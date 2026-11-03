@@ -325,6 +325,37 @@ td.x{color:var(--muted)}
 .rosterline{margin:0;padding:0 14px 8px;font-size:14px;line-height:1.6}
 details.pad{padding-top:10px;padding-bottom:12px}details.pad summary{cursor:pointer;font-weight:600}
 @media (max-width:760px){.two{grid-template-columns:1fr}.two>div+div{border-left:0;border-top:1px solid var(--line)}.trow{grid-template-columns:1fr}}
+
+/* ---- phone layout ---- */
+.mast{position:sticky;top:0;z-index:30}
+.tabs .wrap{position:relative}
+.mhead .body{min-width:0}
+.mhead .pill,.mcard .pill{white-space:normal}
+@media (max-width:640px){
+  .mast .top{padding-block:10px 8px;align-items:center;gap:4px 12px}
+  .logo{height:34px;border-radius:4px}
+  .brandlink{gap:10px}
+  .eyebrow{font-size:11px;letter-spacing:.1em}
+  .brand{font-size:24px}
+  .status{font-size:12px;width:100%;min-width:0}
+  #statusText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .tabs a{font-size:14px;padding:10px 9px 8px}
+  .tabs .wrap::after{content:"";position:absolute;right:0;top:0;bottom:0;width:28px;background:linear-gradient(90deg,transparent,var(--navy-2));pointer-events:none}
+  main{padding-block:14px 28px}
+  .sec-head h1{font-size:26px}
+  .mhead img{height:200px;object-position:center 25%}
+  .facts dd,.stats dd{font-size:20px;overflow-wrap:anywhere}
+  .facts dt{font-size:10px;letter-spacing:.04em}
+}
+/* ---- small Google Sites box on phones: section launcher ---- */
+.launch{padding:8px 0 10px}
+.launch p{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.launch .open{display:block;text-align:center;background:var(--gold);color:var(--gold-ink);font-family:var(--font-display);font-weight:800;font-size:17px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:10px;padding:10px;margin-bottom:8px}
+.launch .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.launch .grid a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:38px;background:var(--surface);border:1px solid var(--line);border-radius:8px;font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--ink);padding:4px}
+body.embed-small .tabs{display:none}
+body.embed-small main{padding-block:0}
+body.embed-small .mast .top{padding-block:8px 6px}
 </style>
 </head>
 <body>
@@ -897,7 +928,17 @@ function go(h){
   try { if (/^https?:$/.test(location.protocol) && location.hash.slice(1).toLowerCase() !== ROUTE) history.pushState(null, "", "#" + ROUTE); } catch (err) {}
   route(); window.scrollTo(0, 0);
 }
+const HUB_URL = "https://the-show-42.github.io/sf-league-hub/";
+const framed = (() => { try { return window.self !== window.top; } catch (err) { return true; } })();
+const smallEmbed = () => LIVE && framed && window.innerWidth <= 640;
+function vLauncher(){
+  const s = [["home","Home"],["rosters","Rosters"],["compare","Trade Compare"],["planner","Planner"],["draft-2027","2027 Draft"],["draft-2028","2028 Draft"],["rankings","Rankings"],["trades","Trade Log"],["managers","Managers"],["history","History"],["records","Record Book"],["resources","Resources"]];
+  return `<div class="launch"><a class="open" href="${HUB_URL}" target="_blank" rel="noopener">Open the League Hub &#8599;</a>
+    <div class="grid">${s.map(([id, n]) => `<a href="${HUB_URL}#${id}" target="_blank" rel="noopener">${n}</a>`).join("")}</div></div>`;
+}
 function route(){
+  document.body.classList.toggle("embed-small", smallEmbed());
+  if (smallEmbed()) { $("view").innerHTML = vLauncher(); return; }
   const h = ROUTE;
   let html, active = h;
   const VIEWS = {home:vHome, rosters:vRosters, teams:vTeams, compare:vCompare, planner:vPlanner, "draft-2027":vDraft27, "draft-2028":vDraft28, rankings:vRankings, trades:vTrades, managers:vManagers, history:vHistory, records:vRecords, resources:vResources};
@@ -1004,6 +1045,8 @@ $("logo").src = PH.logo;
 ui.teamA = T[store("hub.a")] ? store("hub.a") : "Show";
 ui.plan = T[store("hub.plan")] ? store("hub.plan") : "Show";
 ui.teamB = T[store("hub.b")] && store("hub.b") !== ui.teamA ? store("hub.b") : (ui.teamA === "Mosby" ? "Show" : "Mosby");
+const pinTabs = () => { const top = document.querySelector(".mast .top"); document.querySelector(".mast").style.top = -(top ? top.offsetHeight : 0) + "px"; };
+pinTabs(); window.addEventListener("load", pinTabs); if (document.fonts) document.fonts.ready.then(pinTabs); window.addEventListener("resize", () => { pinTabs(); if (smallEmbed() !== document.body.classList.contains("embed-small")) route(); });
 derive(); route();
 if (LIVE) { setStatus(false, "Loading live data…"); loadLive(); }
 else setStatus(false, "Rosters, ranks, picks and trades as of " + DATA.asOf);
