@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S&F trade graphic</title>
+<style>body{margin:0;background:#111;color:#eee;font:600 18px system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;gap:14px;padding:16px;box-sizing:border-box}
+button{font:800 28px system-ui;padding:22px 40px;border:0;border-radius:12px;background:#b2172c;color:#fff;cursor:pointer}
+img{max-width:min(520px,100%);border-radius:8px}</style></head><body>
+<button id="copy">Copy trade graphic</button><div id="st">Ready</div><img id="im" alt="Trade alert graphic">
+<script>
+// Copies a trade graphic to the clipboard as PNG so it can be pasted into a Facebook post.
+const src = new URLSearchParams(location.search).get('img') || '';
+const ok = /^[\w.-]+\.(png|jpg)$/.test(src);
+const im = document.getElementById('im'), st = document.getElementById('st');
+if (ok) im.src = src; else st.textContent = 'No image named';
+document.getElementById('copy').onclick = async () => {
+  try {
+    const png = new Promise(async res => {
+      const bmp = await createImageBitmap(await (await fetch(src, {cache: 'no-store'})).blob());
+      const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height;
+      c.getContext('2d').drawImage(bmp, 0, 0); c.toBlob(res, 'image/png');
+    });
+    await navigator.clipboard.write([new ClipboardItem({'image/png': png})]);
+    st.textContent = 'COPIED';
+  } catch (e) { st.textContent = 'FAILED: ' + e.message; }
+};
+</script></body></html>
