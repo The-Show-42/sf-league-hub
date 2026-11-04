@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>S&F trade image relay</title>
+<p>Sending the trade graphic&hellip; this tab closes itself.</p>
+<script>
+// Opened by the Facebook composer helper: fetches a trade graphic from this site and hands it to the opener window.
+(async () => {
+  const src = new URLSearchParams(location.search).get('img');
+  if (!src || !/^trades\/[\w.-]+\.(png|jpg)$/.test(src) || !window.opener) return;
+  const b = await (await fetch(src, {cache: 'no-store'})).blob();
+  window.opener.postMessage({sfTradeImage: b, name: src.split('/').pop()}, 'https://www.facebook.com');
+  setTimeout(() => window.close(), 500);
+})();
+</script>
