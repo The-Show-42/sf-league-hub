@@ -415,6 +415,9 @@ body.embed-small .mast .top{padding-block:8px 6px}
 .pop ol.cmvp-pop{padding-left:22px;font-size:14px;line-height:1.45}.pop ol.cmvp-pop li{margin-bottom:6px}.pop ol.cmvp-pop small{color:var(--muted)}
 .ring-part{color:#a86b00;font-weight:800;margin-left:1px}.rosterline .lab{display:block;font-weight:800;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
 @media (max-width:760px){.cmvp{grid-template-columns:1fr}}
+button.pl{all:unset;cursor:pointer;font:inherit;color:inherit;border-bottom:1px dotted var(--muted)}button.pl:hover{background:var(--sel)}button.pl:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.pl-rks{display:flex;gap:10px;margin:0 0 10px;flex-wrap:wrap}.pl-rk{display:flex;align-items:baseline;gap:6px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 10px}.pl-rk small{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.pl-rk b{font-size:18px;padding:0 4px;border-radius:4px}.pl-rk em{font-style:normal;font-size:12px;color:var(--muted)}
+.pop .pl-tab{width:100%;font-size:13px;margin:0 0 8px;white-space:nowrap}.pop .pl-tab td,.pop .pl-tab th{padding:5px 6px;text-align:right}.pop .pl-tab .l{text-align:left}.pl-proj td{font-weight:800;background:var(--sel)}.pl-none td{color:var(--muted);font-style:italic;text-align:left!important}.pl-none td.l{font-style:normal}
 .pop.pop-wide{max-width:760px}
 .tx-row{cursor:pointer}.tx-row:hover{background:var(--surface-2)}.tx-row:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
 .tx-why{display:block;margin-top:4px;font-size:11px;font-weight:800;color:#a86b00;white-space:nowrap}
@@ -581,7 +584,7 @@ function rosterTable(pl, opts){
   const row = p => {
     const id = "p:" + p.name;
     const attrs = pick ? ` class="p" tabindex="0" data-id="${esc(id)}" aria-pressed="${sel.has(id)}"` : "";
-    return `<tr${attrs}><td class="name">${esc(p.name)}<span>${esc(p.mlb)}</span></td><td>${esc(p.pos)}</td><td>${p.age ?? "&mdash;"}</td>${rkCell(p.dyn)}${full ? `<td>${esc(p.dynPos) || "&mdash;"}</td>` : ""}${rkCell(p.r27)}${full ? `<td>${esc(p.r27Pos) || "&mdash;"}</td><td>${esc(p.slot)}</td>` : ""}</tr>`;
+    return `<tr${attrs}><td class="name">${plBtn(p.name, p.mlb, p.pos, p.type)}<span>${esc(p.mlb)}</span></td><td>${esc(p.pos)}</td><td>${p.age ?? "&mdash;"}</td>${rkCell(p.dyn)}${full ? `<td>${esc(p.dynPos) || "&mdash;"}</td>` : ""}${rkCell(p.r27)}${full ? `<td>${esc(p.r27Pos) || "&mdash;"}</td><td>${esc(p.slot)}</td>` : ""}</tr>`;
   };
   const cols = full ? 8 : 5;
   const hit = pl.filter(p => p.type === "Hitter"), pit = pl.filter(p => p.type === "Pitcher");
@@ -627,11 +630,14 @@ function vHome(){
 }
 
 function vRosters(){
+  const red = ui.roSet === "r27", k = red ? "r27" : "dyn", big = 1e9;
+  const ord = list => [...list].sort((x, y) => (x[k] ?? big) - (y[k] ?? big) || ((red ? x.dyn : x.r27) ?? big) - ((red ? y.dyn : y.r27) ?? big) || x.name.localeCompare(y.name));
   const card = x => { const d = cache.team[x.key];
-    const li = p => `<li><span>${esc(p.name)}</span><span class="pos">${esc(p.pos)}</span><span class="r ${tier(p.dyn)}">${p.dyn ?? "NR"}</span></li>`;
+    const li = p => `<li><span>${plBtn(p.name, p.mlb, p.pos, p.type)}</span><span class="pos">${esc(p.pos)}</span><span class="r ${tier(p[k])}">${p[k] ?? "NR"}</span></li>`;
     return `<article class="rcard" style="--team:${x.color}"><header><a href="#team-${x.key.toLowerCase()}">${esc(x.team)}</a><span>${esc(x.key)} &middot; ${d.players.length}</span></header>
-      <h4>Hitters &middot; ${d.hit.length}</h4><ol>${d.hit.map(li).join("")}</ol><h4>Pitchers &middot; ${d.pit.length}</h4><ol>${d.pit.map(li).join("")}</ol></article>`; };
-  return `<div class="sec-head"><div><h1>League Rosters</h1><p>All 12 rosters, sorted by dynasty rank. The number is each player's FantasyPros dynasty rank. Tap a team name for its full page.</p></div></div>${legend}
+      <h4>Hitters &middot; ${d.hit.length}</h4><ol>${ord(d.hit).map(li).join("")}</ol><h4>Pitchers &middot; ${d.pit.length}</h4><ol>${ord(d.pit).map(li).join("")}</ol></article>`; };
+  return `<div class="sec-head"><div><h1>League Rosters</h1><p>All 12 rosters, sorted by ${red ? "2027 redraft" : "dynasty"} rank. The number is each player's ${red ? (esc(DATA.redSource || "2027 redraft") + " rank") : "FantasyPros dynasty rank"}. Tap a player for his stats and 2027 projection, or a team name for its full page.</p></div></div>
+    <div style="margin:2px 0 10px"><div class="seg" role="group" aria-label="Ranking set"><button type="button" data-ro="dyn" aria-pressed="${!red}">Dynasty</button><button type="button" data-ro="r27" aria-pressed="${red}">2027 Redraft</button></div></div>${legend}
     <div class="rgrid">${TEAMS.map(card).join("")}</div>`;
 }
 
@@ -721,7 +727,7 @@ function vPlanner(){
     : me.futRank <= 4 && me.futRank < me.nowRank ? ["Builder", "The future core is stronger than the 2027 roster. Hold prospects and add picks unless a deal fills a hole."]
     : me.nowRank >= 9 && me.futRank >= 9 ? ["Rebuild", "Low on both win-now and future value. Sell veterans outside your top 8 for picks and young players."]
     : ["Balanced", "Middle of the pack both ways. Look for trades that turn depth into one keeper-level player."];
-  const prow = p => `<tr><td class="name">${esc(p.name)}<span>${esc(p.mlb)}</span></td><td>${esc(p.pos)}</td><td>${p.age ?? "&mdash;"}</td>${rkCell(p.dyn)}${rkCell(p.r27)}<td><b>${r1(pval(p))}</b></td></tr>`;
+  const prow = p => `<tr><td class="name">${plBtn(p.name, p.mlb, p.pos, p.type)}<span>${esc(p.mlb)}</span></td><td>${esc(p.pos)}</td><td>${p.age ?? "&mdash;"}</td>${rkCell(p.dyn)}${rkCell(p.r27)}<td><b>${r1(pval(p))}</b></td></tr>`;
   const ptable = (rows, empty) => rows.length ? `<table><thead><tr><th class="l">Player</th><th>Pos</th><th>Age</th><th>Dyn</th><th>'27</th><th>Value</th></tr></thead><tbody>${rows.map(prow).join("")}</tbody></table>` : `<p class="empty">${empty}</p>`;
   const opts = TEAMS.map(t => `<option value="${t.key}"${t.key === key ? " selected" : ""}>${esc(t.key)} &mdash; ${esc(t.team)}</option>`).join("");
   const scRow = POSG.map(p => `<div><dt>${p}</dt><dd>${sc[p]}</dd></div>`).join("");
@@ -959,6 +965,7 @@ document.addEventListener("click", e => {
   const t = e.target;
   if (t.id === "popBack" || t.closest("[data-popx]")) { closePop(); return; }
   const a = t.closest("[data-mgx]"); if (a) { const [m, n] = a.dataset.mgx.split("|"); openPop(mgExplain(m, n)); return; }
+  const pb = t.closest("[data-pl]"); if (pb) { e.stopImmediatePropagation(); e.preventDefault(); openPlayer(pb.dataset.pl); return; }
   const cm = t.closest("[data-cmvp]"); if (cm && !t.closest("a")) { openPop(cmvpExplain(cm.dataset.cmvp)); return; }
   const tx = t.closest("[data-tx]"); if (tx && !t.closest("a,input,select")) { openTrade(tx.dataset.tx); return; }
   const s = t.closest("[data-mgs]"); if (s) { const [m, y] = s.dataset.mgs.split("|"); openPop(mgSeasonExplain(m, y)); return; }
@@ -1054,6 +1061,62 @@ function cmvpExplain(k){
   const list = (rs, lab) => `<p class="tx-h">${lab}</p><ol class="cmvp-pop">${rs.map(r => `<li><b>${esc(r[0])}</b> <b class="cmvp-v">${f1(r[1])}</b><br><small>${r[2].map(([y, x]) => `${y} ${f1(x)}`).join(" &middot; ")}</small></li>`).join("")}</ol>`;
   return `<h3>${esc(nm1(k))} &middot; career franchise MVP &amp; Cy Young</h3><p class="sub">Value produced while on his roster, by season.</p>${list(v.h, "Hitters")}${list(v.p, "Pitchers")}`;
 }
+// ---------- player stat pop-up (data: stats.json, loaded on first use) ----------
+let PST = null, pstP = null;
+function loadStats(){ return pstP || (pstP = fetch("stats.json", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
+const plNorm = s => String(s).replace(/\s*\((batter|pitcher)\)\s*$/i, "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.']/g, "").replace(/\b(jr|sr|ii|iii|iv)\b/g, "").replace(/[^a-z]+/g, " ").trim();
+const TEAMFIX = {AZ:"ARI", CHW:"CWS", KCR:"KC", SDP:"SD", SFG:"SF", TBR:"TB", WSN:"WSH", WAS:"WSH", OAK:"ATH",
+  Diamondbacks:"ARI", "D-backs":"ARI", Braves:"ATL", Orioles:"BAL", "Red Sox":"BOS", Cubs:"CHC", "White Sox":"CWS", Reds:"CIN", Guardians:"CLE", Rockies:"COL", Tigers:"DET",
+  Astros:"HOU", Royals:"KC", Angels:"LAA", Dodgers:"LAD", Marlins:"MIA", Brewers:"MIL", Twins:"MIN", Mets:"NYM", Yankees:"NYY", Athletics:"ATH", "A's":"ATH", Phillies:"PHI",
+  Pirates:"PIT", Padres:"SD", Mariners:"SEA", Giants:"SF", Cardinals:"STL", Rays:"TB", Rangers:"TEX", "Blue Jays":"TOR", Nationals:"WSH"};
+const teamCode = t => TEAMFIX[t] || t || "";
+const plGroup = (pos, type, name) => /\(pitcher\)/i.test(name) ? "P" : /\(batter\)/i.test(name) ? "H" : type === "Pitcher" ? "P" : type === "Hitter" ? "H"
+  : /^(SP|RP|P)(,(SP|RP|P))*$/.test(pos || "") ? "P" : /\b(SP|RP)\b/.test(pos || "") ? "HP" : "H";
+function plFind(name, team, grp){
+  const ids = PST.ix[plNorm(name)] || []; if (!ids.length) return null;
+  const tc = teamCode(team);
+  const score = i => { const x = PST.p[i], hasH = Object.keys(x.h).length || (x.ph && x.ph[0] >= 30), hasP = Object.keys(x.p).length || (x.pp && x.pp[0] >= 10);
+    return (tc && x.t === tc ? 8 : 0) + ((grp.includes("P") && hasP) || (grp.includes("H") && hasH) ? 4 : 0) + (x.h[2026] || x.p[2026] ? 2 : 0) + ((x.ph ? x.ph[0] / 700 : 0) + (x.pp ? x.pp[0] / 200 : 0)); };
+  return ids.map(String).sort((a, b) => score(b) - score(a))[0];
+}
+const ipOf = o => `${Math.floor(o / 3)}.${o % 3}`;
+const d3 = v => v == null ? "&mdash;" : v.toFixed(3).replace(/^0/, "");
+const d2 = v => v == null ? "&mdash;" : v.toFixed(2);
+function plRanks(name){
+  const k = plNorm(name), p = cache.players.find(x => plNorm(x.name) === k);
+  const dr = (DATA.dyn || []).find(r => plNorm(r[1]) === k), rr = (DATA.red || []).find(r => plNorm(r[1]) === k);
+  return {mgr: p ? p.mgr : null, dyn: dr ? num(dr[0]) : p ? p.dyn : null, dynPos: dr ? dr[4] : p ? p.dynPos : "", r27: rr ? num(rr[0]) : p ? p.r27 : null, r27Pos: rr ? rr[4] : p ? p.r27Pos : "",
+          age: p ? p.age : dr ? num(dr[5]) : null, pos: p ? p.pos : dr ? dr[3] : rr ? rr[3] : "", mlb: p ? p.mlb : dr ? dr[2] : rr ? rr[2] : ""};
+}
+function playerCard(name, team, pos, type){
+  const R = plRanks(name), grp = plGroup(pos || R.pos, type, name), id = plFind(name, team || R.mlb, grp), x = id ? PST.p[id] : null;
+  const clean = String(name).replace(/\s*\((batter|pitcher)\)\s*$/i, "");
+  const rk = (n, p, lab) => `<span class="pl-rk"><small>${lab}</small><b class="${tier(n)}">${n ?? "NR"}</b>${p ? `<em>${esc(p)}</em>` : ""}</span>`;
+  const head = `<h3>${esc(clean)}</h3><p class="sub">${[esc(teamCode(team || R.mlb) || (x && x.t) || ""), esc(pos || R.pos || ""), R.age ? `Age ${R.age}` : ""].filter(Boolean).join(" &middot; ")}${R.mgr ? ` &middot; ${tag(R.mgr)}` : ` &middot; <span class="avail">Available</span>`}</p>
+    <div class="pl-rks">${rk(R.dyn, R.dynPos, "Dynasty")}${rk(R.r27, R.r27Pos, "2027 redraft")}</div>`;
+  if (!x) return head + `<p>No major-league stats from 2024&ndash;2026 and no 2027 projection yet.</p>`;
+  const yrs = PST.yrs, showH = grp.includes("H") || (!grp.includes("P")), showP = grp.includes("P");
+  const hasH = yrs.some(y => x.h[y]) || x.ph, hasP = yrs.some(y => x.p[y]) || x.pp;
+  const hit = () => `<p class="tx-h">Hitting</p><div class="scroll"><table class="pl-tab"><thead><tr><th class="l">Season</th><th>G/PA</th><th>AB</th><th>R</th><th>H</th><th>HR</th><th>RBI</th><th>SB</th><th>BB</th><th>K</th><th>AVG</th><th>OBP</th></tr></thead><tbody>
+    ${yrs.map(y => { const s = x.h[y]; return s ? `<tr><td class="l">${y}</td><td>${s[0]} G</td><td>${s[1]}</td><td>${s[2]}</td><td>${s[3]}</td><td>${s[4]}</td><td>${s[5]}</td><td>${s[6]}</td><td>${s[7]}</td><td>${s[8]}</td><td>${d3(s[9])}</td><td>${d3(s[10])}</td></tr>` : `<tr class="pl-none"><td class="l">${y}</td><td colspan="11">Did not play in the majors</td></tr>`; }).join("")}
+    ${x.ph ? `<tr class="pl-proj"><td class="l">2027 proj.</td><td>${x.ph[0]} PA</td><td>${x.ph[1]}</td><td>${x.ph[2]}</td><td>${x.ph[3]}</td><td>${x.ph[4]}</td><td>${x.ph[5]}</td><td>${x.ph[6]}</td><td>${x.ph[7]}</td><td>${x.ph[8]}</td><td>${d3(x.ph[9])}</td><td>${d3(x.ph[10])}</td></tr>` : `<tr class="pl-none"><td class="l">2027 proj.</td><td colspan="11">No projection</td></tr>`}</tbody></table></div>`;
+  const pit = () => `<p class="tx-h">Pitching</p><div class="scroll"><table class="pl-tab"><thead><tr><th class="l">Season</th><th>G/GS</th><th>IP</th><th>W</th><th>H</th><th>BB</th><th>K</th><th>ERA</th><th>WHIP</th><th>K/9</th><th>BSV</th><th>SV+H</th></tr></thead><tbody>
+    ${yrs.map(y => { const s = x.p[y]; return s ? `<tr><td class="l">${y}</td><td>${s[0]}/${s[1]}</td><td>${ipOf(s[2])}</td><td>${s[3]}</td><td>${s[4]}</td><td>${s[5]}</td><td>${s[6]}</td><td>${d2(s[7])}</td><td>${d2(s[8])}</td><td>${d2(s[9])}</td><td>${s[10]}</td><td>${s[11]}</td></tr>` : `<tr class="pl-none"><td class="l">${y}</td><td colspan="11">Did not pitch in the majors</td></tr>`; }).join("")}
+    ${x.pp ? `<tr class="pl-proj"><td class="l">2027 proj.</td><td>&ndash;/${x.pp[2]}</td><td>${x.pp[0]}</td><td>${x.pp[1]}</td><td>${x.pp[3]}</td><td>${x.pp[4]}</td><td>${x.pp[5]}</td><td>${d2(x.pp[6])}</td><td>${d2(x.pp[7])}</td><td>${d2(x.pp[8])}</td><td>${x.pp[9]}</td><td>${x.pp[10]}</td></tr>` : `<tr class="pl-none"><td class="l">2027 proj.</td><td colspan="11">No projection</td></tr>`}</tbody></table></div>`;
+  const parts = [];
+  if (showH && hasH) parts.push(hit());
+  if (showP && hasP) parts.push(pit());
+  if (!parts.length) parts.push(hasH ? hit() : pit());
+  return head + parts.join("") + `<p class="note">MLB regular-season stats in S&amp;F's categories. 2027 projections: ${esc(PST.src)}, pulled ${fdate(PST.asof)}.</p>`;
+}
+function openPlayer(a){
+  const [name, team, pos, type] = JSON.parse(a);
+  const show = () => { openPop(playerCard(name, team, pos, type)); widenPop(); };
+  if (PST) return show();
+  openPop(`<h3>Loading ${esc(String(name).replace(/\s*\((batter|pitcher)\)\s*$/i, ""))}&hellip;</h3>`);
+  loadStats().then(() => { if ($("popBack")) show(); }).catch(() => { if ($("popBack")) openPop(`<h3>Player stats didn't load</h3><p>Check your connection and tap the player again.</p>`); });
+}
+const plBtn = (name, team, pos, type) => `<button type="button" class="pl" data-pl="${esc(JSON.stringify([name, team || "", pos || "", type || ""]))}">${esc(name)}</button>`;
 function openTrade(id){
   if (PATHS) { openPop(tradeExplain(id, PATHS)); widenPop(); return; }
   openPop(`<h3>Loading trade details&hellip;</h3>`); widenPop();
@@ -1164,7 +1227,7 @@ function fillRankings(){
   $("rkSource").textContent = dyn ? "FantasyPros dynasty consensus. " + (DATA.dynSource || "") : (DATA.redSource || "2027 redraft rankings") + ".";
   $("rkCount").textContent = `${rows.length} of ${list.length} players`;
   $("rkBody").innerHTML = rows.map(r => { const n = num(r[0]), own = owners[n] || "";
-    return `<tr><td class="rk ${tier(n)}">${n}</td><td class="name">${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td>${esc(r[4])}</td><td>${num(r[5]) ?? "&mdash;"}</td><td class="l">${own ? tag(own) : '<span class="avail">Available</span>'}</td></tr>`; }).join("")
+    return `<tr><td class="rk ${tier(n)}">${n}</td><td class="name">${plBtn(r[1], r[2], r[3])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td>${esc(r[4])}</td><td>${num(r[5]) ?? "&mdash;"}</td><td class="l">${own ? tag(own) : '<span class="avail">Available</span>'}</td></tr>`; }).join("")
     || `<tr><td colspan="7" class="empty">No players match those filters.</td></tr>`;
 }
 
@@ -1303,6 +1366,7 @@ document.addEventListener("click", e => {
   const rm = t.closest("[data-rm]"); if (rm) { sel.delete(rm.dataset.rm); rerender(true); return; }
   if (t.closest("#clear")) { sel.clear(); rerender(true); return; }
   if (t.closest("#swap")) { [ui.teamA, ui.teamB] = [ui.teamB, ui.teamA]; rerender(true); return; }
+  const ro = t.closest("[data-ro]"); if (ro) { ui.roSet = ro.dataset.ro; store("hub.ro", ui.roSet); rerender(true); return; }
   const rk = t.closest("[data-rk]"); if (rk) { ui.rkSet = rk.dataset.rk; document.querySelectorAll("[data-rk]").forEach(b => b.setAttribute("aria-pressed", b === rk)); fillRankings(); return; }
   const jp = t.closest("[data-jump]"); if (jp) { e.preventDefault(); const el = $(jp.dataset.jump); if (el) el.scrollIntoView({behavior:"smooth", block:"start"}); return; }
   const pr = t.closest("[data-compare-pair]"); if (pr) { const [x, y] = pr.dataset.comparePair.split("|"); ui.teamA = x; ui.teamB = y; sel.clear(); return; }
@@ -1391,6 +1455,7 @@ async function loadLive(){
 $("logo").src = PH.logo;
 ui.teamA = T[store("hub.a")] ? store("hub.a") : "Show";
 ui.plan = T[store("hub.plan")] ? store("hub.plan") : "Show";
+ui.roSet = store("hub.ro") === "r27" ? "r27" : "dyn";
 ui.teamB = T[store("hub.b")] && store("hub.b") !== ui.teamA ? store("hub.b") : (ui.teamA === "Mosby" ? "Show" : "Mosby");
 const pinTabs = () => { const top = document.querySelector(".mast .top"); document.querySelector(".mast").style.top = -(top ? top.offsetHeight : 0) + "px"; };
 pinTabs(); window.addEventListener("load", pinTabs); if (document.fonts) document.fonts.ready.then(pinTabs); window.addEventListener("resize", () => { pinTabs(); if (smallEmbed() !== document.body.classList.contains("embed-small")) route(); });
