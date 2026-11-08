@@ -439,6 +439,7 @@ button.plaque{font:inherit;border:0;cursor:pointer;width:100%;transition:transfo
 .cr-facts{margin:0 0 6px}.h2h-m thead tr:first-child th{top:0}.h2h-m th.grp{border-bottom:1px solid var(--line);text-align:center}.h2h-m thead tr:nth-child(2) th{top:31px}.cr-head.cr-plain{background:var(--surface-2);color:var(--ink)}.pop .cr-plain h3,.pop .cr-plain .sub{color:var(--ink)}.cr-l{color:var(--muted)}button.yr-b{all:unset;cursor:pointer;font-weight:800;border-bottom:1px dotted var(--muted)}button.yr-b:hover{background:var(--sel)}button.yr-b:focus-visible{outline:2px solid var(--gold)}.pop ol.cr-run{list-style:none;padding:0;margin:4px 0 6px}.cr-run li{display:grid;grid-template-columns:150px 1fr auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}.cr-rd{font-weight:800}.cr-rd small{display:block;font-weight:600;color:var(--muted);font-size:11px}.cr-tb{grid-column:1/-1;color:var(--muted);font-size:12px}
 .pop p.cr-sum{font-size:13px;color:var(--muted);margin:0 0 6px}.cr-tab td.l{white-space:nowrap}.cr-how{display:block;font-size:11px;color:var(--muted);font-weight:500}.cr-gone td{opacity:.6}
 @media (max-width:640px){.cr-run li{grid-template-columns:110px 1fr auto}}
+button.scar-b{all:unset;cursor:pointer;display:block;width:100%;text-align:center;border-radius:6px}button.scar-b:hover{background:var(--sel)}button.scar-b:focus-visible{outline:2px solid var(--gold)}button.scar-l{all:unset;cursor:pointer;border-bottom:1px dotted var(--muted)}button.scar-l:hover{background:var(--sel)}.sc-me td{background:var(--sel)}.pop .sc-tab td.k1,.pop .sc-tab td.k2,.pop .sc-tab td.k3,.pop .sc-tab td.k4{text-align:center}
 .pop.pop-wide{max-width:760px}
 .tx-row{cursor:pointer}.tx-row:hover{background:var(--surface-2)}.tx-row:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
 .tx-why{display:block;margin-top:4px;font-size:11px;font-weight:800;color:#a86b00;white-space:nowrap}
@@ -751,7 +752,7 @@ function vPlanner(){
   const prow = p => `<tr><td class="name">${plBtn(p.name, p.mlb, p.pos, p.type)}${p.own ? ` <span class="own">&middot; ${esc(p.own)}</span>` : ""}<span>${esc(p.mlb)}</span></td><td>${esc(p.pos)}</td><td>${p.age ?? "&mdash;"}</td>${rkCell(p.dyn)}${rkCell(p.r27)}<td><b>${r1(pval(p))}</b></td></tr>`;
   const ptable = (rows, empty) => rows.length ? `<table><thead><tr><th class="l">Player</th><th>Pos</th><th>Age</th><th>Dyn</th><th>'27</th><th>Value</th></tr></thead><tbody>${rows.map(prow).join("")}</tbody></table>` : `<p class="empty">${empty}</p>`;
   const opts = TEAMS.map(t => `<option value="${t.key}"${t.key === key ? " selected" : ""}>${esc(t.key)} &mdash; ${esc(t.team)}</option>`).join("");
-  const scRow = POSG.map(p => `<div><dt>${p}</dt><dd>${sc[p]}</dd></div>`).join("");
+  const scRow = POSG.map(p => `<div><button type="button" class="scar-b" data-scar="${p}"><dt>${p}</dt><dd>${sc[p]}</dd></button></div>`).join("");
   return `<div class="sec-head"><div><h1>Off-Season Planner</h1><p>Recommended keepers, holes to fill, players to target and the best trade partners for each team. Built from the same values as the Trade Grade, so it updates when a trade is logged.</p></div></div>
     <div class="controls"><label class="f">Team<select id="planTeam">${opts}</select></label></div>
     <section class="panel" style="--team:${T[key].color}"><div class="plan-top"><div><h2 style="margin:0">${esc(T[key].team)}</h2><p style="margin:2px 0 0;color:var(--muted)">${esc(T[key].owner)}</p></div>
@@ -762,7 +763,7 @@ function vPlanner(){
         <h2 class="panel-h">NA keepers &middot; 2</h2><div class="scroll">${ptable(plan.na, "No ranked prospects without a 2027 rank.")}</div>
         <p class="foot">NA picks are the top dynasty-ranked players age 23 or under with no 2027 rank, the usual NA-eligible prospects. Confirm each one's NA status in Yahoo before keeper day.</p></section>
       <section class="panel"><h2 class="panel-h">Keeper holes, scarcest first</h2>
-        ${needs.length ? `<ul class="needs">${needs.map(n => `<li><b>${n.pos}</b> keepers: ${n.have} of ${n.want} &middot; ${n.pool} keeper-quality ${n.pos} in the league</li>`).join("")}</ul>` : `<p class="empty">Every spot is covered by the keepers.</p>`}
+        ${needs.length ? `<ul class="needs">${needs.map(n => `<li><b>${n.pos}</b> keepers: ${n.have} of ${n.want} &middot; <button type="button" class="scar-l" data-scar="${n.pos}">${n.pool} keeper-quality ${n.pos} in the league</button></li>`).join("")}</ul>` : `<p class="empty">Every spot is covered by the keepers.</p>`}
         <h2 class="panel-h">League scarcity &middot; keeper-quality players by spot</h2><dl class="facts scarce">${scRow}</dl>
         <h2 class="panel-h">Trade chips &middot; useful players outside the top 8</h2><div class="scroll">${ptable(surplus[key].slice(0, 8), "No surplus players worth 12+.")}</div></section>
     </div>
@@ -996,6 +997,7 @@ document.addEventListener("click", e => {
   const pb = t.closest("[data-pl]"); if (pb) { e.stopImmediatePropagation(); e.preventDefault(); openPlayer(pb.dataset.pl); return; }
   const ch = t.closest("[data-champ]"); if (ch) { const c = champYears().find(x => String(x[0]) === ch.dataset.champ); if (c) openSeason(c[1], c[0]); return; }
   const ms = t.closest("[data-mseason]"); if (ms) { const [k, y] = ms.dataset.mseason.split("|"); openSeason(k, +y); return; }
+  const sb = t.closest("[data-scar]"); if (sb) { openPop(scarcityCard(sb.dataset.scar)); widenPop(); return; }
   const dn = t.closest("[data-dneed]"); if (dn) { const [k, y, lab] = dn.dataset.dneed.split("|"); openPop(draftNeeds(k, +y, lab)); widenPop(); return; }
   const cm = t.closest("[data-cmvp]"); if (cm && !t.closest("a")) { openPop(cmvpExplain(cm.dataset.cmvp)); return; }
   const tx = t.closest("[data-tx]"); if (tx && !t.closest("a,input,select")) { openTrade(tx.dataset.tx); return; }
@@ -1006,7 +1008,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePop(); else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.tx) { e.preventDefault(); openTrade(e.target.dataset.tx); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.cmvp) { e.preventDefault(); openPop(cmvpExplain(e.target.dataset.cmvp)); } });
 // ---------- trade explanation pop-up (data: paths.json, loaded on first use) ----------
 let PATHS = null, pathsP = null;
-function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611072232", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
+function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611072301", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
 const f1 = x => (Math.round(x * 10) / 10).toFixed(1);
 const txPct = w => Math.round(w * 100) + "%";
 const fdate = s => { if (!s) return ""; const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); };
@@ -1094,7 +1096,7 @@ function cmvpExplain(k){
 }
 // ---------- player stat pop-up (data: stats.json, loaded on first use) ----------
 let PST = null, pstP = null;
-function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611072232", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
+function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611072301", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
 const plNorm = s => String(s).replace(/\s*\((batter|pitcher)\)\s*$/i, "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.']/g, "").replace(/\b(jr|sr|ii|iii|iv)\b/g, "").replace(/[^a-z]+/g, " ").trim();
 const TEAMFIX = {AZ:"ARI", CHW:"CWS", KCR:"KC", SDP:"SD", SFG:"SF", TBR:"TB", WSN:"WSH", WAS:"WSH", OAK:"ATH",
   Diamondbacks:"ARI", "D-backs":"ARI", Braves:"ATL", Orioles:"BAL", "Red Sox":"BOS", Cubs:"CHC", "White Sox":"CWS", Reds:"CIN", Guardians:"CLE", Rockies:"COL", Tigers:"DET",
@@ -1214,6 +1216,15 @@ function ownTable(year){
   return `<section class="panel own"><h2 class="panel-h">Pick ownership</h2><div class="scroll"><table><thead><tr><th class="l">Manager</th>${year === 2027 ? "<th>Slot</th>" : ""}<th>Picks</th><th>Capital</th>${year === 2027 ? "<th>Capital Rank</th>" : ""}<th>First pick</th></tr></thead><tbody>${rows}</tbody></table></div></section>`;
 }
 // ---------- draft board: what a manager should target (keeper metric on current rosters) ----------
+function scarcityCard(pos){
+  const lt = leagueTable(), kept = new Map(); lt.forEach(r => r.s.plan.keep.concat(r.s.plan.na).forEach(p => kept.set(p, r.key)));
+  const list = cache.players.filter(p => pval(p) >= 20 && posList(p).includes(pos)).sort((a, b) => pval(b) - pval(a));
+  const me = ui.plan || TEAMS[0].key;
+  return `<h3>Keeper-quality ${pos} &middot; ${list.length}</h3><p class="sub">Every rostered player eligible at ${pos} with a keeper value of 20 or more</p>
+    <div class="scroll"><table class="pl-tab sc-tab"><thead><tr><th class="l">Player</th><th class="l">Team</th><th class="l">Pos</th><th>Age</th><th>Dyn</th><th>'27</th><th>Value</th><th class="l">Status</th></tr></thead><tbody>
+    ${list.map(p => `<tr${p.mgr === me ? ' class="sc-me"' : ""}><td class="l">${plBtn(p.name, p.mlb, p.pos, p.type)}<small class="cr-how">${esc(p.mlb)}</small></td><td class="l">${tag(p.mgr)}</td><td class="l">${esc(p.pos)}</td><td>${p.age ?? "&mdash;"}</td><td class="${tier(p.dyn)}">${p.dyn ?? "NR"}</td><td class="${tier(p.r27)}">${p.r27 ?? "NR"}</td><td><b>${r1(pval(p))}</b></td><td class="l">${kept.has(p) ? "Projected keeper" : `<span class="avail">Not a projected keeper</span>`}</td></tr>`).join("") || `<tr><td colspan="8">None.</td></tr>`}</tbody></table></div>
+    <p class="note">Value is the Planner's keeper value: 60% dynasty rank and 40% 2027 rank on one curve; 20 or more is keeper quality. "Projected keeper" means he is in his team's best 8 (or 2 NA) by that value; the others are the realistic trade targets.${me ? ` Your players are highlighted.` : ""}</p>`;
+}
 function draftPool(lt){
   const pool = [], seen = new Set(cache.players.map(p => plNorm(p.name)));
   lt.forEach(r => r.s.plan.rest.forEach(p => pool.push({...p, from:p.mgr})));
@@ -1420,7 +1431,7 @@ function vManager(key){
 }
 // ---------- season pop-up: the run and the roster (data: seasons_detail.json, loaded on first use) ----------
 let SDT = null, sdtP = null;
-function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611072232", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
+function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611072301", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
 function openSeason(key, y){
   const show = () => { openPop(seasonCard(key, y)); widenPop(); };
   if (SDT) return show();
