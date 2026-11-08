@@ -1003,6 +1003,7 @@ document.addEventListener("click", e => {
   const t = e.target;
   if (t.id === "popBack" || t.closest("[data-popx]")) { closePop(); return; }
   const a = t.closest("[data-mgx]"); if (a) { const [m, n] = a.dataset.mgx.split("|"); openPop(mgExplain(m, n)); return; }
+  const dpl = t.closest("[data-dpl]"); if (dpl) { e.stopImmediatePropagation(); const [k, y, rd, ...n] = dpl.dataset.dpl.split("|"); openKeeper(k, +y, n.join("|"), `Drafted in round ${rd}`); return; }
   const kp = t.closest("[data-kpl]"); if (kp) { e.stopImmediatePropagation(); const [k, y, ...n] = kp.dataset.kpl.split("|"); openKeeper(k, +y, n.join("|")); return; }
   const pb = t.closest("[data-pl]"); if (pb) { e.stopImmediatePropagation(); e.preventDefault(); openPlayer(pb.dataset.pl); return; }
   const ch = t.closest("[data-champ]"); if (ch) { const c = champYears().find(x => String(x[0]) === ch.dataset.champ); if (c) openSeason(c[1], c[0]); return; }
@@ -1018,7 +1019,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePop(); else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.tx) { e.preventDefault(); openTrade(e.target.dataset.tx); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.cmvp) { e.preventDefault(); openPop(cmvpExplain(e.target.dataset.cmvp)); } });
 // ---------- trade explanation pop-up (data: paths.json, loaded on first use) ----------
 let PATHS = null, pathsP = null;
-function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611072320", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
+function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611072325", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
 const f1 = x => (Math.round(x * 10) / 10).toFixed(1);
 const txPct = w => Math.round(w * 100) + "%";
 const fdate = s => { if (!s) return ""; const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); };
@@ -1106,7 +1107,7 @@ function cmvpExplain(k){
 }
 // ---------- player stat pop-up (data: stats.json, loaded on first use) ----------
 let PST = null, pstP = null;
-function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611072320", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
+function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611072325", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
 const plNorm = s => String(s).replace(/\s*\((batter|pitcher)\)\s*$/i, "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.']/g, "").replace(/\b(jr|sr|ii|iii|iv)\b/g, "").replace(/[^a-z]+/g, " ").trim();
 const TEAMFIX = {AZ:"ARI", CHW:"CWS", KCR:"KC", SDP:"SD", SFG:"SF", TBR:"TB", WSN:"WSH", WAS:"WSH", OAK:"ATH",
   Diamondbacks:"ARI", "D-backs":"ARI", Braves:"ATL", Orioles:"BAL", "Red Sox":"BOS", Cubs:"CHC", "White Sox":"CWS", Reds:"CIN", Guardians:"CLE", Rockies:"COL", Tigers:"DET",
@@ -1264,7 +1265,7 @@ function draftNeeds(key, year, label){
 }
 // ---------- Draft History (data: draft_history.json, loaded on first visit) ----------
 let DHD = null, dhP = null;
-function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611072320", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
+function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611072325", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
 function vDraftHist(){
   if (!DHD) { loadDH().then(() => { if (ROUTE === "draft-history") rerender(true); }).catch(() => { const b = $("dhBody"); if (b) b.innerHTML = `<p class="empty">The draft history didn't load. Check your connection and refresh.</p>`; });
     return `<div class="sec-head"><div><h1>Draft History</h1><p>How every manager drafts, from every live pick since 2009.</p></div></div><div id="dhBody"><p class="empty">Loading the draft history&hellip;</p></div>`; }
@@ -1309,13 +1310,13 @@ function dhManager(k, per){
   const yrs = [...new Set(picks.map(p => p[0]))].sort((a, b) => b - a);
   const log = yrs.map(y => { const ps = picks.filter(p => p[0] === y); const nk = y < 2010 ? 0 : y === 2010 ? 6 : 8;
     return `<details class="dh-yr"${y === yrs[0] ? " open" : ""}><summary><b>${y}</b> <span>${ps.length} picks &middot; ${M.kpos[y] ? `kept ${Object.entries(M.kpos[y]).sort((a, b) => b[1] - a[1]).map(([p, c]) => `${c} ${p}`).join(", ")}` : "no keepers"}</span></summary>
-      <div class="scroll"><table class="pl-tab"><thead><tr><th class="l">Round</th><th>Pick</th><th class="l">Player</th><th class="l">Pos</th><th class="l">MLB</th><th>Age</th></tr></thead><tbody>${ps.map(p => `<tr><td class="l">${p[1] + nk}</td><td>${p[2]}</td><td class="l">${plBtn(p[3], p[6], p[4], ["SP", "RP"].includes(p[4]) ? "Pitcher" : "Hitter")}${p[5] ? ` <span class="pill dh-pro">Prospect</span>` : ""}</td><td class="l">${p[4]}</td><td class="l">${p[6] ? esc(p[6]) : "&mdash;"}</td><td>${p[7] ?? "&mdash;"}</td></tr>`).join("")}</tbody></table></div></details>`; }).join("");
+      <div class="scroll"><table class="pl-tab"><thead><tr><th class="l">Round</th><th>Pick</th><th class="l">Player</th><th class="l">Pos</th><th class="l">MLB</th><th>Age</th></tr></thead><tbody>${ps.map(p => `<tr><td class="l">${p[1] + nk}</td><td>${p[2]}</td><td class="l"><button type="button" class="pl" data-dpl="${esc(k)}|${p[0]}|${p[1] + nk}|${esc(p[3])}">${esc(p[3])}</button>${p[5] ? ` <span class="pill dh-pro">Prospect</span>` : ""}</td><td class="l">${p[4]}</td><td class="l">${p[6] ? esc(p[6]) : "&mdash;"}</td><td>${p[7] ?? "&mdash;"}</td></tr>`).join("")}</tbody></table></div></details>`; }).join("");
   const first = S.firstPick.map(([p, c]) => `${p} (${c} of ${S.firstN} drafts)`).join(", ");
   return `<dl class="facts dh-facts"><div><dt>Drafts</dt><dd>${S.years}</dd></div><div><dt>Pitchers</dt><dd>${dhPct(S.pit)} ${diff(S.pit, L.pit)}</dd></div><div><dt>Prospects</dt><dd>${dhPct(S.pro)} ${diff(S.pro, L.pro)}</dd></div><div><dt>Average age</dt><dd>${S.age} <small class="dn-m">league ${L.age}</small></dd></div></dl>
     <section class="panel"><h2 class="panel-h">${esc(nm)}'s roster construction &middot; live picks per draft</h2><div class="dh-bars">${P.map(p => { const v = S.per[p] || 0; return `<div><span>${p}</span><i style="--w:${(v / 7 * 100).toFixed(1)}%"></i><b>${v.toFixed(1)}</b><small>${diff(v / 100, lp(p) / 100) ? `league ${lp(p).toFixed(1)}` : ""}</small></div>`; }).join("")}</div>
       <p class="foot pad">His first live pick is usually: ${first}. He takes his first SP in live round ${S.firsts.SP ?? "&mdash;"} on average (league ${L.firsts.SP}), his first RP in round ${S.firsts.RP ?? "&mdash;"} (league ${L.firsts.RP}), and his first catcher in round ${S.firsts.C ?? "&mdash;"} (league ${L.firsts.C}). Live round 1 is round 9.</p></section>
     <section class="panel"><h2 class="panel-h">Early, middle and late &middot; what he takes, against the league</h2><div class="dh-phases">${phase}</div><p class="foot pad">Each draft's live rounds are split into thirds. The small number is percentage points above (+) or below (&minus;) the league in the same third.</p></section>
-    <div class="grid2"><section class="panel"><h2 class="panel-h">Prospects</h2><div class="pad">${pros.length ? `<p><b>${pros.length}</b> prospect pick${pros.length === 1 ? "" : "s"} (players with no MLB games yet), ${dhPct(S.pro)} of his picks against ${dhPct(L.pro)} for the league. On average his first prospect goes in live round ${S.proFirst}; the earliest he has taken one is live round ${S.proEarliest} (${dhRd(S.proEarliest)}).</p><p class="dh-pros">${pros.slice().reverse().slice(0, 14).map(p => `${plBtn(p[3], "", p[4], "")} <small>${p[0]} ${dhRd(p[1])}</small>`).join(" &middot; ")}</p>` : `<p>He has never drafted a prospect in the live rounds.</p>`}</div></section>
+    <div class="grid2"><section class="panel"><h2 class="panel-h">Prospects</h2><div class="pad">${pros.length ? `<p><b>${pros.length}</b> prospect pick${pros.length === 1 ? "" : "s"} (players with no MLB games yet), ${dhPct(S.pro)} of his picks against ${dhPct(L.pro)} for the league. On average his first prospect goes in live round ${S.proFirst}; the earliest he has taken one is live round ${S.proEarliest} (${dhRd(S.proEarliest)}).</p><p class="dh-pros">${pros.slice().reverse().slice(0, 14).map(p => `<button type="button" class="pl" data-dpl="${esc(k)}|${p[0]}|${p[1] + (p[0] < 2010 ? 0 : p[0] === 2010 ? 6 : 8)}|${esc(p[3])}">${esc(p[3])}</button> <small>${p[0]} Rd ${p[1] + (p[0] < 2010 ? 0 : p[0] === 2010 ? 6 : 8)}</small>`).join(" &middot; ")}</p>` : `<p>He has never drafted a prospect in the live rounds.</p>`}</div></section>
       <section class="panel"><h2 class="panel-h">MLB team leanings</h2><div class="pad">${M.lean.filter(x => x[2] >= 1.3).length ? `<ul class="dh-k">${M.lean.filter(x => x[2] >= 1.3).map(([t, c, l]) => `<li><b>${esc(t)}</b>: ${c} picks, ${l.toFixed(1)}&times; the league's rate</li>`).join("")}</ul>` : `<p>No team stands out: his picks are spread like the league's.</p>`}
         ${M.again.length ? `<p class="tx-h">Players he keeps coming back to</p><p>${M.again.map(([n, c, ys]) => `${plBtn(n, "", "", "")} <small>&times;${c} (${ys.join(", ")})</small>`).join(" &middot; ")}</p>` : ""}</div></section></div>
     <section class="panel"><h2 class="panel-h">Do his keepers change his draft?</h2><div class="pad">${kText}</div><p class="foot pad">Compares the share of a position in his early live rounds in drafts where he kept several players there against drafts where he didn't. Only differences of 5 points or more are shown.</p></section>
@@ -1422,12 +1423,13 @@ function bioOf(k){
   const tok = {titles: Cap(W(champs.length)), titleYears: champs.join(", "), trips: (c.playoffs || []).length, seasons: (c.seasons || []).length, firsts: lg.firsts || 0, runnerup: W(lg.runnerup || 0), trades, mostTrades: trades && trades === maxT ? ", more than anyone in league history" : ""};
   return String(L.bios[k] || "").replace(/\{(\w+)(?::(\w+))?\}/g, (m, a, b) => a === "h2h" ? (mh[b] ? mh[b].join("-") : "") : String(tok[a] ?? m));
 }
-function keeperCard(key, y, name){
-  const P = SDT[`${key}|${y}`], r = P && P.roster.find(x => x[0] === name), H = ((BOOK.keeperHist || {})[key] || []).find(h => h.Y === +y);
+function keeperCard(key, y, name, how){
+  const strip = n => String(n).replace(/\s*\((Batter|Pitcher)\)$/, "");
+  const P = SDT[`${key}|${y}`], r = P && (P.roster.find(x => x[0] === name) || P.roster.find(x => strip(x[0]) === strip(name) && x[2].some(v => v))), H = ((BOOK.keeperHist || {})[key] || []).find(h => h.Y === +y);
   const kv = H && (H.kept.find(k => k[0] === name) || [])[1];
-  const head = `<h3>${esc(name)} &middot; ${y}</h3><p class="sub">Kept by ${tag(key)} ${esc(T[key] ? T[key].owner : key)}${P && P.team ? ` &middot; ${esc(P.team)}` : ""}${P && P.champ ? ` &middot; <span class="pill gold">Champion</span>` : ""}</p>`;
+  const head = `<h3>${esc(name)} &middot; ${y}</h3><p class="sub">${how ? esc(how) + " by" : "Kept by"} ${tag(key)} ${esc(T[key] ? T[key].owner : key)}${P && P.team ? ` &middot; ${esc(P.team)}` : ""}${P && P.champ ? ` &middot; <span class="pill gold">Champion</span>` : ""}</p>`;
   const more = `<p><button type="button" class="pl" data-pl="${esc(JSON.stringify([name, "", "", /\(Pitcher\)/.test(name) ? "Pitcher" : ""]))}">See his full MLB stats and 2027 projection</button></p>`;
-  if (!r || !r[2].some(x => x)) return head + `<p>He never played a major-league game for ${esc(nm1(key))} in ${y}. Either he was traded or dropped before he took the field for the team, or he missed the season, so he gave the team nothing that year.</p>${kv != null ? `<p class="dn-m">The keeper rating still counts his full MLB season: ${f1(kv)}.</p>` : ""}` + more;
+  if (!r || !r[2].some(x => x)) return head + `<p>He never played a major-league game for ${esc(nm1(key))} in ${y}. Either he was traded or dropped before he took the field for the team, or he spent the season in the minors or hurt, so he gave the team nothing that year.</p>${kv != null ? `<p class="dn-m">The keeper rating still counts his full MLB season: ${f1(kv)}.</p>` : ""}` + more;
   const t = r[2], d3 = v => v == null ? "&mdash;" : v.toFixed(3).replace(/^0/, ""), d2 = v => v == null ? "&mdash;" : v.toFixed(2), ip = o => `${Math.floor(o / 3)}.${o % 3}`;
   const tab = r[1] === "h"
     ? `<table class="pl-tab"><thead><tr><th>AB</th><th>R</th><th>H</th><th>HR</th><th>RBI</th><th>SB</th><th>BB</th><th>K</th><th>AVG</th><th>OBP</th></tr></thead><tbody><tr class="pl-proj">${[t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7]].map(v => `<td>${v}</td>`).join("")}<td>${d3(t[8])}</td><td>${d3(t[9])}</td></tr></tbody></table>`
@@ -1436,10 +1438,10 @@ function keeperCard(key, y, name){
   const span = r[4] ? "the whole season" : `until ${fdate(r[8])}`;
   return head + `<p class="tx-h">What he gave ${esc(nm1(key))} in ${y}</p><div class="scroll">${tab}</div>
     <dl class="facts cr-facts"><div><dt>Value for the team</dt><dd>${f1(r[3])}</dd></div><div><dt>Rank on the roster</dt><dd>${rank ? `${rank} of ${P.roster.filter(x => x[2].some(v => v)).length}` : "&mdash;"}</dd></div><div><dt>On the roster</dt><dd>${r[4] ? "All season" : "Left " + fdate(r[8]).replace(/, \d{4}$/, "")}</dd></div></dl>
-    <p class="dn-m">Stats count the games he played while on ${esc(nm1(key))}'s roster (${span}). The keeper rating uses his full MLB season${kv != null ? `, worth ${f1(kv)}` : ""}.</p>${more}`;
+    <p class="dn-m">Stats count the games he played while on ${esc(nm1(key))}'s roster (${span}).${how ? "" : ` The keeper rating uses his full MLB season${kv != null ? `, worth ${f1(kv)}` : ""}.`}</p>${more}`;
 }
-function openKeeper(key, y, name){
-  const show = () => { openPop(keeperCard(key, y, name)); widenPop(); };
+function openKeeper(key, y, name, how){
+  const show = () => { openPop(keeperCard(key, y, name, how)); widenPop(); };
   if (SDT) return show();
   openPop(`<h3>Loading ${esc(name)}&hellip;</h3>`);
   loadSeasons().then(() => { if ($("popBack")) show(); }).catch(() => { if ($("popBack")) openPop(`<h3>The season didn't load</h3><p>Check your connection and tap the player again.</p>`); });
@@ -1500,7 +1502,7 @@ function vManager(key){
 }
 // ---------- season pop-up: the run and the roster (data: seasons_detail.json, loaded on first use) ----------
 let SDT = null, sdtP = null;
-function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611072320", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
+function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611072325", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
 function openSeason(key, y){
   const show = () => { openPop(seasonCard(key, y)); widenPop(); };
   if (SDT) return show();
