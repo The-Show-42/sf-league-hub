@@ -303,6 +303,10 @@ h3.sub{font-family:var(--font-display);font-weight:700;font-size:14px;letter-spa
 .pcard p{margin:6px 0}.pcard small{color:var(--muted)}
 @media (max-width:760px){.gcards,.plan-grid,.partners{grid-template-columns:1fr}.facts.scarce{grid-template-columns:repeat(4,1fr)}}
 
+.subnav{display:flex;gap:2px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 0 14px;border-bottom:2px solid var(--line)}.subnav a{font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--muted);padding:8px 12px 7px;margin-bottom:-2px;border-bottom:3px solid transparent}.subnav a:hover{color:var(--ink)}.subnav a{white-space:nowrap;flex:none}@media (max-width:640px){.subnav a{font-size:13px;padding:8px 8px 7px}}.subnav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--gold)}
+#bk-rings .scroll,#bk-ever .scroll{max-height:min(640px,70vh);overflow:auto}#bk-rings thead th,#bk-ever thead th{position:sticky;top:0;z-index:1}
+.booktabs{margin:0 0 10px}.booktabs .seg{flex-wrap:wrap}
+.own{font-weight:600;color:var(--muted);font-size:.92em}
 .booknav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
 .booknav a{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;text-decoration:none;color:var(--ink)}
 .booknav a:hover{border-color:var(--gold)}
@@ -449,7 +453,7 @@ button.pl{all:unset;cursor:pointer;font:inherit;color:inherit;border-bottom:1px 
     <p class="status"><span class="dot" id="dot"></span><span id="statusText">Loading&hellip;</span></p>
   </div>
   <div class="tabs"><div class="wrap"><nav id="nav" aria-label="Sections">
-    <a href="#home">Home</a><a href="#rosters">Rosters</a><a href="#compare">Trade Compare</a><a href="#planner">Planner</a><a href="#draft-2027">2027 Draft</a><a href="#draft-2028">2028 Draft</a><a href="#rankings">Rankings</a><a href="#trades">Trade Log</a><a href="#managers">Managers</a><a href="#history">History</a><a href="#records">Record Book</a><a href="#rules">Rules</a><a href="#resources">Resources</a>
+    <a href="#home" data-g="home">Home</a><a href="#rosters" data-g="rosters">Rosters</a><a href="#rankings" data-g="rankings">Rankings</a><a href="#compare" data-g="trade">Trades</a><a href="#draft-2027" data-g="draft">Drafts</a><a href="#history" data-g="hist">League History</a><a href="#rules" data-g="rules">Rules</a><a href="#resources" data-g="resources">Resources</a>
   </nav></div></div>
 </header>
 <main class="wrap" id="view"></main>
@@ -727,7 +731,7 @@ function vPlanner(){
     : me.futRank <= 4 && me.futRank < me.nowRank ? ["Builder", "The future core is stronger than the 2027 roster. Hold prospects and add picks unless a deal fills a hole."]
     : me.nowRank >= 9 && me.futRank >= 9 ? ["Rebuild", "Low on both win-now and future value. Sell veterans outside your top 8 for picks and young players."]
     : ["Balanced", "Middle of the pack both ways. Look for trades that turn depth into one keeper-level player."];
-  const prow = p => `<tr><td class="name">${plBtn(p.name, p.mlb, p.pos, p.type)}<span>${esc(p.mlb)}</span></td><td>${esc(p.pos)}</td><td>${p.age ?? "&mdash;"}</td>${rkCell(p.dyn)}${rkCell(p.r27)}<td><b>${r1(pval(p))}</b></td></tr>`;
+  const prow = p => `<tr><td class="name">${plBtn(p.name, p.mlb, p.pos, p.type)}${p.own ? ` <span class="own">&middot; ${esc(p.own)}</span>` : ""}<span>${esc(p.mlb)}</span></td><td>${esc(p.pos)}</td><td>${p.age ?? "&mdash;"}</td>${rkCell(p.dyn)}${rkCell(p.r27)}<td><b>${r1(pval(p))}</b></td></tr>`;
   const ptable = (rows, empty) => rows.length ? `<table><thead><tr><th class="l">Player</th><th>Pos</th><th>Age</th><th>Dyn</th><th>'27</th><th>Value</th></tr></thead><tbody>${rows.map(prow).join("")}</tbody></table>` : `<p class="empty">${empty}</p>`;
   const opts = TEAMS.map(t => `<option value="${t.key}"${t.key === key ? " selected" : ""}>${esc(t.key)} &mdash; ${esc(t.team)}</option>`).join("");
   const scRow = POSG.map(p => `<div><dt>${p}</dt><dd>${sc[p]}</dd></div>`).join("");
@@ -746,10 +750,10 @@ function vPlanner(){
         <h2 class="panel-h">Trade chips &middot; useful players outside the top 8</h2><div class="scroll">${ptable(surplus[key].slice(0, 8), "No surplus players worth 12+.")}</div></section>
     </div>
     <section class="panel"><h2 class="panel-h">Targets &middot; players other teams can't keep</h2>
-      ${targets.length ? targets.map(t => `<h3 class="sub">${t.n.pos}</h3><div class="scroll">${ptable(t.list.map(p => ({...p, name:p.name + " · " + p.mgr})), "No one available.")}</div>`).join("") : `<p class="empty">No holes to fill. Use picks to buy the best player available.</p>`}</section>
+      ${targets.length ? targets.map(t => `<h3 class="sub">${t.n.pos}</h3><div class="scroll">${ptable(t.list.map(p => ({...p, own:p.mgr})), "No one available.")}</div>`).join("") : `<p class="empty">No holes to fill. Use picks to buy the best player available.</p>`}</section>
     <section class="panel"><h2 class="panel-h">Best trade partners</h2><div class="partners">${partners.map(x => `<div class="pcard" style="--team:${T[x.r.key].color}">${tag(x.r.key)} <small>needs ${x.theirNeeds.join(", ") || "nothing"}</small>
-      <p><b>They have:</b> ${x.theyHave.slice(0, 4).map(p => esc(p.name) + " (" + esc(p.pos) + ")").join(", ") || "&mdash;"}</p>
-      <p><b>You have:</b> ${x.iHave.slice(0, 4).map(p => esc(p.name) + " (" + esc(p.pos) + ")").join(", ") || "&mdash;"}</p>
+      <p><b>They have:</b> ${x.theyHave.slice(0, 4).map(p => plBtn(p.name, p.mlb, p.pos, p.type) + " (" + esc(p.pos) + ")").join(", ") || "&mdash;"}</p>
+      <p><b>You have:</b> ${x.iHave.slice(0, 4).map(p => plBtn(p.name, p.mlb, p.pos, p.type) + " (" + esc(p.pos) + ")").join(", ") || "&mdash;"}</p>
       <a href="#compare" data-compare-pair="${key}|${x.r.key}">Open in Trade Compare &rarr;</a></div>`).join("")}</div></section>
     <section class="panel"><h2 class="panel-h">League power rankings</h2><div class="scroll"><table><thead><tr><th>#</th><th class="l">Team</th><th>Score</th><th>Keepers</th><th>NA</th><th>Capital</th><th>Win-now</th><th>Future</th></tr></thead><tbody>
       ${lt.map(r => `<tr class="${r.key === key ? "hl" : ""}"><td>${r.rank}</td><td class="l">${tag(r.key)}</td><td><b>${r1(r.s.total)}</b></td><td>${r1(r.s.keepV)}</td><td>${r1(r.s.naV)}</td><td>${r1(r.s.capA + r.s.capB)}</td><td>#${r.nowRank}</td><td>#${r.futRank}</td></tr>`).join("")}</tbody></table></div></section>`;
@@ -762,9 +766,15 @@ const f3 = v => v === null || v === undefined ? "&mdash;" : (v < 1 && v > 0 ? v.
 const fnum = (c, v) => v === null || v === undefined ? "&mdash;" : ["AVG","OBP"].includes(c) ? v.toFixed(3).replace(/^0/, "") : ["ERA","WHIP","K/9"].includes(c) ? v.toFixed(2) : c === "IP" ? v.toFixed(1) : Math.round(v).toLocaleString();
 const CATN = {R:"Runs", H:"Hits", HR:"Home runs", RBI:"RBI", SB:"Stolen bases", BB:"Walks", K_bat:"Batter strikeouts", AVG:"Average", OBP:"On-base %", IP:"Innings", W:"Wins", SV:"Saves", HLD:"Holds", "SV+H":"Saves + holds", K_pit:"Pitcher strikeouts", ERA:"ERA", WHIP:"WHIP", "K/9":"K per 9", BB_pit:"Walks allowed", H_pit:"Hits allowed", BSV:"Blown saves"};
 const cn = c => c.replace(/_bat|_pit/, "");
+const BKG = [["mgr","Managers",[["mgrades","Manager grades"],["legacy","Legacy"],["h2h","Head to head"],["streaks","Streaks & weeks"]]],
+  ["season","Seasons & stats",[["seasons","Seasons"],["cats","Category records"],["avg","162-game averages"],["big","Biggest seasons"]]],
+  ["trade","Trades",[["trades","Trade history"],["tgrades","Trade grades"]]],
+  ["player","Players",[["stats","MVPs & Cy Youngs"],["rings","Rings"],["keepers","Keepers & draft"],["ever","Every player"]]]];
 function bookNav(){
-  const s = [["mgrades","Manager grades"],["legacy","Legacy"],["streaks","Streaks & weeks"],["seasons","Seasons"],["h2h","Head to head"],["cats","Category records"],["avg","162-game averages"],["trades","Trade history"],["tgrades","Trade grades"],["rings","Rings"],["ever","Every player"],["keepers","Keepers & draft"],["stats","MVPs & Cy Youngs"],["big","Biggest seasons"]];
-  return `<nav class="booknav" aria-label="Record Book sections">${s.map(([id, n]) => `<a href="#records" data-jump="bk-${id}">${n}</a>`).join("")}</nav>`;
+  const g = ui.bkTab || "mgr", cur = BKG.find(x => x[0] === g);
+  const chips = (cur ? cur[2] : BKG.flatMap(x => x[2]));
+  return `<div class="booktabs"><div class="seg" role="tablist" aria-label="Record Book">${BKG.map(([id, n]) => `<button type="button" role="tab" data-bktab="${id}" aria-pressed="${g === id}">${n}</button>`).join("")}<button type="button" role="tab" data-bktab="all" aria-pressed="${g === "all"}">Show all</button></div></div>
+    <nav class="booknav" aria-label="Jump to a section">${chips.map(([id, n]) => `<a href="#records" data-jump="bk-${id}">${n}</a>`).join("")}</nav>`;
 }
 function vRecords(){
   const B = BOOK, R = B.rec;
@@ -887,7 +897,7 @@ function vRecords(){
     ${B.best.slice(0, 15).map(([n, k, y, g, line], i) => `<tr><td>${i + 1}</td><td class="l"><b>${esc(n)}</b></td><td class="l">${who(k)}</td><td>${y}</td><td class="l"><small>${esc(line)}</small></td></tr>`).join("")}</tbody></table></div>
     <p class="foot pad">Players on a final roster, 2009&ndash;2026 (2020 not counted). Full MLB season totals. All-around seasons use the same score as the MVPs, compared with everyone rostered that year.</p></section>`;
   return `<div class="sec-head"><div><h1>Record Book</h1><p>Seventeen seasons of Showler &amp; Friends, rebuilt from Yahoo: legacies, streaks, head-to-head, category records, every trade, every ring and every player who wore our colors.</p></div></div>
-    ${bookNav()}<div class="stack">${mgrSec}${legacy}${streaks}${seasons}${h2h}${cats}${avg}${trades}${tgrades}${rings}${ever}${keepers}${statsSec}${bigSec}</div>`;
+    ${bookNav()}<div class="stack" id="bkStack">${mgrSec}${legacy}${streaks}${seasons}${h2h}${cats}${avg}${trades}${tgrades}${rings}${ever}${keepers}${statsSec}${bigSec}</div>`;
 }
 
 // ---------- grade explanations (Manager grades section) ----------
@@ -975,7 +985,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePop(); else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.tx) { e.preventDefault(); openTrade(e.target.dataset.tx); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.cmvp) { e.preventDefault(); openPop(cmvpExplain(e.target.dataset.cmvp)); } });
 // ---------- trade explanation pop-up (data: paths.json, loaded on first use) ----------
 let PATHS = null, pathsP = null;
-function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611071846", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
+function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611071941", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
 const f1 = x => (Math.round(x * 10) / 10).toFixed(1);
 const txPct = w => Math.round(w * 100) + "%";
 const fdate = s => { if (!s) return ""; const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); };
@@ -1063,13 +1073,13 @@ function cmvpExplain(k){
 }
 // ---------- player stat pop-up (data: stats.json, loaded on first use) ----------
 let PST = null, pstP = null;
-function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611071846", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
+function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611071941", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
 const plNorm = s => String(s).replace(/\s*\((batter|pitcher)\)\s*$/i, "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.']/g, "").replace(/\b(jr|sr|ii|iii|iv)\b/g, "").replace(/[^a-z]+/g, " ").trim();
 const TEAMFIX = {AZ:"ARI", CHW:"CWS", KCR:"KC", SDP:"SD", SFG:"SF", TBR:"TB", WSN:"WSH", WAS:"WSH", OAK:"ATH",
   Diamondbacks:"ARI", "D-backs":"ARI", Braves:"ATL", Orioles:"BAL", "Red Sox":"BOS", Cubs:"CHC", "White Sox":"CWS", Reds:"CIN", Guardians:"CLE", Rockies:"COL", Tigers:"DET",
   Astros:"HOU", Royals:"KC", Angels:"LAA", Dodgers:"LAD", Marlins:"MIA", Brewers:"MIL", Twins:"MIN", Mets:"NYM", Yankees:"NYY", Athletics:"ATH", "A's":"ATH", Phillies:"PHI",
   Pirates:"PIT", Padres:"SD", Mariners:"SEA", Giants:"SF", Cardinals:"STL", Rays:"TB", Rangers:"TEX", "Blue Jays":"TOR", Nationals:"WSH"};
-const teamCode = t => TEAMFIX[t] || t || "";
+const teamCode = t => { t = String(t || "").replace(/\*$/, "").trim(); return TEAMFIX[t] || t; };
 const plGroup = (pos, type, name) => /\(pitcher\)/i.test(name) ? "P" : /\(batter\)/i.test(name) ? "H" : type === "Pitcher" ? "P" : type === "Hitter" ? "H"
   : /^(SP|RP|P)(,(SP|RP|P))*$/.test(pos || "") ? "P" : /\b(SP|RP)\b/.test(pos || "") ? "HP" : "H";
 function plFind(name, team, grp){
@@ -1129,6 +1139,12 @@ const tgCls = g => g >= 60 ? "tg-w" : g > 40 ? "tg-e" : "tg-l";
 function tgRow(t, m){ return t[4] && t[4].g.find(x => x[0] === m); }
 function tgBadge(t, m){ const r = tgRow(t, m); if (!r) return ""; return ` <b class="tg ${tgCls(r[1])}" title="Result ${r[1]} (${r[3]} value pts) · At the time ${r[2]}${t[4].dev ? " · still playing out" : ""}">${tgLetter(r[1])} ${r[1]}</b>`; }
 function tgGap(t){ const v = t[4].g.map(x => x[3]); return Math.max(...v) - Math.min(...v); }
+function bookShow(){
+  const g = ui.bkTab || "mgr", cur = BKG.find(x => x[0] === g), on = cur ? new Set(cur[2].map(x => "bk-" + x[0])) : null;
+  const order = cur ? cur[2].map(x => "bk-" + x[0]) : null, box = $("bkStack"); if (!box) return;
+  box.querySelectorAll(':scope > section[id^="bk-"]').forEach(s => { s.hidden = !!on && !on.has(s.id); });
+  if (order) order.forEach(id => { const el = $(id); if (el) box.appendChild(el); });   // tab order
+}
 function fillRings(){
   const box = $("bk-rings"); if (!box) return;
   const q = norm((ui.bkRingQ || "").trim()), min = (ui.bkRingM || "final") === "all" ? 3 : 2; let shown = 0;
@@ -1344,6 +1360,11 @@ function vLauncher(){
   return `<div class="launch"><a class="open" href="${HUB_URL}" target="_blank" rel="noopener">Open the League Hub &#8599;</a>
     <div class="grid">${s.map(([id, n]) => `<a href="${HUB_URL}#${id}" target="_blank" rel="noopener">${n}</a>`).join("")}</div></div>`;
 }
+const NAVG = [["home","Home",[["home","Home"]]],["rosters","Rosters",[["rosters","Rosters"]]],["rankings","Rankings",[["rankings","Rankings"]]],
+  ["trade","Trades",[["compare","Trade Compare"],["planner","Off-Season Planner"],["trades","Trade Log"]]],
+  ["draft","Drafts",[["draft-2027","2027 Draft"],["draft-2028","2028 Draft"]]],
+  ["hist","League History",[["history","Seasons & Champions"],["managers","Managers"],["records","Record Book"]]],
+  ["rules","Rules",[["rules","Rules"]]],["resources","Resources",[["resources","Resources"]]]];
 function route(){
   document.body.classList.toggle("embed-small", smallEmbed());
   if (smallEmbed()) { $("view").innerHTML = vLauncher(); return; }
@@ -1353,10 +1374,12 @@ function route(){
   if (h.startsWith("team-")) { const key = TEAMS.find(t => t.key.toLowerCase() === h.slice(5)); html = key ? vTeam(key.key) : vTeams(); active = "rosters"; }
   else if (h.startsWith("manager-")) { const key = TEAMS.find(t => t.key.toLowerCase() === h.slice(8)); html = key ? vManager(key.key) : vManagers(); active = "managers"; }
   else { html = (VIEWS[h] || vHome)(); if (h === "teams") active = "rosters"; if (!VIEWS[h]) active = "home"; }
-  $("view").innerHTML = html;
-  document.querySelectorAll("#nav a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + active ? "page" : "false"));
+  const grp = NAVG.find(g => g[2].some(x => x[0] === active)) || NAVG.find(g => g[0] === active) || NAVG[0];
+  const sub = grp[2].length > 1 ? `<nav class="subnav" aria-label="${esc(grp[1])} pages">${grp[2].map(([id, n]) => `<a href="#${id}"${id === active ? ' aria-current="page"' : ""}>${n}</a>`).join("")}</nav>` : "";
+  $("view").innerHTML = sub + html;
+  document.querySelectorAll("#nav a").forEach(a => a.setAttribute("aria-current", a.dataset.g === grp[0] ? "page" : "false"));
   if (h === "rankings") fillRankings();
-  if (h === "records") { fillBook(); fillRings(); }
+  if (h === "records") { fillBook(); fillRings(); bookShow(); }
   const cur = document.querySelector('#nav a[aria-current="page"]'); if (cur) cur.scrollIntoView({block:"nearest", inline:"nearest"});
 }
 function rerender(keepScroll){ const y = window.scrollY; route(); if (keepScroll) window.scrollTo(0, y); }
@@ -1366,6 +1389,7 @@ document.addEventListener("click", e => {
   const rm = t.closest("[data-rm]"); if (rm) { sel.delete(rm.dataset.rm); rerender(true); return; }
   if (t.closest("#clear")) { sel.clear(); rerender(true); return; }
   if (t.closest("#swap")) { [ui.teamA, ui.teamB] = [ui.teamB, ui.teamA]; rerender(true); return; }
+  const bt = t.closest("[data-bktab]"); if (bt) { ui.bkTab = bt.dataset.bktab; store("hub.bk", ui.bkTab); const y = window.scrollY; route(); window.scrollTo(0, Math.min(y, $("bkStack") ? $("bkStack").offsetTop - 160 : y)); return; }
   const ro = t.closest("[data-ro]"); if (ro) { ui.roSet = ro.dataset.ro; store("hub.ro", ui.roSet); rerender(true); return; }
   const rk = t.closest("[data-rk]"); if (rk) { ui.rkSet = rk.dataset.rk; document.querySelectorAll("[data-rk]").forEach(b => b.setAttribute("aria-pressed", b === rk)); fillRankings(); return; }
   const jp = t.closest("[data-jump]"); if (jp) { e.preventDefault(); const el = $(jp.dataset.jump); if (el) el.scrollIntoView({behavior:"smooth", block:"start"}); return; }
@@ -1456,6 +1480,7 @@ $("logo").src = PH.logo;
 ui.teamA = T[store("hub.a")] ? store("hub.a") : "Show";
 ui.plan = T[store("hub.plan")] ? store("hub.plan") : "Show";
 ui.roSet = store("hub.ro") === "r27" ? "r27" : "dyn";
+ui.bkTab = ["mgr","season","trade","player","all"].includes(store("hub.bk")) ? store("hub.bk") : "mgr";
 ui.teamB = T[store("hub.b")] && store("hub.b") !== ui.teamA ? store("hub.b") : (ui.teamA === "Mosby" ? "Show" : "Mosby");
 const pinTabs = () => { const top = document.querySelector(".mast .top"); document.querySelector(".mast").style.top = -(top ? top.offsetHeight : 0) + "px"; };
 pinTabs(); window.addEventListener("load", pinTabs); if (document.fonts) document.fonts.ready.then(pinTabs); window.addEventListener("resize", () => { pinTabs(); if (smallEmbed() !== document.body.classList.contains("embed-small")) route(); });
