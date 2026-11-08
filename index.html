@@ -796,7 +796,6 @@ const CATN = {R:"Runs", H:"Hits", HR:"Home runs", RBI:"RBI", SB:"Stolen bases", 
 const cn = c => c.replace(/_bat|_pit/, "");
 const BKG = [["mgr","Managers",[["mgrades","Manager grades"],["legacy","Legacy"],["h2h","Head to head"],["streaks","Streaks & weeks"]]],
   ["season","Seasons & stats",[["seasons","Seasons"],["cats","Category records"],["avg","162-game averages"],["big","Biggest seasons"]]],
-  ["trade","Trades",[["trades","Trade history"],["tgrades","Trade grades"]]],
   ["player","Players",[["stats","MVPs & Cy Youngs"],["rings","Rings"],["keepers","Keepers & draft"],["ever","Every player"]]]];
 function bookNav(){
   const g = ui.bkTab || "mgr", cur = BKG.find(x => x[0] === g);
@@ -1019,7 +1018,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePop(); else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.tx) { e.preventDefault(); openTrade(e.target.dataset.tx); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.cmvp) { e.preventDefault(); openPop(cmvpExplain(e.target.dataset.cmvp)); } });
 // ---------- trade explanation pop-up (data: paths.json, loaded on first use) ----------
 let PATHS = null, pathsP = null;
-function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611072325", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
+function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611072345", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
 const f1 = x => (Math.round(x * 10) / 10).toFixed(1);
 const txPct = w => Math.round(w * 100) + "%";
 const fdate = s => { if (!s) return ""; const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); };
@@ -1107,7 +1106,7 @@ function cmvpExplain(k){
 }
 // ---------- player stat pop-up (data: stats.json, loaded on first use) ----------
 let PST = null, pstP = null;
-function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611072325", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
+function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611072345", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
 const plNorm = s => String(s).replace(/\s*\((batter|pitcher)\)\s*$/i, "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.']/g, "").replace(/\b(jr|sr|ii|iii|iv)\b/g, "").replace(/[^a-z]+/g, " ").trim();
 const TEAMFIX = {AZ:"ARI", CHW:"CWS", KCR:"KC", SDP:"SD", SFG:"SF", TBR:"TB", WSN:"WSH", WAS:"WSH", OAK:"ATH",
   Diamondbacks:"ARI", "D-backs":"ARI", Braves:"ATL", Orioles:"BAL", "Red Sox":"BOS", Cubs:"CHC", "White Sox":"CWS", Reds:"CIN", Guardians:"CLE", Rockies:"COL", Tigers:"DET",
@@ -1176,6 +1175,7 @@ function tgGap(t){ const v = t[4].g.map(x => x[3]); return Math.max(...v) - Math
 function bookShow(){
   const g = ui.bkTab || "mgr", cur = BKG.find(x => x[0] === g), on = cur ? new Set(cur[2].map(x => "bk-" + x[0])) : null;
   const order = cur ? cur[2].map(x => "bk-" + x[0]) : null, box = $("bkStack"); if (!box) return;
+  ["bk-trades", "bk-tgrades"].forEach(id => { const el = $(id); if (el && el.parentNode === box) el.remove(); });   // trades live on Trades > Trade History
   box.querySelectorAll(':scope > section[id^="bk-"]').forEach(s => { s.hidden = !!on && !on.has(s.id); });
   if (order) order.forEach(id => { const el = $(id); if (el) box.appendChild(el); });   // tab order
 }
@@ -1265,7 +1265,7 @@ function draftNeeds(key, year, label){
 }
 // ---------- Draft History (data: draft_history.json, loaded on first visit) ----------
 let DHD = null, dhP = null;
-function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611072325", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
+function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611072345", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
 function vDraftHist(){
   if (!DHD) { loadDH().then(() => { if (ROUTE === "draft-history") rerender(true); }).catch(() => { const b = $("dhBody"); if (b) b.innerHTML = `<p class="empty">The draft history didn't load. Check your connection and refresh.</p>`; });
     return `<div class="sec-head"><div><h1>Draft History</h1><p>How every manager drafts, from every live pick since 2009.</p></div></div><div id="dhBody"><p class="empty">Loading the draft history&hellip;</p></div>`; }
@@ -1321,6 +1321,12 @@ function dhManager(k, per){
         ${M.again.length ? `<p class="tx-h">Players he keeps coming back to</p><p>${M.again.map(([n, c, ys]) => `${plBtn(n, "", "", "")} <small>&times;${c} (${ys.join(", ")})</small>`).join(" &middot; ")}</p>` : ""}</div></section></div>
     <section class="panel"><h2 class="panel-h">Do his keepers change his draft?</h2><div class="pad">${kText}</div><p class="foot pad">Compares the share of a position in his early live rounds in drafts where he kept several players there against drafts where he didn't. Only differences of 5 points or more are shown.</p></section>
     <section class="panel"><h2 class="panel-h">Draft by draft &middot; every live pick</h2><div class="pad">${log}</div></section>`;
+}
+function vTradeHist(){
+  const doc = new DOMParser().parseFromString(`<div>${vRecords()}</div>`, "text/html");
+  const sec = id => { const el = doc.getElementById(id); return el ? el.outerHTML : ""; };
+  return `<div class="sec-head"><div><h1>Trade History</h1><p>Every trade in league history with its grades. Tap a trade to see why it got its grades and where every player and pick ended up.</p></div></div>
+    <div class="stack">${sec("bk-trades")}${sec("bk-tgrades")}</div>`;
 }
 function vDraft27(){
   const order = cache.order, rounds = [...Array(16)].map((_, i) => i + 9);
@@ -1502,7 +1508,7 @@ function vManager(key){
 }
 // ---------- season pop-up: the run and the roster (data: seasons_detail.json, loaded on first use) ----------
 let SDT = null, sdtP = null;
-function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611072325", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
+function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611072345", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
 function openSeason(key, y){
   const show = () => { openPop(seasonCard(key, y)); widenPop(); };
   if (SDT) return show();
@@ -1609,7 +1615,7 @@ function vLauncher(){
     <div class="grid">${s.map(([id, n]) => `<a href="${HUB_URL}#${id}" target="_blank" rel="noopener">${n}</a>`).join("")}</div></div>`;
 }
 const NAVG = [["home","Home",[["home","Home"]]],["rosters","Rosters",[["rosters","Rosters"]]],["rankings","Rankings",[["rankings","Rankings"]]],
-  ["trade","Trades",[["compare","Trade Compare"],["planner","Off-Season Planner"],["trades","Trade Log"]]],
+  ["trade","Trades",[["compare","Trade Compare"],["planner","Off-Season Planner"],["trades","Trade Log"],["trade-history","Trade History"]]],
   ["draft","Drafts",[["draft-2027","2027 Draft"],["draft-2028","2028 Draft"],["draft-history","Draft History"]]],
   ["hist","League History",[["history","Hall of History"],["managers","Managers"],["records","Record Book"]]],
   ["rules","Rules",[["rules","Rules"]]],["resources","Resources",[["resources","Resources"]]]];
@@ -1618,7 +1624,7 @@ function route(){
   if (smallEmbed()) { $("view").innerHTML = vLauncher(); return; }
   const h = ROUTE;
   let html, active = h;
-  const VIEWS = {home:vHome, rosters:vRosters, teams:vTeams, compare:vCompare, planner:vPlanner, "draft-2027":vDraft27, "draft-2028":vDraft28, "draft-history":vDraftHist, rankings:vRankings, trades:vTrades, managers:vManagers, history:vHistory, records:vRecords, rules:vRules, resources:vResources};
+  const VIEWS = {home:vHome, rosters:vRosters, teams:vTeams, compare:vCompare, planner:vPlanner, "draft-2027":vDraft27, "draft-2028":vDraft28, "draft-history":vDraftHist, "trade-history":vTradeHist, rankings:vRankings, trades:vTrades, managers:vManagers, history:vHistory, records:vRecords, rules:vRules, resources:vResources};
   if (h.startsWith("team-")) { const key = TEAMS.find(t => t.key.toLowerCase() === h.slice(5)); html = key ? vTeam(key.key) : vTeams(); active = "rosters"; }
   else if (h.startsWith("manager-")) { const key = TEAMS.find(t => t.key.toLowerCase() === h.slice(8)); html = key ? vManager(key.key) : vManagers(); active = "managers"; }
   else { html = (VIEWS[h] || vHome)(); if (h === "teams") active = "rosters"; if (!VIEWS[h]) active = "home"; }
@@ -1628,6 +1634,7 @@ function route(){
   document.querySelectorAll("#nav a").forEach(a => a.setAttribute("aria-current", a.dataset.g === grp[0] ? "page" : "false"));
   if (h === "rankings") fillRankings();
   if (h === "records") { fillBook(); fillRings(); bookShow(); }
+  if (h === "trade-history") fillBook();
   const cur = document.querySelector('#nav a[aria-current="page"]'); if (cur) cur.scrollIntoView({block:"nearest", inline:"nearest"});
 }
 function rerender(keepScroll){ const y = window.scrollY; route(); if (keepScroll) window.scrollTo(0, y); }
@@ -1731,7 +1738,7 @@ ui.teamA = T[store("hub.a")] ? store("hub.a") : "Show";
 ui.plan = T[store("hub.plan")] ? store("hub.plan") : "Show";
 ui.roSet = store("hub.ro") === "r27" ? "r27" : "dyn";
 ui.dhWho = store("hub.dhw") || "league";
-ui.bkTab = ["mgr","season","trade","player","all"].includes(store("hub.bk")) ? store("hub.bk") : "mgr";
+ui.bkTab = ["mgr","season","player","all"].includes(store("hub.bk")) ? store("hub.bk") : "mgr";
 ui.teamB = T[store("hub.b")] && store("hub.b") !== ui.teamA ? store("hub.b") : (ui.teamA === "Mosby" ? "Show" : "Mosby");
 const pinTabs = () => { const top = document.querySelector(".mast .top"); document.querySelector(".mast").style.top = -(top ? top.offsetHeight : 0) + "px"; };
 pinTabs(); window.addEventListener("load", pinTabs); if (document.fonts) document.fonts.ready.then(pinTabs); window.addEventListener("resize", () => { pinTabs(); if (smallEmbed() !== document.body.classList.contains("embed-small")) route(); });
