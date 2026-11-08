@@ -635,7 +635,8 @@ const legend = `<div class="legend" aria-label="Rank colors"><span><i class="k1"
 /* ---------- views ---------- */
 function vHome(){
   const t = cache.team, s = DATA;
-  const rows = TEAMS.map(x => { const d = t[x.key];
+  const lastName = o => { const p = String(o).trim().split(/\s+/); return [p[p.length - 1], p[0]].join(" ").toLowerCase(); };
+  const rows = [...TEAMS].sort((a, b) => lastName(a.owner).localeCompare(lastName(b.owner))).map(x => { const d = t[x.key];
     return `<tr style="--team:${x.color}"><td><span class="swatch"></span></td><td class="team"><a href="#team-${x.key.toLowerCase()}">${esc(x.team)}</a><span>${esc(x.key)} &middot; ${esc(x.owner)}</span></td>
       <td>${d.players.length}</td><td>${d.hit.length}</td><td>${d.pit.length}</td><td>${d.top100}</td><td class="l">${d.best ? esc(d.best.name) : "&mdash;"}</td><td>${d.cap27} <small>(#${d.capRank})</small></td><td>${d.p28.length}</td></tr>`; }).join("");
   const nTrades = new Set(s.trades.map(r => r[1] + "|" + r[0])).size;
@@ -646,14 +647,14 @@ function vHome(){
       <dl class="facts"><div><dt>Reigning champ</dt><dd>${champ ? esc(T[champ[1]].key) + ` <small style="font-size:14px;color:var(--muted)">${champ[0]}</small>` : "&mdash;"}</dd></div><div><dt>Rostered players</dt><dd>${cache.players.length}</dd></div><div><dt>Trades logged</dt><dd>${nTrades}</dd></div></dl>
       <div class="mlinks" style="margin-top:12px;flex-wrap:wrap"><a ${ext(L.links.yahoo)}>Yahoo league &#8599;</a><a ${ext(L.links.facebook)}>Facebook group &#8599;</a><a ${ext(L.links.drive)}>League Drive &#8599;</a><a ${ext(L.links.scores)}>MLB Scores &#8599;</a></div></section>
     <nav class="panel jump" style="padding:12px" aria-label="Quick links">
-      <a href="#compare"><b>Trade Compare</b><span>Any two teams side by side, plus a trade builder</span></a>
-      <a href="#rankings"><b>Rankings</b><span>Dynasty and 2027 ranks, who owns who, who's available</span></a>
-      <a href="#draft-2027"><b>2027 Draft Board</b><span>Snake order, every pick's owner</span></a>
-      <a href="#draft-2028"><b>2028 Draft Board</b><span>Each team's 2028 picks and who holds them</span></a>
-      <a href="#rosters"><b>League Rosters</b><span>All 12 rosters on one page</span></a>
-      <a href="#trades"><b>Trade Log</b><span>Every deal made this off-season</span></a>
-      <a href="#managers"><b>Managers</b><span>Bios, career records, head to head</span></a>
+      <a href="#draft-2027"><b>Draft Boards</b><span>The 2027 and 2028 boards: snake order and every pick's owner</span></a>
       <a href="#history"><b>History</b><span>Champions and all-time records since 2009</span></a>
+      <a href="#rosters"><b>League Rosters</b><span>All 12 rosters on one page</span></a>
+      <a href="#managers"><b>Managers</b><span>Bios, career records, head to head</span></a>
+      <a href="#planner"><b>Off-Season Planner</b><span>Keepers, holes, trade targets and partners for any team</span></a>
+      <a href="#rankings"><b>Rankings</b><span>Dynasty and 2027 ranks, who owns who, who's available</span></a>
+      <a href="#compare"><b>Trade Compare</b><span>Any two teams side by side, plus a trade builder</span></a>
+      <a href="#trades"><b>Trade Log</b><span>Every deal made this off-season</span></a>
     </nav></div>
   <section class="panel"><h2 class="panel-h">Team directory</h2><div class="scroll"><table class="dir">
     <thead><tr><th></th><th class="l">Team</th><th>Players</th><th>Hitters</th><th>Pitchers</th><th>Top-100 Dyn</th><th class="l">Top dynasty asset</th><th>'27 Capital</th><th>'28 Picks</th></tr></thead>
@@ -1018,7 +1019,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePop(); else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.tx) { e.preventDefault(); openTrade(e.target.dataset.tx); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.cmvp) { e.preventDefault(); openPop(cmvpExplain(e.target.dataset.cmvp)); } });
 // ---------- trade explanation pop-up (data: paths.json, loaded on first use) ----------
 let PATHS = null, pathsP = null;
-function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611072345", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
+function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611072353", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
 const f1 = x => (Math.round(x * 10) / 10).toFixed(1);
 const txPct = w => Math.round(w * 100) + "%";
 const fdate = s => { if (!s) return ""; const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); };
@@ -1106,7 +1107,7 @@ function cmvpExplain(k){
 }
 // ---------- player stat pop-up (data: stats.json, loaded on first use) ----------
 let PST = null, pstP = null;
-function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611072345", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
+function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611072353", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
 const plNorm = s => String(s).replace(/\s*\((batter|pitcher)\)\s*$/i, "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.']/g, "").replace(/\b(jr|sr|ii|iii|iv)\b/g, "").replace(/[^a-z]+/g, " ").trim();
 const TEAMFIX = {AZ:"ARI", CHW:"CWS", KCR:"KC", SDP:"SD", SFG:"SF", TBR:"TB", WSN:"WSH", WAS:"WSH", OAK:"ATH",
   Diamondbacks:"ARI", "D-backs":"ARI", Braves:"ATL", Orioles:"BAL", "Red Sox":"BOS", Cubs:"CHC", "White Sox":"CWS", Reds:"CIN", Guardians:"CLE", Rockies:"COL", Tigers:"DET",
@@ -1265,7 +1266,7 @@ function draftNeeds(key, year, label){
 }
 // ---------- Draft History (data: draft_history.json, loaded on first visit) ----------
 let DHD = null, dhP = null;
-function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611072345", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
+function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611072353", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
 function vDraftHist(){
   if (!DHD) { loadDH().then(() => { if (ROUTE === "draft-history") rerender(true); }).catch(() => { const b = $("dhBody"); if (b) b.innerHTML = `<p class="empty">The draft history didn't load. Check your connection and refresh.</p>`; });
     return `<div class="sec-head"><div><h1>Draft History</h1><p>How every manager drafts, from every live pick since 2009.</p></div></div><div id="dhBody"><p class="empty">Loading the draft history&hellip;</p></div>`; }
@@ -1508,7 +1509,7 @@ function vManager(key){
 }
 // ---------- season pop-up: the run and the roster (data: seasons_detail.json, loaded on first use) ----------
 let SDT = null, sdtP = null;
-function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611072345", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
+function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611072353", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
 function openSeason(key, y){
   const show = () => { openPop(seasonCard(key, y)); widenPop(); };
   if (SDT) return show();
