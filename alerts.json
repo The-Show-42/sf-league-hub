@@ -1,0 +1,36 @@
+{
+ "alerts": [
+  {
+   "id": "dl-2026-window",
+   "at": "2026-12-01T15:00:00Z",
+   "kind": "deadlines",
+   "title": "The trade window is open",
+   "body": "Offers are live on the hub until keepers are due Mar 1.",
+   "url": "offers"
+  },
+  {
+   "id": "dl-2027-keepers-week",
+   "at": "2027-02-22T16:00:00Z",
+   "kind": "deadlines",
+   "title": "Keepers are due in a week",
+   "body": "Lock them in by Mar 1 at 12:01 am CT. The trade window closes then too.",
+   "url": "keeper-calc"
+  },
+  {
+   "id": "dl-2027-keepers-tonight",
+   "at": "2027-03-01T00:00:00Z",
+   "kind": "deadlines",
+   "title": "Keepers are due tonight",
+   "body": "Midnight is the deadline. Open offers close with the trade window.",
+   "url": "keeper-calc"
+  },
+  {
+   "id": "dl-2027-draft",
+   "at": "2027-03-14T14:00:00Z",
+   "kind": "deadlines",
+   "title": "Draft day",
+   "body": "The 2027 S&F draft is today.",
+   "url": "draft-2027"
+  }
+ ]
+}
