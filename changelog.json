@@ -1,0 +1,518 @@
+[
+[
+"2026-11-02 20:23",
+"The Showler & Friends League Hub goes live."
+],
+[
+"2026-11-02 20:43",
+"Phone layout: compact header, pinned tab bar and a section launcher for the Google Sites page."
+],
+[
+"2026-11-02 21:50",
+"Record Book: the full add and drop history, 2009 to 2026 (2,728 players ever rostered)."
+],
+[
+"2026-11-02 22:08",
+"Trade History: season filter, oldest or newest first, trades per year, and old team names matched to their managers."
+],
+[
+"2026-11-03 07:08",
+"Trade History: off-season trades from the league Facebook group, 2023 to 2026."
+],
+[
+"2026-11-03 08:40",
+"Trade History: every off-season trade from the league Facebook group, 2013 to 2026."
+],
+[
+"2026-11-03 12:02",
+"Record Book: trade grades (how it turned out and how it looked at the time) and manager trade ratings."
+],
+[
+"2026-11-03 12:23",
+"Record Book: overall manager grades, season report cards and the best draft steals."
+],
+[
+"2026-11-03 19:27",
+"Rules tab: the league Constitution & Bylaws, compiled from 2012 to 2026 group posts."
+],
+[
+"2026-11-03 21:54",
+"Complete add logs for 2022, 2023, 2025 and 2026; careers pick up their seasons straight from Yahoo."
+],
+[
+"2026-11-05 19:40",
+"Added two missing three-team off-season trades (Jan 5, 2013 and Feb 9, 2018)."
+],
+[
+"2026-11-05 20:02",
+"Manager grade explanations, season report card pop-ups and a multi-manager trade filter."
+],
+[
+"2026-11-05 21:22",
+"Trade pop-ups explain every grade and follow each player and pick to the end of the line; rings for anyone on a title team; career franchise and league MVP and Cy Young."
+],
+[
+"2026-11-05 22:07",
+"Player pop-ups with 2024 to 2026 MLB stats and Steamer 2027 projections; dynasty and redraft rankings on League Rosters."
+],
+[
+"2026-11-07 18:46",
+"NA keepers (rounds 25 and 26) count as kept; release dates fixed for off-season pickups."
+],
+[
+"2026-11-07 19:41",
+"Grouped navigation, Record Book tabs, and the planner's target pop-ups fixed."
+],
+[
+"2026-11-07 19:57",
+"Hall of History page; draft-board manager pop-ups with keeper holes and draft targets."
+],
+[
+"2026-11-07 20:07",
+"Champion plaques open the title run and the roster that won it."
+],
+[
+"2026-11-07 20:15",
+"A season card for every manager and year; matchup records in manager head to head."
+],
+[
+"2026-11-07 20:29",
+"Legendary manager bios built from league records."
+],
+[
+"2026-11-07 21:58",
+"2010 had six keepers: keeper rounds, pick values and grades now follow the league's history."
+],
+[
+"2026-11-07 22:25",
+"Keeper history on manager pages; Ohtani the hitter and Ohtani the pitcher counted separately."
+],
+[
+"2026-11-07 22:32",
+"Keeper names open what that keeper gave the team that season."
+],
+[
+"2026-11-07 23:01",
+"Planner scarcity counts open the players behind them."
+],
+[
+"2026-11-07 23:20",
+"Draft History tab: every pick since 2009, how each manager drafts, and league-wide patterns."
+],
+[
+"2026-11-07 23:26",
+"Draft History picks open what each player gave the team that drafted him."
+],
+[
+"2026-11-07 23:46",
+"Trade History moves under the Trades tab."
+],
+[
+"2026-11-07 23:53",
+"Home: one Draft Boards box, an Off-Season Planner box, links A to Z, and the team directory by manager last name."
+],
+[
+"2026-11-09 00:09",
+"Season Dashboard (2026 preview), trade roasts in the Trade Log, and draft value by round."
+],
+[
+"2026-11-09 01:36",
+"Season Dashboard for every season since 2009 with a Career view; Managers tab with a page for every former manager; aggression and lazy meters and MLB team comparisons; sortable tables; names link to their pages."
+],
+[
+"2026-11-09 01:50",
+"The innings minimum follows the league's history: 7 innings 2009 to 2016, 21 in 2017 to 2022, 30 from 2023."
+],
+[
+"2026-11-09 12:45",
+"Record Book best and toughest regular seasons include former managers; a season range (From / To) for manager grades, trade grades, trade partners and the Season Dashboard career view; a Trade Partners section showing who each manager trades best and worst against; roto champions get their own table; trade pop-ups list every season a player was on the team, even ones where he produced nothing above waiver level (so Aaron Judge shows 2024 to 2026 for Micah); two trades made the same minute by the same managers now keep their own grades; this change log."
+],
+[
+"2026-11-09 17:23",
+"Keeper history on every manager page: tapping the best keeper season, most-kept player, worst keeper or the one that got away shows the full MLB season behind his value points, category by category (every season for the most-kept player)."
+],
+[
+"2026-11-09 17:38",
+"Record Book: every name in Biggest seasons on S&F rosters and Best all-around seasons opens that exact season's full MLB stats and the value points they were worth."
+],
+[
+"2026-11-09 17:43",
+"Every player named next to a season now opens that season: best draft steals, best picks and pickups in grade explanations, MVPs by season, franchise MVPs, rings, players ever rostered, season-card rosters, first picks, repeat draft picks, and every player in the trade explanations. Seasons on former managers' teams show the player's full MLB season."
+],
+[
+"2026-11-09 17:59",
+"A player's value for a team is now a button: tap it on any player season card or season roster to see how it was worked out, category by category, minus a waiver-level player for his time on the roster."
+],
+[
+"2026-11-09 18:04",
+"Lazy meter: one week under the innings minimum now costs 12.5 points and two or more cost the full 25."
+],
+[
+"2026-11-09 18:19",
+"Head-to-head records open every matchup between the two managers, by season and week, with the categories each side won: the Record Book grid, manager pages (regular season and playoffs) and former manager pages."
+],
+[
+"2026-11-09 18:23",
+"Career franchise MVP and Cy Young count every season a player was on the roster, including ones below waiver level, so Aaron Judge now shows 3 seasons, 2024–2026 for Micah."
+],
+[
+"2026-11-09 18:39",
+"League career MVP & Cy Young: click a player to see his value path, season by season, with the manager who had him each year; click any season for the stats behind it."
+],
+[
+"2026-11-09 18:45",
+"Best all-around seasons are now ranked by value points, the same number each player's pop-up shows, with a Value column added. Former managers' seasons in the Record Book player sections show the manager's name instead of his old Yahoo team name."
+],
+[
+"2026-11-09 18:53",
+"Best all-around seasons have a position drop-down (C, 1B, 2B, 3B, SS, OF, DH, SP, RP) showing each position's top 10 by value points, with a Pos column. Position is where the player logged the most MLB games that season."
+],
+[
+"2026-11-09 18:58",
+"Refreshing the hub keeps you on the page you were on, at the same spot, including inside the Claude artifact and embeds. A new tab still opens on Home."
+],
+[
+"2026-11-09 23:01",
+"Audit fixes: the hub link now shows a preview card and icon when shared; Home links to every section and shows the latest changes; Franchise MVPs by season use value points; a Dark/Light switch in the header; all ten tabs fit on a phone; the dynasty rankings note says when FantasyPros last changed its list; five players' seasons now connect to their MLB stats (Michael Lorenzen, José Martínez, Jose Miranda, Christian Encarnacion-Strand); a rostered player who missed a whole season says so."
+],
+[
+"2026-11-09 23:43",
+"Season awards for every season since 2009 on the Season Dashboard: Manager of the Year, Glow-Up of the Year, Fell Off a Cliff, All Hat No Cattle (keeper bust), Golden Horseshoe, Black Cat, Waiver Wire Gremlin and more, plus a season card for every manager."
+],
+[
+"2026-11-09 23:43",
+"Season Dashboard adds Schedule Swap (each manager's record with everyone else's schedule) and Category DNA (record in every category). Manager pages add career Category DNA."
+],
+[
+"2026-11-09 23:43",
+"Record Book adds Rivalries (Managers tab) and Best pickups (Players tab). Home adds Milestone watch and the trade-window countdown. The Planner adds the Contention window."
+],
+[
+"2026-11-09 23:43",
+"A search box in the header finds any player, manager, season or page. Every player now has his own S&F page with his value by season, rings, franchise MVPs and trades."
+],
+[
+"2026-11-10 00:04",
+"Rivalries: the Most playoff meetings list now shows the playoff record as the main number, with the regular-season record beside it."
+],
+[
+"2026-11-10 00:13",
+"Milestone watch on Home now covers category wins, trades, title and playoff streaks, winless series, career team totals (runs, home runs, RBI, steals, strikeouts, wins) and players closing in on career value marks."
+],
+[
+"2026-11-10 00:13",
+"S&F Hall of Fame (League History): 20 voters, a ballot every year since 2024, 75% to get in, with a plaque for every member."
+],
+[
+"2026-11-10 00:13",
+"The S&F Gazette (Season tab): the league's weekly front page. First issue: Week 22, 2026."
+],
+[
+"2026-11-10 00:13",
+"Save image buttons on season cards, the new player cards, Hall of Fame plaques and the Gazette, for reposting on social media (on the hub site)."
+],
+[
+"2026-11-10 07:36",
+"Hall of Fame rules changed: 100 voters (25 philosophies), players need 8 S&F seasons and a 3-season wait, and managers are eligible while still active. Elections now start with the Class of 2020."
+],
+[
+"2026-11-10 22:46",
+"The browser tab now reads \"S&F Baseball\"."
+],
+[
+"2026-11-10 22:51",
+"New S&F Baseball logo (the home-plate crest) in the header, the browser tab icon, the link preview and the Gazette."
+],
+[
+"2026-11-10 22:56",
+"Saving the hub to a phone's home screen now gives an \"S&F Baseball\" app icon with the new logo."
+],
+[
+"2026-11-10 23:03",
+"The S&F Baseball banner now sits at the top of the hub in place of the logo and title."
+],
+[
+"2026-11-10 23:09",
+"The home-screen app icon is now the full home-plate logo (Showler & Friends, S&F Baseball, Est. 2009)."
+],
+[
+"2026-11-10 23:25",
+"Browser tab icon is now the full S&F Baseball plate crest (Showler & Friends, S&F, Baseball, Est. 2009) instead of the S&F-only mark."
+],
+[
+"2026-11-10 23:44",
+"Manager of the Year is now voted: 30 voters, 5-3-1 ballots, leaning on improvement from the season before and on how the season was managed, playoff teams only. Each season's dashboard shows the full vote. Manager pages show Manager of the Year wins and each season's vote finish, and have a new Profile cards row: a career card and every season card, each with a Save image button."
+],
+[
+"2026-11-10 23:52",
+"Manager of the Year voting now gives a large bonus to a manager winning his first championship. Four winners change: 2011 John, 2014 Guy, 2018 Micah and 2023 Doug."
+],
+[
+"2026-11-11 00:06",
+"Hall of Fame: every member now has a bronze plaque. The new plaque gallery shows all 19 by class, each with its own Save image button; managers' photos are cast in bronze."
+],
+[
+"2026-11-11 00:15",
+"Hall of Fame plaque gallery is now a wall of small plaques that fits on one screen; tap one to open it full size and save it. Plaques are rewritten: one short line per honor, then three career numbers."
+],
+[
+"2026-11-11 09:56",
+"Home: new This day in league history section. Trades with their grades, big pickups, draft days, opening days and title days on today's date; when nothing happened, it shows the nearest dates before and after."
+],
+[
+"2026-11-11 10:54",
+"New: The Hot Take Desk, under the Season tab. Five made-up commentators talk trash about real results: Week 22, the trade file, the waiver wire and Frank's Hot Seat. Home shows a Take of the day that opens the desk. The desk now reacts to every logged trade in the Trade Log, in place of the roast."
+],
+[
+"2026-11-11 11:25",
+"The Gazette now has a monthly off-season issue: every trade that month with its grades, and a ledger of the players and picks each manager moved. First issue: February 2026, the 13-trade month."
+],
+[
+"2026-11-11 16:05",
+"New: The Deadline Meter, under the Season tab. Buy, sell or stand pat for every team with August 1 as the sell-by date, built from 4,000 simulated finishes of the season. Every season since 2009 is graded on what happened: 178 of 190 buy and sell calls were right."
+],
+[
+"2026-11-11 16:23",
+"The Deadline Meter now runs every week of the season, not just August 1: pick any week to see the calls then, with a trend line and the move from the week before. In season, Home shows this week's calls and the biggest movers."
+],
+[
+"2026-11-11 18:13",
+"Roto standings for 2009 now exist, added up from every weekly matchup line. 2010 was rebuilt the same way: Yahoo's 2010 season totals only covered part of the season, so its old roto order was wrong (Show still first)."
+],
+[
+"2026-11-11 18:55",
+"Home now changes with the calendar: right now it counts down to the December 1 trade window and shows the 2027 power rankings' top five; from December 1 it counts down the trade window and shows the latest trades, and in season the Deadline Meter leads."
+],
+[
+"2026-11-11 18:55",
+"New: 2027 Power Rankings, under Season. Each team's 8 best keepers by projected 2027 value plus the expected value of its 2027 picks. Tap a team for its core and picks."
+],
+[
+"2026-11-11 18:55",
+"New Press Box tab for The Gazette and The Hot Take Desk. League History now opens on an Overview: one card per part of the history that jumps straight to it."
+],
+[
+"2026-11-11 18:55",
+"New: How the Numbers Work, under Rules. Value points, luck, roto, trade grades, manager ratings, Manager of the Year, the Hall of Fame, the Deadline Meter, the power rankings and draft-pick values, all in one page."
+],
+[
+"2026-11-11 19:15",
+"Home has the 2027 calendar: trade window opens Dec 1, keepers due Mar 1 at 12:01 am CT, the draft Sunday, Mar 14 at 8 pm CT, trade window closes Mar 15, MLB Opening Night Mar 24 and Opening Day Mar 25. The countdown at the top always points at the next one."
+],
+[
+"2026-11-11 19:35",
+"This day in league history now shows only today's date, and stays off Home on days nothing happened. The On the calendar box is gone (the 2027 calendar covers it), and The Hot Take Desk's cast cards are smaller."
+],
+[
+"2026-11-11 19:52",
+"This day in league history now opens with The Hot Take Desk: one of the five commentators takes a shot at the day's biggest moment. Frank on the robberies, The Professor on the grades, Dee on the free-agent steals, Coach Skip on the champions, The Intern on whatever Frank tells him not to bring up."
+],
+[
+"2026-11-11 20:16",
+"New Home banner: the season, a big countdown to the next league date, the reigning champion with his photo and title count, and the league numbers, on navy and gold. The section tiles now sit in a wide grid underneath. Latest on the hub is off Home; every change is still under Resources."
+],
+[
+"2026-11-11 20:16",
+"The Hot Take Desk cast now have faces. Tap any of the five for a full bio."
+],
+[
+"2026-11-11 20:16",
+"Managers and the Home team directory now run in league order: Ben first as commish, then the 2009 originals Mosby, John and Justin, then everyone else by first season. The team directory shows each manager's full name once."
+],
+[
+"2026-11-11 21:59",
+"Player season cards: on any player's page, tap Card next to a season (or Season card in the season pop-up) for a graphic of that season with his stat line, value points, where he ranked on the roster and in the league, how he was acquired, and any title or franchise MVP. Save it as an image."
+],
+[
+"2026-11-11 21:59",
+"Trade Compare: once both sides of the Trade Builder have something in it, tap Make a trade offer graphic for an image of the deal, with both teams' grades, to send to the other manager."
+],
+[
+"2026-11-11 21:59",
+"Trade History: every graded trade has a Trade card button for a graphic of both sides' grades and what each got. The 2027 Power Rankings have a Rankings graphic too."
+],
+[
+"2026-11-11 22:30",
+"Hall of Fame players now wear their main MLB team's jersey and number on their plaques (the team they played the most games for): Pujols in Cardinals red #5, Ortiz in Red Sox #34, and so on."
+],
+[
+"2026-11-11 22:30",
+"New: Draft Analyzer, under Drafts. Every draft since 2009 graded on what the live picks produced against what their slots usually give, with team grades, best picks, early misses and a draft card to save for every team. On March 14 it grades the 2027 draft the same night: where each player sat on the board against where he was taken, plus his projected 2027 value. A mock preview of draft night is in the Draft menu until then."
+],
+[
+"2026-11-11 22:54",
+"The Deadline Meter now uses Yahoo's real week dates for every season, including the two-week All-Star break weeks and the long opening weeks in seasons that started overseas. Each season's August 1 call now uses exactly the weeks that were finished by then, one to three weeks fewer than before in most seasons."
+],
+[
+"2026-11-11 23:04",
+"Fixed: the jersey on a Hall of Fame plaque now comes through correctly when you save the plaque as an image."
+],
+[
+"2026-11-11 23:17",
+"The Hot Take Desk now leads with what's on the air: the newest segment and the three latest trade reactions. Everything older moves into Earlier on the desk at the bottom, and Take of the Day on Home only pulls from what's current."
+],
+[
+"2026-11-11 23:33",
+"The Hot Take Desk splits news from history: the latest news segment leads and is replaced (not kept) when a new one airs; From the Vault holds the league-history segments for good and gets a new one every couple of weeks. Every trade's Desk reaction now stays with that trade in Trade History."
+],
+[
+"2026-11-12 00:30",
+"New: Keeper Calculator, under Drafts (and a button on every team page). Pick 8 keepers and 2 NA prospects and see your 2027 value, where you'd land in the power rankings, your long-term score and the best players you'd throw back. Home points to it from February 1 until keepers are due."
+],
+[
+"2026-11-12 00:30",
+"New: Rivalries, under Managers. Pick any two managers for a card of every meeting: all-time record, categories, playoffs, the current streak, the last five and each side's biggest win. Save it and post it before they play."
+],
+[
+"2026-11-12 00:30",
+"New: a trophy case on every manager page: a trophy for each title, plus runner-up and third-place finishes, first-place regular seasons, Manager of the Year and the Hall of Fame. Save it as an image."
+],
+[
+"2026-11-12 00:30",
+"New for the season: Record watch on Home shows who is on pace to break a single-season record (runs, homers, RBI, steals, walks, pitching wins and strikeouts, matchup wins, category win percentage and the longest winning streak)."
+],
+[
+"2026-11-12 00:30",
+"The Gazette gets a season preview issue right after the draft: every team in power-ranking order with its keepers, draft grade, best pick and a line from the Hot Take Desk."
+],
+[
+"2026-11-12 00:30",
+"The hub loads much faster on phones: the first screen is about a third of the size it was. Manager photos and the record book now load as they're needed."
+],
+[
+"2026-11-12 00:52",
+"Trophy case redrawn: the titles sit on their own shelf in even rows, and every other honor gets a clean card with its count and years. Saving images on phones fixed: if the share sheet doesn't open on the first tap, the button says Image ready, tap to save; phones with no share sheet open the image to press and hold."
+],
+[
+"2026-11-12 01:01",
+"Save image no longer gets stuck on Making the image on phones: it now copies only the graphic, so a photo still loading elsewhere on the page can't hold it up."
+],
+[
+"2026-11-12 23:14",
+"The off-season trade window now closes when keepers are due (Mon, Mar 1, 12:01 am CT), not Mar 15. The calendar, the Home countdown and the Home text all follow it; from Mar 1 to the draft Home says keepers are in and points to draft night."
+],
+[
+"2026-11-13 19:07",
+"Manager of the Year vote: tap any Trades, Waivers, Draft or Keepers grade to see why. Trades lists every deal that counted with what he got and gave; Waivers his best pickups; Draft his best picks and biggest misses against the usual for each spot; Keepers who he kept and the best players he let go. Each shows where he ranked that season. Also fixed 2010 draft pick numbers (that draft started live picks in round 7)."
+],
+[
+"2026-11-13 19:11",
+"Manager of the Year vote table: the trade, waiver, draft and keeper grades are now colored buttons (green good, red poor) that open why he got that grade, and each column name opens what that grade measures."
+],
+[
+"2026-11-13 19:46",
+"Fixed: Shohei Ohtani's pitcher slot was credited with his hitting stats in seasons he didn't pitch (2019, 2024). Grades rebuilt: Travis's 2024 draft grade drops from 58 to 16 and Justin's 2024 keeper grade rises from 20 to 59; other 2024 grades and the 2019 and 2024 Manager of the Year vote points move slightly (no winner changes), and a few Hall of Fame vote totals move by a vote or two (no one in or out changes)."
+],
+[
+"2026-11-13 20:08",
+"New: S&F league awards, an MVP, Cy Young and Rookie of the Year for every season since 2009. Each season page shows the winners with the full vote; the Record Book has every winner. Thirty writers vote on what a player produced for S&F teams, the categories and matchups his weeks won his team, his share of his team and how far it went. Hall of Fame plaques list league awards, and the voters now count them: Corey Kluber falls to 73% in 2027 and stays on the ballot, Troy Tulowitzki drops off after 2025, Evan Longoria stays on the 2026 ballot. Everyone else already in stays in."
+],
+[
+"2026-11-13 20:39",
+"Player pages: Hardware is now a trophy shelf with icons: Hall of Fame plaque, S&F league awards (tap one for the vote), championship rings and franchise awards, grouped with the years. Hall of Fame: tapping a player's name on a ballot opens his S&F career page, and every plaque has a button to his S&F career (or a manager's page)."
+],
+[
+"2026-11-13 21:12",
+"Player pages: new header card. Name and Player card button on top, S&F value, rings and S&F teams in one even row, then an award badge for each award he has won: Hall of Fame (bronze, with his class), S&F MVP, Cy Young and Rookie of the Year (medal, count and years), and franchise MVP and Cy Young (silver trophy, count and the managers' years)."
+],
+[
+"2026-11-13 21:18",
+"Player cards (the save-image card) now carry the same award badges as the player page: Hall of Fame, S&F MVP, Cy Young and Rookie of the Year, and franchise MVP and Cy Young."
+],
+[
+"2026-11-13 22:47",
+"Trade Compare now enforces the league's pick rule: in a trade each team gives as many draft picks as it gets back, year by year. An uneven deal shows what's missing (for example, add a 2027 pick from Micah) and the offer graphic stays off until the picks are even."
+],
+[
+"2026-11-13 22:53",
+"Collapsible sections: tap any section's title (or its arrow) to fold it down to the title bar, tap again to open it. Everything starts open, and the hub remembers what you folded on that device. Pages with four or more sections get Collapse all / Expand all at the top. Saved images always come out in full."
+],
+[
+"2026-11-13 23:24",
+"Claim your team: tap Claim team at the top, sign in with the starter code from Show, then pick your own 4–6 digit code. Your team then shows first and highlighted across the hub, your folded sections and Home layout follow you to every device, and you can post projected keepers on your team page. New Trade Offers page (under Trades): send, counter, accept or pass on off-season deals, including 3- and 4-team deals, with the pick rule enforced. An accepted deal goes on the hub and to the league by itself within the hour. Plus a trade block and phone alerts (the bell): trades, offers, power rankings, the Gazette and deadlines."
+],
+[
+"2026-11-14 22:57",
+"Pitchers are now valued in each season's real S&F categories. Since 2017 that's W, H, BB, K, ERA, WHIP, K/9, BSV and SV+H; earlier seasons use their own sets. Until now the hub scored every season on the old IP, W, SV, BB, K, HLD, ERA, WHIP, BSV list. Trade grades, player values, Manager of the Year grades, team MVPs and the 2027 power rankings are updated; hitters don't change. 2027 blown saves are estimated from projected saves and holds. Hall of Fame: elections already held stand, and voters now give pitchers a small lift so the Hall elects them in line with their share of S&F value."
+],
+[
+"2026-11-14 23:13",
+"New: S&F Rankings (Rosters > S&F Rankings). Our own dynasty and 2027 redraft top 200, scored in S&F's own categories, with FantasyPros (dynasty) and NBC Sports (redraft) beside them. Tap a score to see how it's built: category bars against a replacement player, the math, and for dynasty a four-season chart with the keeper line. Filters for position, who rosters him and a name search."
+],
+[
+"2026-11-14 23:14",
+"Pin your favorite pages: in Customize Home, tap the pages you use most. They move to the front of the Home quick links, starred, in the order you pin them, and follow your team to every device."
+],
+[
+"2026-11-14 23:15",
+"The Gazette names players now: Week's stars shows the two best hitter lines and the best pitcher line on S&F rosters each week, starting with the 2027 season (and on the 2026 Week 22 issue)."
+],
+[
+"2026-11-16 21:30",
+"Home: the Hot Take Desk's Take of the day now sits right under the 2027 Power Rankings."
+],
+[
+"2026-11-16 21:55",
+"The S&F Rankings are now the hub's main rankings. Every tool that ranks players (Trade Compare, Trade Offers, Off-Season Planner, Keeper Calculator, rosters, team pages, Power Rankings, Draft Analyzer) uses them by default, with a Ranked by picker to switch to FantasyPros, HarryKnowsBall, FantraxHQ, RotoWire or NBC. The S&F lists are two-thirds our own model and one-third the market (HarryKnowsBall, FantraxHQ and FantasyPros for dynasty; RotoWire and NBC for 2027), and older players' playing time is now projected one player at a time."
+],
+[
+"2026-11-16 21:56",
+"S&F Rankings: a new Prospects tab, our top 150 NA-eligible prospects, half our model and half the market, with each one's 2026 line and, for those close to the majors, his projected strengths in S&F categories."
+],
+[
+"2026-11-16 21:57",
+"NA tags: every NA-eligible player (151 or fewer MLB at-bats and 51 or fewer innings, checked against MLB's career totals) has an NA tag beside his name across the hub. Keeper plans and the Keeper Calculator fill the two NA slots (keepers 25 and 26) from NA-eligible players only."
+],
+[
+"2026-11-16 21:58",
+"Manager pages: the trophy case spans the full width. Your own team's highlighted rows keep their rank and grade colors, so season report cards and ranking numbers stay easy to read in light mode."
+],
+[
+"2026-11-16 22:15",
+"S&F Rankings pop-ups: the market table now shows each source's share of the whole S&F rank (our model 66.7%; each dynasty source 11.1%, each 2027 source 16.7%), so the rows add up to 100%."
+],
+[
+"2026-11-16 22:40",
+"Home: the Take of the day now stays right under the 2027 Power Rankings for everyone, including managers who've customized their Home order (it used to drop to the bottom)."
+],
+[
+"2026-11-16 22:41",
+"Keeper Calculator: the Dyn and '27 ranks, Long-term and the presets now follow the Ranked by picker."
+],
+[
+"2026-11-16 22:42",
+"Draft Analyzer: the board now uses the S&F dynasty and 2027 ranks, and the mock keepers fill the two NA slots from NA-eligible players. The Power Rankings and Draft Analyzer pages no longer show the Ranked by picker, since neither changes with it."
+],
+[
+"2026-11-16 22:43",
+"Ohtani's pitcher entry no longer borrows the overall #1 from lists that rank him only once (FantasyPros dynasty, HarryKnowsBall, FantraxHQ); it gets a rank only where a list ranks his pitching separately."
+],
+[
+"2026-11-16 22:50",
+"Home: Take of the day is now its own section, so Customize Home can move it, hide it or fold it like the rest. It starts right under the 2027 Power Rankings, even on a Home order saved before it existed."
+],
+[
+"2026-11-16 23:05",
+"The Hot Take Desk adds a sixth voice: Vinnie “The Spoon” Scarpelli, the instigator. He takes what the others say about you and reads it back to your face. His first night: a fresh 2027 power rankings segment with this week's numbers, plus his two cents on the Receipts and Waiver Wire vault pieces."
+],
+[
+"2026-11-16 23:30",
+"The Hot Take Desk gets eight regular segments: Vinnie's Beef of the Week, Who Should Call Who, Keeper Bubble, Ranking Wars, Stock Watch, Desk Picks (with a season-long standings table of who picks best), Overreaction Monday and Bubble Watch. The newest of each sits under Regular segments on the desk. First up: Guy vs. Show, and the biggest gaps between the S&F Rankings and FantasyPros."
+],
+[
+"2026-11-16 23:55",
+"Fixes from the hub audit: player pages now open for the 75 players who were on S&F rosters but have no value points yet (24 rostered now, mostly prospects) instead of \"Player not found\"; the team pop-up names the ranking source actually in use instead of always FantasyPros; the draft boards and planner call keepers 25 and 26 NA keepers (NA-eligible players) instead of prospects."
+],
+[
+"2026-11-17 08:00",
+"Trade Talk: a chat for the league on the Trades tab, for managers who've claimed their team. League and Trade Block rooms plus private two-team chats. Tag a team with @ and he gets a phone alert. The Hot Take Desk reads the public rooms and drops in about once an hour; it never sees private chats. Home shows what's new, Trade Compare has a \"Talk about this trade\" button, and every two-team offer can be talked over privately."
+],
+[
+"2026-11-17 08:01",
+"Reactions: tap 🔥 😂 🧂 or 🗑️ on any Hot Take Desk take or logged trade (one per team; counts are public, who reacted isn't). Home's Take of the day is now the week's most-reacted take on the air."
+],
+[
+"2026-11-17 08:02",
+"Faster Home: the outside ranking lists, the rulebook and this change log now load when they're opened, so the hub's main page is about 17% smaller (1.08 MB to 0.90 MB)."
+]
+]
