@@ -590,5 +590,9 @@
 [
 "2026-11-18 10:45",
 "Record Book: the section tabs and buttons are now two drop-down menus, Show (Managers, Seasons & stats, Players or Everything) and Jump to (any section)."
+],
+[
+"2026-11-18 11:55",
+"Red number on the app icon: in the Home Screen app, the S&F icon shows how many unread Trade Talk messages and trade offers are waiting on you, and while the app is closed it counts the phone alerts that came in. It clears when you're caught up."
 ]
 ]
