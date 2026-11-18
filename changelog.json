@@ -554,5 +554,9 @@
 [
 "2026-11-18 01:20",
 "Fix: the 2027 Power Rankings and the Keeper Calculator were counting every 2027 draft pick for the team it originally belonged to, not the team that owns it now. Picks traded in past seasons now count for their current owner. Order after the fix: Show, Travis, Preston, Micah, Mosby, Morgan, Guy, Justin, Doug, Carter, John, Paul (Morgan up from 10th to 6th; Preston and Micah swap 3rd and 4th). Two Hot Take Desk lines that quoted the old numbers were corrected."
+],
+[
+"2026-11-18 02:00",
+"Fix: the 2027 mock draft in the Draft Analyzer credited each pick to the team it originally belonged to, not the team that owns it on the draft board. Every mock pick now goes to its current owner (for example, 9.01 is John's, 9.04 is Travis's), and the team grades were redone."
 ]
 ]
