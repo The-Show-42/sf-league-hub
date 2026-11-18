@@ -558,5 +558,9 @@
 [
 "2026-11-18 02:00",
 "Fix: the 2027 mock draft in the Draft Analyzer credited each pick to the team it originally belonged to, not the team that owns it on the draft board. Every mock pick now goes to its current owner (for example, 9.01 is John's, 9.04 is Travis's), and the team grades were redone."
+],
+[
+"2026-11-18 02:08",
+"My Blueprint (Trades): every manager's private winter game plan once he claims his team: likely keepers and close calls, trades priced the way this league has actually dealt since 2009 that grade well for both sides, buyers for the players he can't keep, and one tap to open a trade in Trade Compare or send it as an offer. Scouting Reports (Managers): how every manager trades in the off-season and who he is likely to move. The 2027 mock draft now leaves out every team's likely keepers, so only players likely to reach the draft get picked."
 ]
 ]
