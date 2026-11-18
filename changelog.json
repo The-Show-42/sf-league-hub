@@ -582,5 +582,9 @@
 [
 "2026-11-18 09:30",
 "The Gazette's front page reworked: a slightly smaller centered headline, the deck centered on one line under it with a rule, a column rule between the story and the sidebar, the standings or ledger right under the story instead of pinned to the bottom, box labels that no longer break titles in two, and the playoff bracket as a four-box grid. Every issue fits the page."
+],
+[
+"2026-11-18 10:35",
+"Trade Talk and the other signed-in pages no longer get stuck on \"Couldn't reach the hub\": a dropped connection is retried on its own (iPhones often drop the first request after the app wakes up), a Try again button shows if it still can't connect, and coming back to the app or getting signal back reloads the page."
 ]
 ]
