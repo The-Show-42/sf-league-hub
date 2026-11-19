@@ -614,5 +614,13 @@
 [
 "2026-11-19 01:12",
 "New: Players > Player Stats. Every player on the S&F lists plus every rostered player, in S&F's categories, for the 2027 projection, 2026, 2025, 2024 or a 3-year average. Sort by any column, switch dynasty or redraft S&F rank, and filter by position, fantasy team or both."
+],
+[
+"2026-11-19 01:13",
+"New: My Team > Keepers & Tiers. Star your 8 keepers (only you see them) and, if you want, put any player in a trade tier: Tier 1 untouchable, Tier 2 takes a haul, Tier 3 a fair keeper deal, Tier 4 picks or a 2-for-1. Pick where you want to get better and whether the league can see your tiers. Shared tiers show on your team page and become your trade block. It's also step 2 when you first claim your team, or turn it Off and the hub picks for you."
+],
+[
+"2026-11-19 01:14",
+"My Blueprint: once you set your trade tiers, its trades are replaced by ideas matched to your tiers and needs and every other team's (the hub's guesses for teams that haven't shared theirs), updated every hour. Each tier shows the deals that clear both sides' price in the Trade Analyzer, or the closest miss and what would close it, plus 2-for-1 upgrades and players you could buy. Team pages now say only \"Keepers posted\"; posted keepers stay private."
 ]
 ]
