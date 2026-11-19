@@ -594,5 +594,9 @@
 [
 "2026-11-18 11:55",
 "Red number on the app icon: in the Home Screen app, the S&F icon shows how many unread Trade Talk messages and trade offers are waiting on you, and while the app is closed it counts the phone alerts that came in. It clears when you're caught up."
+],
+[
+"2026-11-18 23:25",
+"Player ages filled in everywhere: 77 rostered players (and a few hundred on the ranking lists) had no age because the league sheet only has ages for players in the FantasyPros table. The hub now fills them from MLB's birthdates, and the age stays current on its own. Rosters, team pages, Trade Compare, the Keeper Calculator, the S&F Rankings, every Ranked by list and the draft boards."
 ]
 ]
