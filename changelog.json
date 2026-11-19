@@ -626,5 +626,9 @@
 [
 "2026-11-19 07:30",
 "Fixed: My Team > My Trade Offers stayed on \"Loading\". It now opens your offers and the trade block, the same as Trades > Trade Offers."
+],
+[
+"2026-11-19 08:45",
+"Player pages: every Hardware box opens now. Franchise MVP and Franchise Cy Young show the five most valuable hitters (or pitchers) on that final roster each year he won, with his line and how far ahead he finished. Champion shows where he ranked on each title roster by S&F value, the top five, and that team's franchise MVP and Cy Young."
 ]
 ]
