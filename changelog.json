@@ -642,5 +642,9 @@
 [
 "2026-11-19 11:20",
 "Keeper Calculator: fixed the buttons sitting on top of the team picker on phones. The picker now has its own row, with the buttons below it."
+],
+[
+"2026-11-19 12:40",
+"Trade grades have a wider scale. The old one gave A+ at +6 and F at -10, so most uneven trades came out A+ or F, and near-even swaps often read A for one side and C for the other. Now: A+ is +15 or better, A +8, B+ +3, B within 3 points either way, C+ down to -8, C down to -15, D down to -20, F -20 or worse. The math behind the grades is unchanged. Trade Compare, Trade Offers, My Blueprint and the trade ideas all use the new letters, and the blueprints were refreshed with them."
 ]
 ]
