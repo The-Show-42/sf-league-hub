@@ -622,5 +622,9 @@
 [
 "2026-11-19 01:14",
 "My Blueprint: once you set your trade tiers, its trades are replaced by ideas matched to your tiers and needs and every other team's (the hub's guesses for teams that haven't shared theirs), updated every hour. Each tier shows the deals that clear both sides' price in the Trade Analyzer, or the closest miss and what would close it, plus 2-for-1 upgrades and players you could buy. Team pages now say only \"Keepers posted\"; posted keepers stay private."
+],
+[
+"2026-11-19 07:30",
+"Fixed: My Team > My Trade Offers stayed on \"Loading\". It now opens your offers and the trade block, the same as Trades > Trade Offers."
 ]
 ]
