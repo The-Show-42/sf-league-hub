@@ -646,5 +646,9 @@
 [
 "2026-11-19 12:40",
 "Trade grades have a wider scale. The old one gave A+ at +6 and F at -10, so most uneven trades came out A+ or F, and near-even swaps often read A for one side and C for the other. Now: A+ is +15 or better, A +8, B+ +3, B within 3 points either way, C+ down to -8, C down to -15, D down to -20, F -20 or worse. The math behind the grades is unchanged. Trade Compare, Trade Offers, My Blueprint and the trade ideas all use the new letters, and the blueprints were refreshed with them."
+],
+[
+"2026-11-19 12:55",
+"Player pages: the award boxes at the top open the same pop-ups as Hardware. S&F MVP, Cy Young and Rookie of the Year show the vote (every year he won), the franchise awards show the rest of that roster, and tapping the Rings number shows each title roster."
 ]
 ]
