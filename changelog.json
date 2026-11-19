@@ -638,5 +638,9 @@
 [
 "2026-11-19 10:55",
 "Keeper Calculator: each button now says what it's based on. Best for 2027 uses 2027 value (the power-rankings number, scored like every value point on the hub); Best long-term uses the S&F Rankings, which rate starting pitchers higher. Players the two disagree on are marked Close call, so you can see the choice that's really yours. The team picker is full width on phones."
+],
+[
+"2026-11-19 11:20",
+"Keeper Calculator: fixed the buttons sitting on top of the team picker on phones. The picker now has its own row, with the buttons below it."
 ]
 ]
