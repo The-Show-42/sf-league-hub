@@ -634,5 +634,9 @@
 [
 "2026-11-19 10:45",
 "Keeper Calculator: signed in, your own team now opens on the keepers you posted in Keepers & Tiers, with a \"My posted keepers\" button to get back to them after trying Best for 2027 or Best long-term. Only you see them; other teams still open on the hub's picks."
+],
+[
+"2026-11-19 10:55",
+"Keeper Calculator: each button now says what it's based on. Best for 2027 uses 2027 value (the power-rankings number, scored like every value point on the hub); Best long-term uses the S&F Rankings, which rate starting pitchers higher. Players the two disagree on are marked Close call, so you can see the choice that's really yours. The team picker is full width on phones."
 ]
 ]
