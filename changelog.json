@@ -662,5 +662,9 @@
 [
 "2026-11-19 23:05",
 "Chat: player names link to their player pages (typed with or without accents). Trade ideas in My Blueprint can now update within a few minutes of a Keepers & Tiers save, once the commissioner turns it on. Starting Dec 1, Home opens the first week of the trade window with a banner on where to start, and the Hot Take Desk has a kickoff segment that morning."
+],
+[
+"2026-11-20 17:32",
+"Trade Compare: \"Talk about this trade\" now opens a private chat with the other managers in the deal instead of the Trading Block, and you can add or drop anyone. Chat: start a group chat with any managers you pick (+ Group chat). Team and manager pages have a \"Propose a trade\" button that opens Trade Compare with you and that team, and a player's pop-up has \"Send trade\" in the top right to start a deal with the team that owns him."
 ]
 ]
