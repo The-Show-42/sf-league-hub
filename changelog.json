@@ -666,5 +666,9 @@
 [
 "2026-11-20 17:32",
 "Trade Compare: \"Talk about this trade\" now opens a private chat with the other managers in the deal instead of the Trading Block, and you can add or drop anyone. Chat: start a group chat with any managers you pick (+ Group chat). Team and manager pages have a \"Propose a trade\" button that opens Trade Compare with you and that team, and a player's pop-up has \"Send trade\" in the top right to start a deal with the team that owns him."
+],
+[
+"2026-11-20 17:52",
+"Chat: new \"Ask the desk\" button in the League and Trading Block rooms and on Home's league chat (or type @Desk). Ask the whole Hot Take Desk anything and the one to three members whose beat fits your question answer within seconds, each building on the last. The tag buttons no longer show in group chats."
 ]
 ]
