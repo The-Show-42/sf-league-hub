@@ -27,21 +27,21 @@
 :root{
   --bg:#eef1f5; --surface:#ffffff; --surface-2:#f5f7fa; --line:#d9dee6;
   --ink:#0f1b2d; --muted:#5b6778; --navy:#0b1f3a; --navy-2:#132b4d; --navy-ink:#ffffff; --navy-muted:#aeb9c8;
-  --gold:#f2a516; --gold-ink:#1b1300; --sel:#fff4d6; --sel-tint:rgba(242,165,22,.18); --na-bg:#e3e8ff; --na-ink:#2f3a9e; --sel-line:#f2a516; --good:#1b6320;
-  --t1:#1b5e20; --t1-ink:#ffffff; --t2:#43a047; --t2-ink:#0b2410; --t3:#a5d6a7; --t3-ink:#10301a; --t4:#e8f5e9; --t4-ink:#10301a; --nr:#9aa3af;
+  --gold:#f2a516; --gold-ink:#1b1300; --gold-txt:#8a5a00; --sel:#fff4d6; --sel-tint:rgba(242,165,22,.18); --na-bg:#e3e8ff; --na-ink:#2f3a9e; --sel-line:#f2a516; --good:#1b6320;
+  --t1:#1b5e20; --t1-ink:#ffffff; --t2:#43a047; --t2-ink:#0b2410; --t3:#a5d6a7; --t3-ink:#10301a; --t4:#e8f5e9; --t4-ink:#10301a; --nr:#6b7280;
   --font-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --font-body:"Barlow","Segoe UI",Roboto,Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0a121e; --surface:#121d2d; --surface-2:#18263a; --line:#26364d;
   --ink:#e8edf4; --muted:#93a0b3; --navy:#050d19; --navy-2:#0e1c30; --navy-ink:#ffffff; --navy-muted:#8f9cb0;
-  --gold:#f5b335; --gold-ink:#1b1300; --sel:#2e2610; --sel-tint:rgba(245,179,53,.16); --na-bg:#2b3170; --na-ink:#dfe4ff; --sel-line:#f5b335; --good:#66bb6a;
+  --gold:#f5b335; --gold-ink:#1b1300; --gold-txt:#f5b335; --sel:#2e2610; --sel-tint:rgba(245,179,53,.16); --na-bg:#2b3170; --na-ink:#dfe4ff; --sel-line:#f5b335; --good:#66bb6a;
   --t1:#2e7d32; --t1-ink:#ffffff; --t2:#3f8f44; --t2-ink:#000000; --t3:#2a5a33; --t3-ink:#d9f2dc; --t4:#1b3322; --t4-ink:#cfe9d3; --nr:#6b7686;
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0a121e; --surface:#121d2d; --surface-2:#18263a; --line:#26364d;
   --ink:#e8edf4; --muted:#93a0b3; --navy:#050d19; --navy-2:#0e1c30; --navy-ink:#ffffff; --navy-muted:#8f9cb0;
-  --gold:#f5b335; --gold-ink:#1b1300; --sel:#2e2610; --sel-tint:rgba(245,179,53,.16); --na-bg:#2b3170; --na-ink:#dfe4ff; --sel-line:#f5b335; --good:#66bb6a;
+  --gold:#f5b335; --gold-ink:#1b1300; --gold-txt:#f5b335; --sel:#2e2610; --sel-tint:rgba(245,179,53,.16); --na-bg:#2b3170; --na-ink:#dfe4ff; --sel-line:#f5b335; --good:#66bb6a;
   --t1:#2e7d32; --t1-ink:#ffffff; --t2:#3f8f44; --t2-ink:#000000; --t3:#2a5a33; --t3-ink:#d9f2dc; --t4:#1b3322; --t4-ink:#cfe9d3; --nr:#6b7686;
   color-scheme:dark}
 *{box-sizing:border-box}
@@ -79,7 +79,7 @@ td.name span{display:block;font-weight:500;font-size:12px;color:var(--muted)}
 td.rk{font-family:var(--font-display);font-weight:700;font-size:16px;width:52px}
 .k1{background:var(--t1);color:var(--t1-ink)} .k2{background:var(--t2);color:var(--t2-ink)} .k3{background:var(--t3);color:var(--t3-ink)} .k4{background:var(--t4);color:var(--t4-ink)} .kn{color:var(--nr);font-weight:600!important}
 .group th{background:var(--surface);padding:12px 6px 6px 14px;text-align:left;border-bottom:2px solid var(--team,var(--gold));font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.tag[style*="--team:#EF6C00"]{color:#1b1300}.tag[style*="--team:#558B2F"]{background:#4a7a28}.matrix td small{color:var(--ink)}
+.tag[style*="--team:#EF6C00"]{color:#1b1300}.tag[style*="--team:#558B2F"]{background:#4a7a28}.matrix td small,td.hm small,td.h2h-c small{color:var(--ink)!important}.st-c .hx-eye{color:var(--gold-txt)}
 .tag{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#fff;background:var(--team,#555);white-space:nowrap;text-decoration:none}
 a.tag:hover{filter:brightness(1.15)}
 .avail{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--good)}
@@ -274,7 +274,7 @@ tr[data-sel="1"] td.name{box-shadow:inset 4px 0 0 var(--sel-line)}
 @keyframes pzp{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
 @media (prefers-reduced-motion:reduce){.pz.on i{animation:none}}
 :root[data-theme="dark"] .pz.on{color:#4ade80}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pz.on{color:#4ade80}}
-.teamhead .pz{color:#fff;border-color:rgba(255,255,255,.45);background:rgba(0,0,0,.18);margin-left:6px}.teamhead .pz.on{color:#fff;border-color:#4ade80}
+.side-head .pz,.teamhead .pz{color:#fff;border-color:rgba(255,255,255,.45);background:rgba(0,0,0,.18);margin-left:6px}.side-head .pz.on,.teamhead .pz.on{color:#fff;border-color:#4ade80}
 .pz.dot{padding:0;border:0;background:none;margin-left:5px}.pz[hidden]{display:none}
 .pzbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;padding:7px 14px;background:color-mix(in srgb,#22c55e 9%,transparent);border-bottom:1px solid var(--line)}.pzbar:empty{display:none}
 #hmTalk .pzbar{border-radius:8px;border:0;margin:0 0 8px;padding:6px 10px}
@@ -758,14 +758,14 @@ section.panel.folded > :not(.fold-h){display:none!important}section.panel.folded
 .gz h2{font:800 25px var(--font-display);text-transform:uppercase;letter-spacing:.04em;color:#0b1f3a;margin-bottom:5px;padding:0;border:0;background:none}
 .gz h2{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:10px}.gz h2 small{font:700 13px var(--font-body);letter-spacing:.06em;color:#b3261e;white-space:nowrap}
 .gz table{width:100%;border-collapse:collapse;font:600 18px var(--font-body);font-variant-numeric:tabular-nums}.gz td{padding:4px 0;border:0;text-align:left;background:none;white-space:nowrap}
-.gz .g-sb td{border-bottom:1px solid #cfc8b4}.gz .g-sb td:nth-child(2),.gz .g-sb td:nth-child(4){text-align:right;font-weight:800;width:38px}.gz .g-sb td:nth-child(3){padding-left:18px;color:#6b7482}.gz .g-sb td:first-child{font-weight:800;color:#0b1f3a}
+.gz .g-sb td{border-bottom:1px solid #cfc8b4}.gz .g-sb td:nth-child(2),.gz .g-sb td:nth-child(4){text-align:right;font-weight:800;width:38px}.gz .g-sb td:nth-child(3){padding-left:18px;color:#545c69}.gz .g-sb td:first-child{font-weight:800;color:#0b1f3a}
 .gz .g-item{margin-bottom:8px}.gz .g-item b{font:800 14px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:#b3261e;display:block}.gz .g-item span{font-size:18px;line-height:1.3;display:block}.gz .g-item strong{font-family:var(--font-body);font-weight:800}
-.gz .g-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.gz .g-st td{padding:3px 0;font-size:17px}.gz .g-st td:first-child{width:28px;color:#6b7482}.gz .g-st td:last-child{text-align:right}.gz .g-st.out td{color:#6b7482}
+.gz .g-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.gz .g-st td{padding:3px 0;font-size:17px}.gz .g-st td:first-child{width:28px;color:#545c69}.gz .g-st td:last-child{text-align:right}.gz .g-st.out td{color:#545c69}
 .gz .mv{font-weight:800;color:#1f7a36;font-size:14px;padding-left:6px}.gz .mv.dn{color:#b3261e}
 .gz .g-lead{font:600 17.5px/1.5 var(--font-body)}.gz .g-lead b{font-weight:800;color:#0b1f3a}
 .gz-m h1{font-size:84px}.gz-m .g-led{align-self:start;table-layout:fixed}.gz-m .g-led th:first-child,.gz-m .g-led td:first-child{width:31%}.gz-m .g-led th:nth-child(2){width:17%}.gz-m .g-led th:nth-child(3),.gz-m .g-led th:nth-child(4){width:26%}.gz-m .g-main{grid-template-columns:1.12fr 1fr}.gz-m .g-story p{font-size:20px;line-height:1.36}
-.gz .g-wire td{border-bottom:1px solid #cfc8b4;padding:4px 0;font-size:15.5px;white-space:normal}.gz .g-wire td:first-child{color:#6b7482;width:58px;white-space:nowrap}.gz .g-wire td:nth-child(2){font-weight:600}.gz .g-wire td:nth-child(2) b{font-weight:800;color:#0b1f3a}.gz .g-wire i{font-style:normal;color:#6b7482;font-weight:600}
-.gz .g-led th{font:800 11px var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:#6b7482;text-align:right;padding:0 0 3px}.gz .g-led td{padding:3px 0 3px 8px;font-size:16px;white-space:nowrap;border-bottom:1px solid #e0d9c5}.gz .g-led td:not(:first-child){text-align:right}.gz .g-led td:first-child{font-weight:800;color:#0b1f3a}
+.gz .g-wire td{border-bottom:1px solid #cfc8b4;padding:4px 0;font-size:15.5px;white-space:normal}.gz .g-wire td:first-child{color:#545c69;width:58px;white-space:nowrap}.gz .g-wire td:nth-child(2){font-weight:600}.gz .g-wire td:nth-child(2) b{font-weight:800;color:#0b1f3a}.gz .g-wire i{font-style:normal;color:#545c69;font-weight:600}
+.gz .g-led th{font:800 11px var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:#545c69;text-align:right;padding:0 0 3px}.gz .g-led td{padding:3px 0 3px 8px;font-size:16px;white-space:nowrap;border-bottom:1px solid #e0d9c5}.gz .g-led td:not(:first-child){text-align:right}.gz .g-led td:first-child{font-weight:800;color:#0b1f3a}
 .gz .g-foot{display:flex;justify-content:space-between;border-top:2px solid #0b1f3a;padding-top:8px;font:600 14px var(--font-body);color:#3b4656;letter-spacing:.04em}
 .hof-plq{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:0 0 16px}
 .hof-p{position:relative;border-radius:10px;padding:10px;text-align:center;background:linear-gradient(155deg,#8a6124,#5b3d14 45%,#3a260b);color:#f3ddab;box-shadow:0 6px 18px rgba(0,0,0,.28)}
@@ -799,7 +799,7 @@ section.panel.folded > :not(.fold-h){display:none!important}section.panel.folded
 .hm-tl li.done{opacity:.5}.hm-tl li.done i{background:var(--muted)}
 .hm-tl li.nx i{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 25%,transparent)}
 .hm-tl b{display:block;font-family:var(--font-display);font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.02em;line-height:1.1}
-.hm-tl li.nx b{color:var(--gold)}
+.hm-tl li.nx b{color:var(--gold-txt)}
 .hm-tl span{display:block;font-size:12.5px;color:var(--muted);line-height:1.25;margin-top:2px}.hm-tl li.nx span{color:var(--ink);font-weight:600}
 .hm-cal{list-style:none;margin:0;padding:12px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.hm-cal li{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface-2)}.hm-cal b{display:block;font-family:var(--font-display);font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.02em}.hm-cal span{font-size:13px;color:var(--muted)}.hm-cal li.done{opacity:.5}.hm-cal li.done b{text-decoration:line-through}.hm-cal li.nx{border-color:var(--gold);box-shadow:inset 4px 0 0 var(--gold)}
 @media (max-width:640px){.dk-cast{grid-template-columns:1fr 1fr;gap:6px}.dk-c{padding:7px 8px;column-gap:8px}.dk-c > span:last-child{display:none}.dk-c:last-child:nth-child(odd){grid-column:1/-1}.dk-c b{font-size:14.5px}.dk-c .r{font-size:10.5px;letter-spacing:.05em}}
@@ -971,8 +971,8 @@ tr.me-row>td{background-image:linear-gradient(var(--sel-tint),var(--sel-tint))!i
 .su-ctl{display:grid;gap:14px;padding:14px}.su-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.su-row>div:first-child{flex:1 1 260px;min-width:0}.su-row h3{margin:0 0 2px;font-size:17px}.su-row p{margin:0;font-size:14px;color:var(--muted)}
 .su-row .seg button{font-size:13px;padding:7px 12px;min-height:38px}
 .su-step{background:var(--sel);border:1px solid var(--sel-line);border-radius:8px;padding:10px 12px;margin:0;font-size:14.5px}.su-step b{background:var(--gold);color:var(--gold-ink);border-radius:4px;padding:1px 7px;margin-right:6px;font-family:var(--font-display);letter-spacing:.05em}
-.su-t td{vertical-align:middle}.su-t tr.dim td{opacity:.6}.su-t td small{color:var(--muted)}
-.su-star{font-size:21px;line-height:1;background:none;border:0;cursor:pointer;color:var(--line);padding:4px 6px;min-width:36px;min-height:36px}.su-star[aria-pressed="true"]{color:var(--gold)}
+.su-t td{vertical-align:middle}.su-t tr.dim td{background:var(--surface-2)}.su-t td small{color:var(--muted)}
+.su-star{font-size:21px;line-height:1;background:none;border:0;cursor:pointer;color:var(--muted);padding:4px 6px;min-width:36px;min-height:36px}.su-star[aria-pressed="true"]{color:var(--gold-txt)}
 .su-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:4px;padding:1px 6px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
 .su-tier{display:flex;gap:4px;flex-wrap:nowrap}.su-tier button{font:700 14px var(--font-display);min-width:34px;min-height:34px;padding:4px 6px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 .su-tier button[aria-pressed="true"]{color:#fff;border-color:transparent}.su-tier .t1[aria-pressed="true"]{background:var(--kt1)}.su-tier .t2[aria-pressed="true"]{background:var(--kt2)}.su-tier .t3[aria-pressed="true"]{background:var(--kt3)}.su-tier .t4[aria-pressed="true"]{background:var(--kt4)}.su-tier .t0[aria-pressed="true"]{background:var(--kt0)}
@@ -1103,7 +1103,7 @@ function rsrcShort(kind, k){ const s = rsrcOf(kind, k);
   return s.k === "sf" ? "S&F" : `${s.short}${s.date ? ` (${mdShort(s.date)})` : ""}`; }
 // the live hub loads the outside lists (HarryKnowsBall, Fantrax, RotoWire...) only when someone picks one: rsrc.json
 let rsrcP = null;
-function loadRsrc(){ return rsrcP || (rsrcP = fetch("rsrc.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+function loadRsrc(){ return rsrcP || (rsrcP = fetch("rsrc.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
   .then(j => { ["dyn", "red"].forEach(kind => rsrcList(kind).forEach(s => { if (s.lazy && j[kind] && j[kind][s.k]) s.rows = j[kind][s.k]; })); })
   .catch(e => { rsrcP = null; throw e; })); }
 function rsrcRows(kind, k){ const s = rsrcOf(kind, k);
@@ -1354,7 +1354,7 @@ function hmCal(){
   const now = Date.now(), nx = CAL.ev.findIndex(e => Date.parse(e[0]) > now); if (nx < 0) return "";
   // one-line timeline (Show, Nov 21): date over the event, the next one in gold; the full time is in the tooltip
   const md = x => new Date(x).toLocaleDateString("en-US", {month: "short", day: "numeric", timeZone: "America/Chicago"});
-  return `<section class="panel"><h2 class="panel-h">The ${CAL.season} calendar</h2><ol class="hm-tl">${CAL.ev.map((e, i) => `<li class="${i < nx ? "done" : i === nx ? "nx" : ""}" title="${esc(String(e[2]).replace(/&middot;/g, "·"))}"><i></i><b>${md(e[0])}</b><span>${e[1]}</span></li>`).join("")}</ol></section>`;
+  return `<section class="panel"><h2 class="panel-h">The ${CAL.season} calendar</h2><ol class="hm-tl" tabindex="0" aria-label="League calendar">${CAL.ev.map((e, i) => `<li class="${i < nx ? "done" : i === nx ? "nx" : ""}" title="${esc(String(e[2]).replace(/&middot;/g, "·"))}"><i></i><b>${md(e[0])}</b><span>${e[1]}</span></li>`).join("")}</ol></section>`;
 }
 // Home, the first week of the trade window (Show, Nov 19: Dec 1 kickoff): the window is open, where to start, and the desk's kickoff segment
 function hmKick(){
@@ -1952,7 +1952,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePop(); else if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("ph-tap")) { e.preventDefault(); e.target.click(); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.tx) { e.preventDefault(); openTrade(e.target.dataset.tx); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.cmvp) { e.preventDefault(); openPop(cmvpExplain(e.target.dataset.cmvp)); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.h2h) { e.preventDefault(); const [a, b] = e.target.dataset.h2h.split("|"); openH2H(a, b); } });
 // ---------- trade explanation pop-up (data: paths.json, loaded on first use) ----------
 let PATHS = null, pathsP = null;
-function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
+function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
 const f1 = x => (Math.round(x * 10) / 10).toFixed(1);
 const txPct = w => Math.round(w * 100) + "%";
 const fdate = s => { if (!s) return ""; const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); };
@@ -2068,8 +2068,8 @@ function lgmvpCard(g, i){
 
 // ---------- extras (extra.json: awards, schedule swap, category DNA, pickups; pvals.json: every player's value path) ----------
 let EX = null, exP = null, PV = null, pvP = null;
-function loadExtra(){ return exP || (exP = fetch("extra.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (EX = j)).catch(e => { exP = null; throw e; })); }
-function loadPV(){ return pvP || (pvP = fetch("pvals.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PV = j)).catch(e => { pvP = null; throw e; })); }
+function loadExtra(){ return exP || (exP = fetch("extra.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (EX = j)).catch(e => { exP = null; throw e; })); }
+function loadPV(){ return pvP || (pvP = fetch("pvals.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PV = j)).catch(e => { pvP = null; throw e; })); }
 const needEX = () => { if (EX) return true; const r0 = ROUTE; loadExtra().then(() => { if (ROUTE === r0) rerender(true); }).catch(() => {}); return false; };
 const xRec = r => `${r[0]}-${r[1]}-${r[2]}`;
 const xName = k => k.startsWith("~") ? k.slice(1) : (T[k] ? T[k].owner : k);
@@ -2443,7 +2443,7 @@ async function saveShot(btn){
 }
 // ---------- The S&F Gazette (gazette.json) ----------
 let GZ = null, gzP = null;
-function loadGZ(){ return gzP || (gzP = fetch("gazette.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (GZ = j)).catch(e => { gzP = null; throw e; })); }
+function loadGZ(){ return gzP || (gzP = fetch("gazette.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (GZ = j)).catch(e => { gzP = null; throw e; })); }
 const GZMON = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const gzLabel = x => x.type === "preview" ? `${x.y} season preview` : x.type === "month" ? `${x.y} off-season &middot; ${GZMON[+x.m.slice(5) - 1]}` : x.type === "playoff" ? `${x.y} &middot; Week ${x.w} &middot; ${esc(x.tag)}` : `${x.y} &middot; Week ${x.w}`;
 const gzFile = x => x.type === "preview" ? `SF-Gazette-${x.y}-Season-Preview.png` : x.type === "month" ? `SF-Gazette-${x.m}-Off-Season.png` : `SF-Gazette-${x.y}-Week-${x.w}.png`;
@@ -2577,7 +2577,7 @@ function vKeepers(){
 }
 // ---------- Draft Analyzer (#draft-analyzer, data: draft_an.json from fb/draft/analyze.py) ----------
 let DA = null, daP = null;
-function loadDA(){ return daP || (daP = fetch("draft_an.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DA = j.picks ? {night: j} : j)).catch(e => { daP = null; throw e; })); }
+function loadDA(){ return daP || (daP = fetch("draft_an.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DA = j.picks ? {night: j} : j)).catch(e => { daP = null; throw e; })); }
 const daGain = g => g > 0 ? `<span class="up">+${g}</span>` : g < 0 ? `<span class="down">${g}</span>` : "0";
 const daGc = g => g[0] === "A" ? "gA" : g[0] === "B" ? "gB" : g[0] === "C" ? "gC" : "gD";
 const daRow = (r, mine) => `<tr class="${r.tag ? "da-" + r.tag : ""}"><td>${r.lab}</td><td class="l">${plBtn(r.n, r.mlb, r.pos, /SP|RP/.test(r.pos) ? "Pitcher" : "Hitter")}${r.tag ? ` <span class="pill da-t-${r.tag}">${r.tag === "steal" ? "Steal" : "Reach"}</span>` : ""}<span class="da-sub">${esc([r.pos, r.mlb, r.age ? "age " + r.age : ""].filter(Boolean).join(" · "))}</span>${mine && r.orig !== r.k ? `<span class="da-sub">pick from ${esc(r.orig)}</span>` : ""}</td>${mine ? "" : `<td>${tag(r.k)}${r.orig !== r.k ? `<small class="da-from">from ${esc(r.orig)}</small>` : ""}</td>`}<td>${r.br ?? "NR"}</td><td>${daGain(r.gain)}</td><td>${r.proj == null ? "&mdash;" : r.proj.toFixed(1)}</td></tr>`;
@@ -2650,7 +2650,7 @@ function daNight(){
       <p class="foot pad"><b>Board:</b> every ranked player who wasn't kept, ordered the way the Trade Analyzer values players (60% S&amp;F dynasty rank, 40% S&amp;F 2027 rank). <b>Spots:</b> the pick number among live picks minus his place on that board, capped at 60 either way; a player nobody ranked counts as &minus;60. Twenty-four spots either way (two rounds) is a steal or a reach. <b>2027 value:</b> his 2027 Steamer projection in S&amp;F value points, the same number the power rankings use. <b>Team grade:</b> half spots gained per pick, half projected 2027 value added, each against the rest of the league.</p></section>`;
 }
 let PW = null, pwP = null;
-function loadPW(){ return pwP || (pwP = fetch("power.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PW = j)).catch(e => { pwP = null; throw e; })); }
+function loadPW(){ return pwP || (pwP = fetch("power.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PW = j)).catch(e => { pwP = null; throw e; })); }
 const pwNm = n => n.replace(/\s*\((Batter|Pitcher)\)$/, "");
 function pwCard(k){
   const r = PW.rows.find(x => x.k === k), f1_ = v => v == null ? "&mdash;" : v.toFixed(1);
@@ -2710,7 +2710,7 @@ function xMeterHome(){
     <div class="pad"><div class="dl-hm">${H.teams.map(([k, v, o]) => `<div><span class="dv ${DLV[v]}">${v}</span>${who(nm(k))}<b>${Math.round(100 * o)}%</b></div>`).join("")}</div>
     ${mov.length ? `<p class="dl-hmv"><b>Biggest moves this week:</b> ${mov.map(([k, , , d]) => `${who(nm(k))} <span class="${d > 0 ? "up" : "dn"}">${d > 0 ? "&#9650;" : "&#9660;"} ${Math.abs(Math.round(100 * d))}</span>`).join(" &middot; ")}</p>` : ""}<p style="margin:8px 0 0"><a class="mlink" href="#deadline">Open The Deadline Meter &rarr;</a></p></div></section>`;
 }
-function loadDL(){ return dlP || (dlP = fetch("deadline.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DL = j)).catch(e => { dlP = null; throw e; })); }
+function loadDL(){ return dlP || (dlP = fetch("deadline.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DL = j)).catch(e => { dlP = null; throw e; })); }
 const DLV = {"Buy": "dv-b", "Lean buy": "dv-lb", "Stand pat": "dv-sp", "Lean sell": "dv-ls", "Sell": "dv-s"};
 function vDeadline(){
   const H = `<div class="sec-head"><div><h1>The Deadline Meter</h1><p>Buy, sell or stand pat, updated every week of the season up to the August 1 sell-by date. Each week the meter plays out the rest of the regular season thousands of times from each team&rsquo;s real weeks and real schedule, then makes the call. Pick any week of any season to see what it said then; every finished season is graded on what happened.</p></div></div>`;
@@ -2760,7 +2760,7 @@ function vDeadline(){
     ${calls}`;
 }
 let HOF = null, hofP = null;
-function loadHOF(){ return hofP || (hofP = fetch("hof.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (HOF = j)).catch(e => { hofP = null; throw e; })); }
+function loadHOF(){ return hofP || (hofP = fetch("hof.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (HOF = j)).catch(e => { hofP = null; throw e; })); }
 const hofW = n => ["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"][n] || String(n);
 const hofCap = t => t[0].toUpperCase() + t.slice(1), hofTimes = n => n === 1 ? "once" : n === 2 ? "twice" : hofW(n) + " times", hofAnd = a => a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
 const hofName = r => r.g === "m" ? xName(r.n) : r.n;
@@ -2922,7 +2922,7 @@ function plHardware(n, clean, ring, mvps){
 }
 // franchise award pop-up: the five most valuable hitters (pitchers) on that final roster each year he won (site/mvpx.json from tg/mgr.py)
 let MX = null, mxP = null;
-function loadMX(){ return mxP || (mxP = fetch("mvpx.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (MX = j)).catch(e => { mxP = null; throw e; })); }
+function loadMX(){ return mxP || (mxP = fetch("mvpx.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (MX = j)).catch(e => { mxP = null; throw e; })); }
 const hwStrip = x => x.replace(/\s*\((Batter|Pitcher)\)$/, "");
 function hwFranchise(G, n){
   const won = plMvps(n).filter(m => m[2] === G).sort((a, b) => a[0] - b[0]), lab = G === "B" ? "Franchise MVP" : "Franchise Cy Young", kind = G === "B" ? "hitters" : "pitchers";
@@ -2991,7 +2991,7 @@ function gSearch(raw){
 }
 // ---------- player stat pop-up (data: stats.json, loaded on first use) ----------
 let PST = null, pstP = null;
-function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
+function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
 const plNorm = s => String(s).replace(/\s*\((batter|pitcher)\)\s*$/i, "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.']/g, "").replace(/\b(jr|sr|ii|iii|iv)\b/g, "").replace(/[^a-z]+/g, " ").trim();
 const TEAMFIX = {AZ:"ARI", CHW:"CWS", KCR:"KC", SDP:"SD", SFG:"SF", TBR:"TB", WSN:"WSH", WAS:"WSH", OAK:"ATH",
   Diamondbacks:"ARI", "D-backs":"ARI", Braves:"ATL", Orioles:"BAL", "Red Sox":"BOS", Cubs:"CHC", "White Sox":"CWS", Reds:"CIN", Guardians:"CLE", Rockies:"COL", Tigers:"DET",
@@ -3248,7 +3248,7 @@ function draftNeeds(key, year, label){
 }
 // ---------- Season Dashboard (data: season.json, built by fb/season/dash.py from the weekly Yahoo crawl) ----------
 let SD = null, sdP = null;
-function loadSD(){ return sdP || (sdP = Promise.all([fetch("season.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }), loadSty(), loadExtra()]).then(([j]) => (SD = j)).catch(e => { sdP = null; throw e; })); }
+function loadSD(){ return sdP || (sdP = Promise.all([fetch("season.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }), loadSty(), loadExtra()]).then(([j]) => (SD = j)).catch(e => { sdP = null; throw e; })); }
 const sdRec = r => `${r[0]}-${r[1]}-${r[2]}`;
 const sdPct = x => x.toFixed(3).replace(/^0/, "");
 const sdSign = (x, d = 1) => (x > 0 ? "+" : x < 0 ? "&minus;" : "") + Math.abs(x).toFixed(d);
@@ -3387,7 +3387,7 @@ function sdCareer(){
 }
 // ---------- Draft History (data: draft_history.json, loaded on first visit) ----------
 let DHD = null, dhP = null;
-function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
+function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
 function vDraftHist(){
   if (!DHD) { loadDH().then(() => { if (ROUTE === "draft-history") rerender(true); }).catch(() => { const b = $("dhBody"); if (b) b.innerHTML = `<p class="empty">The draft history didn't load. Check your connection and refresh.</p>`; });
     return `<div class="sec-head"><div><h1>Draft History</h1><p>How every manager drafts, from every live pick since 2009.</p></div></div><div id="dhBody"><p class="empty">Loading the draft history&hellip;</p></div>`; }
@@ -3541,7 +3541,7 @@ function fillRankings(){
 let SR = null, srP = null;
 /* ---------- Player Stats (data: pstats.json, built by fb/rank/pstats.py): S&F categories by season, sortable, filtered by team and position ---------- */
 let PS = null, psP = null;
-function loadPS(){ return psP || (psP = fetch("pstats.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PS = j)).catch(e => { psP = null; throw e; })); }
+function loadPS(){ return psP || (psP = fetch("pstats.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PS = j)).catch(e => { psP = null; throw e; })); }
 const PSC = {h: [["PA",0,1],["R",1,1],["H",2,1],["HR",3,1],["RBI",4,1],["SB",5,1],["BB",6,1],["K",7,-1],["AVG",8,1],["OBP",9,1]],
              p: [["IP",0,1],["W",1,1],["H",2,-1],["BB",3,-1],["K",4,1],["ERA",5,-1],["WHIP",6,-1],["K/9",7,1],["BSV",8,-1],["SV+H",9,1]]};
 const PSPOS = {h: ["All","C","1B","2B","3B","SS","OF","DH"], p: ["All","SP","RP"]};
@@ -3574,7 +3574,7 @@ function fillPS(){
       <td>${r[3] != null ? r[3].toFixed(1) : "&mdash;"}</td><td>${r1(0.6 * VAL(r[6]) + 0.4 * VAL(r[7]))}</td>${C.map(c => `<td${S.sort === c[0] ? ' class="ps-c"' : ""}>${x ? f(c[0], x[c[1]]) : "&mdash;"}</td>`).join("")}</tr>`; }).join("") || `<tr><td colspan="14" class="empty">No players match.</td></tr>`;
   $("psN").textContent = `${L.length} ${S.grp === "h" ? (L.length === 1 ? "hitter" : "hitters") : (L.length === 1 ? "pitcher" : "pitchers")} \u00b7 ${S.yr === "p27" ? "2027 projection" : S.yr === "avg" ? "3-year average" : S.yr} \u00b7 S&F ${S.mode === "d" ? "dynasty" : "redraft"} rank`;
 }
-function loadSR(){ return srP || (srP = fetch("ranks.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SR = j)).catch(e => { srP = null; throw e; })); }
+function loadSR(){ return srP || (srP = fetch("ranks.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SR = j)).catch(e => { srP = null; throw e; })); }
 const srNm = n => esc(String(n).replace(" (Batter)", "")).replace(/ \(Pitcher\)$/, " <small>pitcher</small>");
 const srF1 = v => { v = Math.round(v * 10) / 10; return (v > 0 ? "+" : v < 0 ? "&minus;" : "") + Math.abs(v).toFixed(1); };
 // round each part to one decimal so the parts add up exactly to the rounded total (largest remainder)
@@ -3759,7 +3759,7 @@ function vDesk(){
 let BOOK = null;   // the record book; on the hub site it loads after the first screen (book_site.json), in the artifact it is inline
 const BOOK_N = 834;   // how many trades the book holds, for Home before the book arrives
 let bookP = null;
-function loadBook(){ return BOOK ? Promise.resolve(BOOK) : bookP || (bookP = fetch("book_site.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (BOOK = j)).catch(e => { bookP = null; throw e; })); }
+function loadBook(){ return BOOK ? Promise.resolve(BOOK) : bookP || (bookP = fetch("book_site.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (BOOK = j)).catch(e => { bookP = null; throw e; })); }
 const L = LEAGUE_;
 const PH = {"Show":"img/m/Show.jpg?v=58cc3733","Mosby":"img/m/Mosby.jpg?v=05867497","Justin":"img/m/Justin.jpg?v=2f74dbf9","John":"img/m/John.jpg?v=23ac631c","Doug":"img/m/Doug.jpg?v=a36af3cf","Carter":"img/m/Carter.jpg?v=3391b766","Morgan":"img/m/Morgan.jpg?v=302e35ad","Guy":"img/m/Guy.jpg?v=d972b96c","Travis":"img/m/Travis.jpg?v=366e7dd5","Preston":"img/m/Preston.jpg?v=c37463eb","Micah":"img/m/Micah.jpg?v=a5983192","Paul":"img/m/Paul.jpg?v=4282058c","logo":"img/m/logo.png?v=a02fbeb5","banner":"img/m/banner.png?v=a836b36f"};
 const ext = u => `href="${esc(u)}" target="_blank" rel="noopener"`;
@@ -3847,8 +3847,8 @@ function openKeeper(key, y, name, how){
 }
 // ---------- keeper value: the full MLB season behind a keeper's value points (data: keeper_lines.json) ----------
 let KVL = null, kvlP = null, XL = null, xlP = null;
-function loadXL(){ return xlP || (xlP = fetch("season_lines.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (XL = j)).catch(e => { xlP = null; throw e; })); }
-function loadKVL(){ return kvlP || (kvlP = fetch("keeper_lines.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (KVL = j)).catch(e => { kvlP = null; throw e; })); }
+function loadXL(){ return xlP || (xlP = fetch("season_lines.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (XL = j)).catch(e => { xlP = null; throw e; })); }
+function loadKVL(){ return kvlP || (kvlP = fetch("keeper_lines.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (KVL = j)).catch(e => { kvlP = null; throw e; })); }
 const kvBtn = (key, mode, items, label) => `<button type="button" class="pl" data-kvb="${esc(JSON.stringify({k: key, m: mode, i: items}))}">${esc(label || items[0][0])}</button>`;
 function kvBlock(name, y, v, key, mode, g){
   const b0 = KVL[`${name}|${y}`], b = g && b0 && b0.g !== g ? KVL[`${name} (${g === "p" ? "Pitcher" : "Batter"})|${y}`] : b0, d3 = x => x == null ? "&mdash;" : x.toFixed(3).replace(/^0/, ""), ip = o => `${Math.floor(o / 3)}.${o % 3}`;
@@ -4040,7 +4040,7 @@ function vFormerPage(slug){
 }
 // ---------- manager style: aggression, lazy meter, MLB comparison (data: style.json) ----------
 let STY = null, styP = null;
-function loadSty(){ return styP || (styP = fetch("style.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (STY = j)).catch(e => { styP = null; throw e; })); }
+function loadSty(){ return styP || (styP = fetch("style.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (STY = j)).catch(e => { styP = null; throw e; })); }
 const agLabel = v => v >= 75 ? "Gunslinger" : v >= 60 ? "Aggressive" : v > 40 ? "Balanced" : v > 25 ? "Conservative" : "Hands-off";
 const lzLabel = v => v >= 60 ? "Checked out" : v >= 40 ? "Coasting" : v >= 20 ? "Engaged" : "Locked in";
 const meter = (v, cls) => `<span class="meter ${cls}" title="${v}"><i style="--w:${v}%"></i></span>`;
@@ -4076,7 +4076,7 @@ function styleSection(key){
 }
 // ---------- season pop-up: the run and the roster (data: seasons_detail.json, loaded on first use) ----------
 let SDT = null, sdtP = null;
-function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
+function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
 function openSeason(key, y){
   const show = () => { openPop(seasonCard(key, y)); widenPop(); };
   if (SDT) return show();
@@ -4226,7 +4226,7 @@ function vHistory(){
 }
 let RULES = null, rulesP = null;   // the live hub loads the rulebook when Rules opens (rules.json)
 function vRules(){
-  if (!RULES) { rulesP = rulesP || fetch("rules.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => { RULES = j; if (ROUTE === "rules") rerender(true); }).catch(() => { rulesP = null; });
+  if (!RULES) { rulesP = rulesP || fetch("rules.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => { RULES = j; if (ROUTE === "rules") rerender(true); }).catch(() => { rulesP = null; });
     return `<div class="sec-head"><div><h1>Constitution &amp; Bylaws</h1></div></div><p class="empty">Loading&hellip;</p>`; }
   const R = RULES, FB = "https://www.facebook.com/groups/430643753618118/posts/";
   const fmt = d => { const [y, m, dd] = d.split("-").map(Number); return new Date(y, m - 1, dd).toLocaleDateString("en-US", {month:"short", day:"numeric", year:"numeric"}); };
@@ -4245,7 +4245,7 @@ function vRules(){
 let CHANGES = null, chP = null;   // [Central time "YYYY-MM-DD HH:MM", what changed]; the live hub loads it with Resources (changelog.json)
 const clDay = w => new Date(w.slice(0, 10) + "T12:00:00").toLocaleDateString("en-US", {month: "short", day: "numeric"});
 function changeLog(){
-  if (!CHANGES) { chP = chP || fetch("changelog.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => { CHANGES = j; if (ROUTE === "resources") rerender(true); }).catch(() => { chP = null; });
+  if (!CHANGES) { chP = chP || fetch("changelog.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => { CHANGES = j; if (ROUTE === "resources") rerender(true); }).catch(() => { chP = null; });
     return `<section class="panel" id="changelog"><h2 class="panel-h">Hub change log</h2><p class="empty">Loading&hellip;</p></section>`; }
   const byDay = {}; CHANGES.slice().sort((a, b) => b[0].localeCompare(a[0])).forEach(([t, txt]) => (byDay[t.slice(0, 10)] = byDay[t.slice(0, 10)] || []).push([t.slice(11), txt]));
   const dfmt = d => new Date(d + "T12:00:00").toLocaleDateString("en-US", {weekday: "long", month: "long", day: "numeric", year: "numeric"});
@@ -4996,7 +4996,7 @@ async function cmSetups(){
 const STLAB = {open: "Open", agreed: "Agreed: going on the hub within the hour", passed: "Passed", canceled: "Canceled", closed: "Closed when keepers came due", logged: "Done: on the Trade Log", voided: "Voided by the commissioner"};
 // ---------- My Blueprint (private: each manager sees only his own, from the hub server) and Scouting Reports (public) ----------
 let BPD = null, BPERR = "", SCT = null, sctP = null;
-function loadSct(){ return sctP || (sctP = fetch("scout.json?v=202611212258", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SCT = j)).catch(e => { sctP = null; throw e; })); }
+function loadSct(){ return sctP || (sctP = fetch("scout.json?v=202611212304", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SCT = j)).catch(e => { sctP = null; throw e; })); }
 const bpNum = v => (v > 0 ? "+" : v < 0 ? "&minus;" : "") + Math.abs(v).toFixed(1);
 const bpList = a => a.length < 3 ? a.join(" and ") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
 const bpGr = g => `<b class="bp-gr${/^A/.test(g) ? " a" : ""}">${g}</b>`;
@@ -5734,7 +5734,7 @@ else setStatus(false, "Rosters, ranks, picks and trades as of " + DATA.asOf);
 // 15 minutes while it's open) checks version.json: a newer hub reloads right away, unless something is being typed, then a
 // "tap to refresh" bar waits. Coming back also refreshes the live parts at once (Trade Talk, unread counts, reactions, offers).
 // In the app, pulling down from the top of any page reloads it, like Safari's pull to refresh.
-const BUILD = "202611212258";
+const BUILD = "202611212304";
 let hidAt = 0, updShown = false;
 async function newBuild(){
   try { const r = await fetch("version.json?t=" + Date.now(), {cache: "no-store"}); if (!r.ok) return false; const j = await r.json(); return !!j.b && j.b !== BUILD; }
