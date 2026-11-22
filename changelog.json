@@ -698,5 +698,13 @@
 [
 "2026-11-21 23:55",
 "Chat: rooms sit on one swipeable line, with Search, + Private and + Group as three matching buttons underneath."
+],
+[
+"2026-11-22 00:20",
+"Chat fills the screen: the page stays put and only the messages scroll, with the message box always right above the bottom bar. Tag buttons and Ask the desk sit behind the new @ button."
+],
+[
+"2026-11-22 00:20",
+"Phones: tapping any box no longer zooms the page in (that is what knocked the bottom bar loose), and the bottom bar steps aside while the keyboard is up."
 ]
 ]
