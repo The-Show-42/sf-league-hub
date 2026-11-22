@@ -706,5 +706,13 @@
 [
 "2026-11-22 00:20",
 "Phones: tapping any box no longer zooms the page in (that is what knocked the bottom bar loose), and the bottom bar steps aside while the keyboard is up."
+],
+[
+"2026-11-22 00:40",
+"Chat on phones: tapping the message box turns the chat into a full-screen view above the keyboard, so you always see what you are typing."
+],
+[
+"2026-11-22 00:40",
+"Home Screen app: the Back button moved to the top left of the header, beside the logo, so it never covers anything."
 ]
 ]
