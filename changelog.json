@@ -714,5 +714,9 @@
 [
 "2026-11-22 00:40",
 "Home Screen app: the Back button moved to the top left of the header, beside the logo, so it never covers anything."
+],
+[
+"2026-11-22 07:50",
+"Home Screen app: the Back button no longer shows on Home or when you first open the app, and it always sits beside the logo instead of pushing it down."
 ]
 ]
