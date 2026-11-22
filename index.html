@@ -1151,7 +1151,7 @@ function rsrcShort(kind, k){ const s = rsrcOf(kind, k);
   return s.k === "sf" ? "S&F" : `${s.short}${s.date ? ` (${mdShort(s.date)})` : ""}`; }
 // the live hub loads the outside lists (HarryKnowsBall, Fantrax, RotoWire...) only when someone picks one: rsrc.json
 let rsrcP = null;
-function loadRsrc(){ return rsrcP || (rsrcP = fetch("rsrc.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+function loadRsrc(){ return rsrcP || (rsrcP = fetch("rsrc.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
   .then(j => { ["dyn", "red"].forEach(kind => rsrcList(kind).forEach(s => { if (s.lazy && j[kind] && j[kind][s.k]) s.rows = j[kind][s.k]; })); })
   .catch(e => { rsrcP = null; throw e; })); }
 function rsrcRows(kind, k){ const s = rsrcOf(kind, k);
@@ -2000,7 +2000,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePop(); else if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("ph-tap")) { e.preventDefault(); e.target.click(); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.tx) { e.preventDefault(); openTrade(e.target.dataset.tx); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.cmvp) { e.preventDefault(); openPop(cmvpExplain(e.target.dataset.cmvp)); } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.h2h) { e.preventDefault(); const [a, b] = e.target.dataset.h2h.split("|"); openH2H(a, b); } });
 // ---------- trade explanation pop-up (data: paths.json, loaded on first use) ----------
 let PATHS = null, pathsP = null;
-function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
+function loadPaths(){ return pathsP || (pathsP = fetch("paths.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PATHS = j)).catch(e => { pathsP = null; throw e; })); }
 const f1 = x => (Math.round(x * 10) / 10).toFixed(1);
 const txPct = w => Math.round(w * 100) + "%";
 const fdate = s => { if (!s) return ""; const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); };
@@ -2116,8 +2116,8 @@ function lgmvpCard(g, i){
 
 // ---------- extras (extra.json: awards, schedule swap, category DNA, pickups; pvals.json: every player's value path) ----------
 let EX = null, exP = null, PV = null, pvP = null;
-function loadExtra(){ return exP || (exP = fetch("extra.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (EX = j)).catch(e => { exP = null; throw e; })); }
-function loadPV(){ return pvP || (pvP = fetch("pvals.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PV = j)).catch(e => { pvP = null; throw e; })); }
+function loadExtra(){ return exP || (exP = fetch("extra.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (EX = j)).catch(e => { exP = null; throw e; })); }
+function loadPV(){ return pvP || (pvP = fetch("pvals.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PV = j)).catch(e => { pvP = null; throw e; })); }
 const needEX = () => { if (EX) return true; const r0 = ROUTE; loadExtra().then(() => { if (ROUTE === r0) rerender(true); }).catch(() => {}); return false; };
 const xRec = r => `${r[0]}-${r[1]}-${r[2]}`;
 const xName = k => k.startsWith("~") ? k.slice(1) : (T[k] ? T[k].owner : k);
@@ -2491,7 +2491,7 @@ async function saveShot(btn){
 }
 // ---------- The S&F Gazette (gazette.json) ----------
 let GZ = null, gzP = null;
-function loadGZ(){ return gzP || (gzP = fetch("gazette.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (GZ = j)).catch(e => { gzP = null; throw e; })); }
+function loadGZ(){ return gzP || (gzP = fetch("gazette.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (GZ = j)).catch(e => { gzP = null; throw e; })); }
 const GZMON = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const gzLabel = x => x.type === "preview" ? `${x.y} season preview` : x.type === "month" ? `${x.y} off-season &middot; ${GZMON[+x.m.slice(5) - 1]}` : x.type === "playoff" ? `${x.y} &middot; Week ${x.w} &middot; ${esc(x.tag)}` : `${x.y} &middot; Week ${x.w}`;
 const gzFile = x => x.type === "preview" ? `SF-Gazette-${x.y}-Season-Preview.png` : x.type === "month" ? `SF-Gazette-${x.m}-Off-Season.png` : `SF-Gazette-${x.y}-Week-${x.w}.png`;
@@ -2625,7 +2625,7 @@ function vKeepers(){
 }
 // ---------- Draft Analyzer (#draft-analyzer, data: draft_an.json from fb/draft/analyze.py) ----------
 let DA = null, daP = null;
-function loadDA(){ return daP || (daP = fetch("draft_an.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DA = j.picks ? {night: j} : j)).catch(e => { daP = null; throw e; })); }
+function loadDA(){ return daP || (daP = fetch("draft_an.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DA = j.picks ? {night: j} : j)).catch(e => { daP = null; throw e; })); }
 const daGain = g => g > 0 ? `<span class="up">+${g}</span>` : g < 0 ? `<span class="down">${g}</span>` : "0";
 const daGc = g => g[0] === "A" ? "gA" : g[0] === "B" ? "gB" : g[0] === "C" ? "gC" : "gD";
 const daRow = (r, mine) => `<tr class="${r.tag ? "da-" + r.tag : ""}"><td>${r.lab}</td><td class="l">${plBtn(r.n, r.mlb, r.pos, /SP|RP/.test(r.pos) ? "Pitcher" : "Hitter")}${r.tag ? ` <span class="pill da-t-${r.tag}">${r.tag === "steal" ? "Steal" : "Reach"}</span>` : ""}<span class="da-sub">${esc([r.pos, r.mlb, r.age ? "age " + r.age : ""].filter(Boolean).join(" · "))}</span>${mine && r.orig !== r.k ? `<span class="da-sub">pick from ${esc(r.orig)}</span>` : ""}</td>${mine ? "" : `<td>${tag(r.k)}${r.orig !== r.k ? `<small class="da-from">from ${esc(r.orig)}</small>` : ""}</td>`}<td>${r.br ?? "NR"}</td><td>${daGain(r.gain)}</td><td>${r.proj == null ? "&mdash;" : r.proj.toFixed(1)}</td></tr>`;
@@ -2698,7 +2698,7 @@ function daNight(){
       <p class="foot pad"><b>Board:</b> every ranked player who wasn't kept, ordered the way the Trade Analyzer values players (60% S&amp;F dynasty rank, 40% S&amp;F 2027 rank). <b>Spots:</b> the pick number among live picks minus his place on that board, capped at 60 either way; a player nobody ranked counts as &minus;60. Twenty-four spots either way (two rounds) is a steal or a reach. <b>2027 value:</b> his 2027 Steamer projection in S&amp;F value points, the same number the power rankings use. <b>Team grade:</b> half spots gained per pick, half projected 2027 value added, each against the rest of the league.</p></section>`;
 }
 let PW = null, pwP = null;
-function loadPW(){ return pwP || (pwP = fetch("power.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PW = j)).catch(e => { pwP = null; throw e; })); }
+function loadPW(){ return pwP || (pwP = fetch("power.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PW = j)).catch(e => { pwP = null; throw e; })); }
 const pwNm = n => n.replace(/\s*\((Batter|Pitcher)\)$/, "");
 function pwCard(k){
   const r = PW.rows.find(x => x.k === k), f1_ = v => v == null ? "&mdash;" : v.toFixed(1);
@@ -2758,7 +2758,7 @@ function xMeterHome(){
     <div class="pad"><div class="dl-hm">${H.teams.map(([k, v, o]) => `<div><span class="dv ${DLV[v]}">${v}</span>${who(nm(k))}<b>${Math.round(100 * o)}%</b></div>`).join("")}</div>
     ${mov.length ? `<p class="dl-hmv"><b>Biggest moves this week:</b> ${mov.map(([k, , , d]) => `${who(nm(k))} <span class="${d > 0 ? "up" : "dn"}">${d > 0 ? "&#9650;" : "&#9660;"} ${Math.abs(Math.round(100 * d))}</span>`).join(" &middot; ")}</p>` : ""}<p style="margin:8px 0 0"><a class="mlink" href="#deadline">Open The Deadline Meter &rarr;</a></p></div></section>`;
 }
-function loadDL(){ return dlP || (dlP = fetch("deadline.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DL = j)).catch(e => { dlP = null; throw e; })); }
+function loadDL(){ return dlP || (dlP = fetch("deadline.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DL = j)).catch(e => { dlP = null; throw e; })); }
 const DLV = {"Buy": "dv-b", "Lean buy": "dv-lb", "Stand pat": "dv-sp", "Lean sell": "dv-ls", "Sell": "dv-s"};
 function vDeadline(){
   const H = `<div class="sec-head"><div><h1>The Deadline Meter</h1><p>Buy, sell or stand pat, updated every week of the season up to the August 1 sell-by date. Each week the meter plays out the rest of the regular season thousands of times from each team&rsquo;s real weeks and real schedule, then makes the call. Pick any week of any season to see what it said then; every finished season is graded on what happened.</p></div></div>`;
@@ -2808,7 +2808,7 @@ function vDeadline(){
     ${calls}`;
 }
 let HOF = null, hofP = null;
-function loadHOF(){ return hofP || (hofP = fetch("hof.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (HOF = j)).catch(e => { hofP = null; throw e; })); }
+function loadHOF(){ return hofP || (hofP = fetch("hof.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (HOF = j)).catch(e => { hofP = null; throw e; })); }
 const hofW = n => ["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"][n] || String(n);
 const hofCap = t => t[0].toUpperCase() + t.slice(1), hofTimes = n => n === 1 ? "once" : n === 2 ? "twice" : hofW(n) + " times", hofAnd = a => a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
 const hofName = r => r.g === "m" ? xName(r.n) : r.n;
@@ -2970,7 +2970,7 @@ function plHardware(n, clean, ring, mvps){
 }
 // franchise award pop-up: the five most valuable hitters (pitchers) on that final roster each year he won (site/mvpx.json from tg/mgr.py)
 let MX = null, mxP = null;
-function loadMX(){ return mxP || (mxP = fetch("mvpx.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (MX = j)).catch(e => { mxP = null; throw e; })); }
+function loadMX(){ return mxP || (mxP = fetch("mvpx.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (MX = j)).catch(e => { mxP = null; throw e; })); }
 const hwStrip = x => x.replace(/\s*\((Batter|Pitcher)\)$/, "");
 function hwFranchise(G, n){
   const won = plMvps(n).filter(m => m[2] === G).sort((a, b) => a[0] - b[0]), lab = G === "B" ? "Franchise MVP" : "Franchise Cy Young", kind = G === "B" ? "hitters" : "pitchers";
@@ -3039,7 +3039,7 @@ function gSearch(raw){
 }
 // ---------- player stat pop-up (data: stats.json, loaded on first use) ----------
 let PST = null, pstP = null;
-function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
+function loadStats(){ return pstP || (pstP = fetch("stats.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PST = j)).catch(e => { pstP = null; throw e; })); }
 const plNorm = s => String(s).replace(/\s*\((batter|pitcher)\)\s*$/i, "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.']/g, "").replace(/\b(jr|sr|ii|iii|iv)\b/g, "").replace(/[^a-z]+/g, " ").trim();
 const TEAMFIX = {AZ:"ARI", CHW:"CWS", KCR:"KC", SDP:"SD", SFG:"SF", TBR:"TB", WSN:"WSH", WAS:"WSH", OAK:"ATH",
   Diamondbacks:"ARI", "D-backs":"ARI", Braves:"ATL", Orioles:"BAL", "Red Sox":"BOS", Cubs:"CHC", "White Sox":"CWS", Reds:"CIN", Guardians:"CLE", Rockies:"COL", Tigers:"DET",
@@ -3296,7 +3296,7 @@ function draftNeeds(key, year, label){
 }
 // ---------- Season Dashboard (data: season.json, built by fb/season/dash.py from the weekly Yahoo crawl) ----------
 let SD = null, sdP = null;
-function loadSD(){ return sdP || (sdP = Promise.all([fetch("season.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }), loadSty(), loadExtra()]).then(([j]) => (SD = j)).catch(e => { sdP = null; throw e; })); }
+function loadSD(){ return sdP || (sdP = Promise.all([fetch("season.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }), loadSty(), loadExtra()]).then(([j]) => (SD = j)).catch(e => { sdP = null; throw e; })); }
 const sdRec = r => `${r[0]}-${r[1]}-${r[2]}`;
 const sdPct = x => x.toFixed(3).replace(/^0/, "");
 const sdSign = (x, d = 1) => (x > 0 ? "+" : x < 0 ? "&minus;" : "") + Math.abs(x).toFixed(d);
@@ -3435,7 +3435,7 @@ function sdCareer(){
 }
 // ---------- Draft History (data: draft_history.json, loaded on first visit) ----------
 let DHD = null, dhP = null;
-function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
+function loadDH(){ return dhP || (dhP = fetch("draft_history.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (DHD = j)).catch(e => { dhP = null; throw e; })); }
 function vDraftHist(){
   if (!DHD) { loadDH().then(() => { if (ROUTE === "draft-history") rerender(true); }).catch(() => { const b = $("dhBody"); if (b) b.innerHTML = `<p class="empty">The draft history didn't load. Check your connection and refresh.</p>`; });
     return `<div class="sec-head"><div><h1>Draft History</h1><p>How every manager drafts, from every live pick since 2009.</p></div></div><div id="dhBody"><p class="empty">Loading the draft history&hellip;</p></div>`; }
@@ -3589,7 +3589,7 @@ function fillRankings(){
 let SR = null, srP = null;
 /* ---------- Player Stats (data: pstats.json, built by fb/rank/pstats.py): S&F categories by season, sortable, filtered by team and position ---------- */
 let PS = null, psP = null;
-function loadPS(){ return psP || (psP = fetch("pstats.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PS = j)).catch(e => { psP = null; throw e; })); }
+function loadPS(){ return psP || (psP = fetch("pstats.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (PS = j)).catch(e => { psP = null; throw e; })); }
 const PSC = {h: [["PA",0,1],["R",1,1],["H",2,1],["HR",3,1],["RBI",4,1],["SB",5,1],["BB",6,1],["K",7,-1],["AVG",8,1],["OBP",9,1]],
              p: [["IP",0,1],["W",1,1],["H",2,-1],["BB",3,-1],["K",4,1],["ERA",5,-1],["WHIP",6,-1],["K/9",7,1],["BSV",8,-1],["SV+H",9,1]]};
 const PSPOS = {h: ["All","C","1B","2B","3B","SS","OF","DH"], p: ["All","SP","RP"]};
@@ -3622,7 +3622,7 @@ function fillPS(){
       <td>${r[3] != null ? r[3].toFixed(1) : "&mdash;"}</td><td>${r1(0.6 * VAL(r[6]) + 0.4 * VAL(r[7]))}</td>${C.map(c => `<td${S.sort === c[0] ? ' class="ps-c"' : ""}>${x ? f(c[0], x[c[1]]) : "&mdash;"}</td>`).join("")}</tr>`; }).join("") || `<tr><td colspan="14" class="empty">No players match.</td></tr>`;
   $("psN").textContent = `${L.length} ${S.grp === "h" ? (L.length === 1 ? "hitter" : "hitters") : (L.length === 1 ? "pitcher" : "pitchers")} \u00b7 ${S.yr === "p27" ? "2027 projection" : S.yr === "avg" ? "3-year average" : S.yr} \u00b7 S&F ${S.mode === "d" ? "dynasty" : "redraft"} rank`;
 }
-function loadSR(){ return srP || (srP = fetch("ranks.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SR = j)).catch(e => { srP = null; throw e; })); }
+function loadSR(){ return srP || (srP = fetch("ranks.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SR = j)).catch(e => { srP = null; throw e; })); }
 const srNm = n => esc(String(n).replace(" (Batter)", "")).replace(/ \(Pitcher\)$/, " <small>pitcher</small>");
 const srF1 = v => { v = Math.round(v * 10) / 10; return (v > 0 ? "+" : v < 0 ? "&minus;" : "") + Math.abs(v).toFixed(1); };
 // round each part to one decimal so the parts add up exactly to the rounded total (largest remainder)
@@ -3807,7 +3807,7 @@ function vDesk(){
 let BOOK = null;   // the record book; on the hub site it loads after the first screen (book_site.json), in the artifact it is inline
 const BOOK_N = 834;   // how many trades the book holds, for Home before the book arrives
 let bookP = null;
-function loadBook(){ return BOOK ? Promise.resolve(BOOK) : bookP || (bookP = fetch("book_site.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (BOOK = j)).catch(e => { bookP = null; throw e; })); }
+function loadBook(){ return BOOK ? Promise.resolve(BOOK) : bookP || (bookP = fetch("book_site.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (BOOK = j)).catch(e => { bookP = null; throw e; })); }
 const L = LEAGUE_;
 const PH = {"Show":"img/m/Show.jpg?v=58cc3733","Mosby":"img/m/Mosby.jpg?v=05867497","Justin":"img/m/Justin.jpg?v=2f74dbf9","John":"img/m/John.jpg?v=23ac631c","Doug":"img/m/Doug.jpg?v=a36af3cf","Carter":"img/m/Carter.jpg?v=3391b766","Morgan":"img/m/Morgan.jpg?v=302e35ad","Guy":"img/m/Guy.jpg?v=d972b96c","Travis":"img/m/Travis.jpg?v=366e7dd5","Preston":"img/m/Preston.jpg?v=c37463eb","Micah":"img/m/Micah.jpg?v=a5983192","Paul":"img/m/Paul.jpg?v=4282058c","logo":"img/m/logo.png?v=a02fbeb5","banner":"img/m/banner.png?v=a836b36f"};
 const ext = u => `href="${esc(u)}" target="_blank" rel="noopener"`;
@@ -3895,8 +3895,8 @@ function openKeeper(key, y, name, how){
 }
 // ---------- keeper value: the full MLB season behind a keeper's value points (data: keeper_lines.json) ----------
 let KVL = null, kvlP = null, XL = null, xlP = null;
-function loadXL(){ return xlP || (xlP = fetch("season_lines.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (XL = j)).catch(e => { xlP = null; throw e; })); }
-function loadKVL(){ return kvlP || (kvlP = fetch("keeper_lines.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (KVL = j)).catch(e => { kvlP = null; throw e; })); }
+function loadXL(){ return xlP || (xlP = fetch("season_lines.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (XL = j)).catch(e => { xlP = null; throw e; })); }
+function loadKVL(){ return kvlP || (kvlP = fetch("keeper_lines.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (KVL = j)).catch(e => { kvlP = null; throw e; })); }
 const kvBtn = (key, mode, items, label) => `<button type="button" class="pl" data-kvb="${esc(JSON.stringify({k: key, m: mode, i: items}))}">${esc(label || items[0][0])}</button>`;
 function kvBlock(name, y, v, key, mode, g){
   const b0 = KVL[`${name}|${y}`], b = g && b0 && b0.g !== g ? KVL[`${name} (${g === "p" ? "Pitcher" : "Batter"})|${y}`] : b0, d3 = x => x == null ? "&mdash;" : x.toFixed(3).replace(/^0/, ""), ip = o => `${Math.floor(o / 3)}.${o % 3}`;
@@ -4088,7 +4088,7 @@ function vFormerPage(slug){
 }
 // ---------- manager style: aggression, lazy meter, MLB comparison (data: style.json) ----------
 let STY = null, styP = null;
-function loadSty(){ return styP || (styP = fetch("style.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (STY = j)).catch(e => { styP = null; throw e; })); }
+function loadSty(){ return styP || (styP = fetch("style.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (STY = j)).catch(e => { styP = null; throw e; })); }
 const agLabel = v => v >= 75 ? "Gunslinger" : v >= 60 ? "Aggressive" : v > 40 ? "Balanced" : v > 25 ? "Conservative" : "Hands-off";
 const lzLabel = v => v >= 60 ? "Checked out" : v >= 40 ? "Coasting" : v >= 20 ? "Engaged" : "Locked in";
 const meter = (v, cls) => `<span class="meter ${cls}" title="${v}"><i style="--w:${v}%"></i></span>`;
@@ -4124,7 +4124,7 @@ function styleSection(key){
 }
 // ---------- season pop-up: the run and the roster (data: seasons_detail.json, loaded on first use) ----------
 let SDT = null, sdtP = null;
-function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
+function loadSeasons(){ return sdtP || (sdtP = fetch("seasons_detail.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SDT = j)).catch(e => { sdtP = null; throw e; })); }
 function openSeason(key, y){
   const show = () => { openPop(seasonCard(key, y)); widenPop(); };
   if (SDT) return show();
@@ -4274,7 +4274,7 @@ function vHistory(){
 }
 let RULES = null, rulesP = null;   // the live hub loads the rulebook when Rules opens (rules.json)
 function vRules(){
-  if (!RULES) { rulesP = rulesP || fetch("rules.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => { RULES = j; if (ROUTE === "rules") rerender(true); }).catch(() => { rulesP = null; });
+  if (!RULES) { rulesP = rulesP || fetch("rules.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => { RULES = j; if (ROUTE === "rules") rerender(true); }).catch(() => { rulesP = null; });
     return `<div class="sec-head"><div><h1>Constitution &amp; Bylaws</h1></div></div><p class="empty">Loading&hellip;</p>`; }
   const R = RULES, FB = "https://www.facebook.com/groups/430643753618118/posts/";
   const fmt = d => { const [y, m, dd] = d.split("-").map(Number); return new Date(y, m - 1, dd).toLocaleDateString("en-US", {month:"short", day:"numeric", year:"numeric"}); };
@@ -4293,7 +4293,7 @@ function vRules(){
 let CHANGES = null, chP = null;   // [Central time "YYYY-MM-DD HH:MM", what changed]; the live hub loads it with Resources (changelog.json)
 const clDay = w => new Date(w.slice(0, 10) + "T12:00:00").toLocaleDateString("en-US", {month: "short", day: "numeric"});
 function changeLog(){
-  if (!CHANGES) { chP = chP || fetch("changelog.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => { CHANGES = j; if (ROUTE === "resources") rerender(true); }).catch(() => { chP = null; });
+  if (!CHANGES) { chP = chP || fetch("changelog.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => { CHANGES = j; if (ROUTE === "resources") rerender(true); }).catch(() => { chP = null; });
     return `<section class="panel" id="changelog"><h2 class="panel-h">Hub change log</h2><p class="empty">Loading&hellip;</p></section>`; }
   const byDay = {}; CHANGES.slice().sort((a, b) => b[0].localeCompare(a[0])).forEach(([t, txt]) => (byDay[t.slice(0, 10)] = byDay[t.slice(0, 10)] || []).push([t.slice(11), txt]));
   const dfmt = d => new Date(d + "T12:00:00").toLocaleDateString("en-US", {weekday: "long", month: "long", day: "numeric", year: "numeric"});
@@ -5047,7 +5047,7 @@ async function cmSetups(){
 const STLAB = {open: "Open", agreed: "Agreed: going on the hub within the hour", passed: "Passed", canceled: "Canceled", closed: "Closed when keepers came due", logged: "Done: on the Trade Log", voided: "Voided by the commissioner"};
 // ---------- My Blueprint (private: each manager sees only his own, from the hub server) and Scouting Reports (public) ----------
 let BPD = null, BPERR = "", SCT = null, sctP = null;
-function loadSct(){ return sctP || (sctP = fetch("scout.json?v=202611220901", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SCT = j)).catch(e => { sctP = null; throw e; })); }
+function loadSct(){ return sctP || (sctP = fetch("scout.json?v=202611220917", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(j => (SCT = j)).catch(e => { sctP = null; throw e; })); }
 const bpNum = v => (v > 0 ? "+" : v < 0 ? "&minus;" : "") + Math.abs(v).toFixed(1);
 const bpList = a => a.length < 3 ? a.join(" and ") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
 const bpGr = g => `<b class="bp-gr${/^A/.test(g) ? " a" : ""}">${g}</b>`;
@@ -5550,8 +5550,9 @@ function tkFit(){
   else {
     p.style.top = "";
     if (!typing && window.scrollY) window.scrollTo(0, 0);
-    const bottom = vv ? vv.offsetTop + vv.height : window.innerHeight;
-    const bt = $("btab"), btTop = bt && bt.offsetHeight ? bt.getBoundingClientRect().top : Infinity;
+    // measure against the page's own screen box, never the moving parts (keyboard, the bar while it's being re-pinned); Show, Nov 22: the chat stopped short above the bar
+    const H = document.documentElement.clientHeight, bottom = H;
+    const bt = $("btab"), btTop = bt && bt.offsetHeight ? H - bt.offsetHeight : Infinity;
     p.style.height = Math.max(240, Math.min(bottom, btTop) - p.getBoundingClientRect().top - (btTop < Infinity ? 6 : 14)) + "px";
   }
   if (el && stick && !TK.srch) el.scrollTop = el.scrollHeight;
@@ -5563,11 +5564,12 @@ function tkFit(){
   // iPhone moves the visible screen inside the page after a pinch, a double tap or the keyboard closing, and fixed bars drift mid-screen.
   // Keep every bottom-pinned bar on the bottom edge of what's actually visible, at its normal size.
   if (window.visualViewport) { let pq = 0; const pin = () => { pq = 0; const vv = visualViewport, H = document.documentElement.clientHeight;
-      const dy = vv.offsetTop + vv.height - H, dx = vv.offsetLeft, sc = vv.scale || 1, off = Math.abs(dy) > 1 || Math.abs(dx) > 1 || Math.abs(sc - 1) > .01;
+      const dy = vv.offsetTop + vv.height - H, dx = vv.offsetLeft, sc = vv.scale || 1, off = sc > 1.01;   // only while pinch-zoomed: the keyboard and dropdown pickers shrink the view without zooming, and iPhone already keeps the bar right for those (Show, Nov 22)
       document.querySelectorAll(".btab, .cmp-tray").forEach(e => { e.style.transform = off && !document.body.classList.contains("typing") ? `translate(${dx}px, ${dy}px) scale(${1 / sc})` : ""; }); };
     const pq2 = () => { if (!pq) pq = requestAnimationFrame(pin); };
     visualViewport.addEventListener("resize", pq2); visualViewport.addEventListener("scroll", pq2); window.addEventListener("scroll", pq2, {passive: true});
-    document.addEventListener("focusout", () => setTimeout(() => { if (!document.body.classList.contains("typing")) { window.scrollTo(window.scrollX, window.scrollY); pin(); } }, 120)); }
+    const nudge = () => setTimeout(() => { if (!document.body.classList.contains("typing")) { window.scrollTo(window.scrollX, window.scrollY); pin(); } }, 120);
+    document.addEventListener("focusout", nudge); document.addEventListener("change", nudge, true); [300, 900].forEach(t => document.addEventListener("focusout", () => setTimeout(pin, t))); }
   if (window.ResizeObserver) { const ro = new ResizeObserver(q); const go = () => { const m = document.querySelector(".mast"); if (m) ro.observe(m); }; if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else go(); }
   window.addEventListener("load", q);
   // while a phone keyboard is up the bottom bar steps aside, on every page, so it never sits on top of the box being typed in
@@ -5576,7 +5578,7 @@ function tkFit(){
   const tsync = () => { const a = document.activeElement; document.body.classList.toggle("typing", !!(a && a !== document.body && txt({target: a}))); q(); };
   window.tySync = tsync;
   document.addEventListener("focusin", e => { if (txt(e)) { document.body.classList.add("typing"); q(); if (e.target.id === "tkIn") [120, 350, 700].forEach(t => setTimeout(q, t)); } });
-  document.addEventListener("focusout", () => setTimeout(tsync, 60));
+  document.addEventListener("focusout", () => { setTimeout(tsync, 60); [300, 700, 1200].forEach(t => setTimeout(q, t)); });
   document.addEventListener("click", () => setTimeout(tsync, 80), true);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(tsync, 80); });
   window.addEventListener("popstate", () => setTimeout(tsync, 80)); window.addEventListener("hashchange", () => setTimeout(tsync, 80)); }
@@ -5834,7 +5836,7 @@ else setStatus(false, "Rosters, ranks, picks and trades as of " + DATA.asOf);
 // 15 minutes while it's open) checks version.json: a newer hub reloads right away, unless something is being typed, then a
 // "tap to refresh" bar waits. Coming back also refreshes the live parts at once (Trade Talk, unread counts, reactions, offers).
 // In the app, pulling down from the top of any page reloads it, like Safari's pull to refresh.
-const BUILD = "202611220901";
+const BUILD = "202611220917";
 let hidAt = 0, updShown = false;
 async function newBuild(){
   try { const r = await fetch("version.json?t=" + Date.now(), {cache: "no-store"}); if (!r.ok) return false; const j = await r.json(); return !!j.b && j.b !== BUILD; }

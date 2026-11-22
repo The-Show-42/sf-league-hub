@@ -726,5 +726,9 @@
 [
 "2026-11-22 09:10",
 "Phones: the bottom buttons stay on the bottom edge of the screen on every page, even after a zoom or the keyboard closing; double-tap no longer zooms the page."
+],
+[
+"2026-11-22 09:25",
+"Phones: the bottom buttons stay on the bottom after using a dropdown (Ranked by, Jump to team), and Chat fills the screen down to the buttons again after the keyboard closes."
 ]
 ]
