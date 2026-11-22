@@ -694,5 +694,9 @@
 [
 "2026-11-21 23:45",
 "Phones: tapping another button in the bottom bar now closes the More menu."
+],
+[
+"2026-11-21 23:55",
+"Chat: rooms sit on one swipeable line, with Search, + Private and + Group as three matching buttons underneath."
 ]
 ]
