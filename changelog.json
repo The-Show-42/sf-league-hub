@@ -722,5 +722,9 @@
 [
 "2026-11-22 08:20",
 "Phones: the bottom buttons always come back after you tap a box or a dropdown and move on (they could stay hidden on team pages)."
+],
+[
+"2026-11-22 09:10",
+"Phones: the bottom buttons stay on the bottom edge of the screen on every page, even after a zoom or the keyboard closing; double-tap no longer zooms the page."
 ]
 ]
