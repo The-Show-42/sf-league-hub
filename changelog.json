@@ -734,5 +734,9 @@
 [
 "2026-11-22 21:40",
 "Phones: the bottom buttons now check their own spot and snap back to the bottom of the screen if iPhone leaves them floating (it can after the keyboard closes)."
+],
+[
+"2026-11-22 21:55",
+"Home Screen app: when iPhone gets stuck thinking the keyboard is still up, the chat and the bottom buttons now use the full screen anyway."
 ]
 ]
