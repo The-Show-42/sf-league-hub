@@ -738,5 +738,9 @@
 [
 "2026-11-22 21:55",
 "Home Screen app: when iPhone gets stuck thinking the keyboard is still up, the chat and the bottom buttons now use the full screen anyway."
+],
+[
+"2026-11-22 22:00",
+"Phone alerts: tapping one while the hub is open switches straight to the right page without reloading, and the chat and bottom buttons use the full screen even when the app is opened from an alert."
 ]
 ]

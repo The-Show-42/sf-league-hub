@@ -14,7 +14,8 @@ self.addEventListener("notificationclick", e => {
   e.notification.close(); iconBadge();
   const url = new URL("./" + (e.notification.data && e.notification.data.url || ""), self.registration.scope).href;
   e.waitUntil(self.clients.matchAll({type: "window", includeUncontrolled: true}).then(ws => {
-    for (const w of ws) if (w.url.startsWith(self.registration.scope) && "focus" in w) return w.navigate(url).then(x => (x || w).focus()).catch(() => w.focus());
+    // an open hub: bring it forward and tell it which page to show, no reload (a reload while iPhone is still waking the app gave the page the wrong screen height; Show, Nov 22)
+    for (const w of ws) if (w.url.startsWith(self.registration.scope) && "focus" in w) return w.focus().then(f => (f || w).postMessage({type: "go", url})).catch(() => w.navigate(url).catch(() => {}));
     return self.clients.openWindow(url);
   }));
 });
