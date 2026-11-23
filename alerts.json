@@ -1,14 +1,6 @@
 {
  "alerts": [
   {
-   "id": "desk-beef-2026-11-23",
-   "at": "2026-11-23T12:54:54Z",
-   "kind": "desk",
-   "title": "The Hot Take Desk",
-   "body": "Micah vs. Justin: 17-3 in the regular season, and Micah won the first twelve. Vinnie's Beef is up.",
-   "url": "desk"
-  },
-  {
    "id": "dl-2026-window",
    "at": "2026-12-01T15:00:00Z",
    "kind": "deadlines",
