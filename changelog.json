@@ -798,5 +798,9 @@
 [
 "2026-11-26 10:32",
 "League Chat: the chat's League room is now called League Chat. The Hot Take Desk can also crunch the hub's numbers on the spot now (averages, counts and rankings across every draft, keeper, trade and season since 2009), so ask it the hard ones."
+],
+[
+"2026-11-26 19:05",
+"Trade Ideas fix: passing on a \"closest miss\" idea (the deal that works once a pick is added) now takes it off your list right away, and the next run won't bring the same deal back. Before, \"The price is too high\" saved but the deal kept reappearing."
 ]
 ]
